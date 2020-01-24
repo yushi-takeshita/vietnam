@@ -1,4 +1,7 @@
 <h1>Post</h1>
+<div>
+    <%= link_to "← Back", posts_path %>
+</div>
 
 <%= form_with model: @post do |f| %>
     <%= f.label :content %>

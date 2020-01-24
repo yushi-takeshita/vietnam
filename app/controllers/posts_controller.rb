@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find_by(id: params[:id])
+    @post = Post.find(params[:id])
   end
 
   def new
@@ -17,6 +17,14 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.save
+    flash[:notice] = "Đăng thành công"
+    redirect_to posts_url
+  end
+
+  def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+    flash[:notice] = "Loại bỏ thành công"
     redirect_to posts_url
   end
 

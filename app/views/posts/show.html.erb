@@ -5,3 +5,6 @@
 <div>
     <%= @post.content %>
 </div>
+<div>
+    <%= link_to "Xóa", post_path(@post), method: :delete, data: {confirm: "Do you DELETE this post ?"} %>
+</div>

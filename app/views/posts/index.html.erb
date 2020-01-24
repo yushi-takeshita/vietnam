@@ -1,0 +1,9 @@
+<h1>Website under construction</h1>
+    <% @posts.each do |post| %>
+        <div>
+        <%= post.content %>
+        </div>
+    <% end %>
+<div>
+    <%= link_to "Bài", new_post_path  %>
+</div>

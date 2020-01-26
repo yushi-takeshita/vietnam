@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class PostsController < ApplicationController
   def index
     @posts = Post.all.order(created_at: :desc)
@@ -30,8 +32,7 @@ class PostsController < ApplicationController
 
   private
 
-    def post_params
-      params.require(:post).permit(:content)
-    end
-
+  def post_params
+    params.require(:post).permit(:content)
+  end
 end

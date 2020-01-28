@@ -5,9 +5,10 @@
     <%= link_to "← Back", posts_path %>
 </div>
 
-<%= form_with model: @post do |f| %>
+<%= form_with model: @post, local: true do |f| %>
+<%= render 'shared/error_messages' %>
     <%= f.label :content %>
-    <%= f.text_field :content %>
+    <%= f.text_area :content, value: @post.content %>
     <%= f.submit %>
 <% end %>
 

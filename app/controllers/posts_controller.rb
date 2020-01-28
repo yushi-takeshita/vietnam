@@ -18,9 +18,12 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    @post.save
-    flash[:notice] = "Đăng thành công"
-    redirect_to posts_url
+    if @post.save
+      flash[:notice] = "Đăng thành công"
+      redirect_to posts_url
+    else
+      render "posts/new"
+    end
   end
 
   def destroy

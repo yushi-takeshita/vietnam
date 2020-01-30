@@ -1,2 +1,25 @@
-<h1>Users#new</h1>
-<p>Find me in app/views/users/new.html.erb</p>
+<%= provide(:title, "Đăng ký") %>
+
+<h1>Create your account</h1>
+<div>
+    <%= link_to "← Back", root_path %>
+</div>
+
+<div class="row">
+<div class="col-md-6 col-md-offset-3">
+<%= form_with model: @user, url: user_create_path, local: true do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name, value: @user.name %>
+
+    <%= f.label :email %>
+    <%= f.email_field :email, value: @user.email %>
+
+    <%= f.label :password %>
+    <%= f.password_field :password, value: @user.password %>
+
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation, value: @user.password_confirmation %>
+    <%= f.submit %>
+<% end %>
+</div>
+</div>

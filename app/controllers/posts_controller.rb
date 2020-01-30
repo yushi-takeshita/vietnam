@@ -20,9 +20,9 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     if @post.save
       flash[:notice] = "Đăng thành công"
-      redirect_to posts_url
+      redirect_to root_url
     else
-      render "posts/new"
+      render "new"
     end
   end
 

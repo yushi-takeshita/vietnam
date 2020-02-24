@@ -1,25 +1,13 @@
-<%= provide(:title, "Đăng ký") %>
+<%= provide(:title, "会員登録") %>
 
-<h1>Create your account</h1>
-<div>
-    <%= link_to "← Back", root_path %>
-</div>
+<h1 class="text-center my-4">会員情報の入力</h1>
 
-<div class="row">
-<div class="col-md-6 col-md-offset-3">
-<%= form_with model: @user, url: user_create_path, local: true do |f| %>
-    <%= f.label :name %>
-    <%= f.text_field :name, value: @user.name %>
-
-    <%= f.label :email %>
-    <%= f.email_field :email, value: @user.email %>
-
-    <%= f.label :password %>
-    <%= f.password_field :password, value: @user.password %>
-
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation, value: @user.password_confirmation %>
-    <%= f.submit %>
+<% if @user.errors.any? %>
+<ul id="error_explanation">
+  <% @user.errors.full_messages.each do |msg| %>
+  <li><%= msg %></li>
+  <% end %>
+</ul>
 <% end %>
-</div>
-</div>
+
+<%= render "shared/form" %>

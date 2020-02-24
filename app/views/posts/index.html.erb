@@ -1,13 +1,25 @@
 <% provide(:title) %>
 
-<h1>Website under construction</h1>
-    <% @posts.each do |post| %>
-        <div>
-        <%= post.created_at %>
-        <%= link_to post.content, post_path(post) %>
-        </div>
-    <% end %>
+<div class="introduction wide-wrap">
+	<div class="row pt-3 pb-5 px-5">
+		<div class="col-md-6">
+			<h1>What is PostOne?</h1>
+			<p class="text-wrap">This is an Internet forum for Vietnamese living in Japan.This is an Internet forum for
+				Vietnamese living in Japan.</p>
+		</div>
+		<div class="d-none d-md-block col-md-6">
+			<%= render "shared/form" %>
+		</div>
+	</div>
+</div>
+
+<% @posts.each do |post| %>
 <div>
-    <%= link_to "Bài", new_post_path %>
-    <%= link_to "Đăng ký thành viên", user_create_path %>
+	<%= post.created_at %>
+	<%= link_to post.content, post_path(post) %>
+</div>
+<% end %>
+<div>
+	<%= link_to "Bài", new_post_path %>
+	<%= link_to "Đăng ký thành viên", "#"  %>
 </div>

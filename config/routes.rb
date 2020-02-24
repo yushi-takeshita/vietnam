@@ -3,9 +3,5 @@
 Rails.application.routes.draw do
   root to: "posts#index"
   resources :posts
-
-  get "/user_create", to: "users#new"
-  post "/user_create", to: "users#create"
-  get "users/show"
-  get "users/edit"
+  resources :users
 end

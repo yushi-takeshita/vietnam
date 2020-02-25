@@ -1,2 +1,12 @@
-<h1>マイページ</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<div class="card mt-4 mx-auto" style="width: 30rem;">
+  <%= image_tag("unnamed.jpg", class: "rounded-circle") %>
+  <div class="card-body">
+    <h1 class="card-title"><%= @user.name %></h1>
+    <p class="card-text">
+      私は大学時代法学部で法律について勉強をしましたのでもし貴社で就職する事が出来た場合には、法律関係のトラブルが発生した時に適切なアドバイスをする事が出来ます。また在学中はアメフト部に居ましたので体力にも自信がありどの様な過酷な仕事でも弱音を吐くことなくガッツでどんな仕事に対しても取り組む事が出来ます。（150文字）
+    </p>
+    <%= link_to "編集", "edit_user_path", class: "card-link" %>
+    <%= link_to "ログアウト", "#", class: "card-link" %>
+    <%= link_to "アカウントを削除", "user_path", class: "card-link" %>
+  </div>
+</div>

@@ -7,6 +7,10 @@ inherit_from: .rubocop_todo.yml
 require:
   - rubocop-rails
 
+# Railsモード
+Rails:
+  Enabled: true
+
 AllCops:
   # Rubyバージョン指定
   TargetRubyVersion: 2.6
@@ -15,16 +19,17 @@ AllCops:
     - 'config.ru'
     - 'bin/**'
     - 'lib/**'
-    - "vendor/**/*" # rubocop config/default.yml
+    - "vendor/**/*"
     - "db/schema.rb"
     - 'db/**/*'
     - 'config/**/*'
     - 'script/**/*'
     - !ruby/regexp /old_and_unused\.rb$/
+    - '**/Gemfile'
 
 # 日本語でのコメントを許可
 AsciiComments:
-  Enabled: true
+  Enabled: false
 
 # クラスのコメント必須を無視
 Documentation:
@@ -37,3 +42,6 @@ ClassAndModuleChildren:
 # 文字リテラルのイミュータブル宣言を無視（freezeになるのはRuby3以降）
 Style/FrozenStringLiteralComment:
   Enabled: false
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes

@@ -15,9 +15,12 @@ ja:
         name: ハンドルネーム
         email: メールアドレス
         password: パスワード
-        password_confirmation: パスワード(確認用) 
+        password_confirmation: パスワード(確認用)
         created_at: 登録日時
         updated_at: 更新日時
+      session:
+        email: メールアドレス
+        password: パスワード
   date:
     abbr_day_names:
     - 日
@@ -154,8 +157,12 @@ ja:
       prompt: 選択してください
     submit:
       create: 登録する
-      submit: 保存する
+      submit: ログイン
       update: 更新する
+    label:
+      session:
+        email: メールアドレス
+        password: パスワード
   number:
     currency:
       format:

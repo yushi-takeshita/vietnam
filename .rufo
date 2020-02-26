@@ -1,3 +1,4 @@
 parens_in_def :dynamic
 trailing_commas false
 quote_style :double
+align_case_when true

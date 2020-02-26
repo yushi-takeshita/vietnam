@@ -2,9 +2,9 @@ require "rails_helper"
 require "byebug"
 
 RSpec.describe "ユーザー管理機能", type: :system do
+  # visit root_path
   describe "ユーザー登録機能" do
     before do
-      # visit root_path
       # click_button "会員登録"
       visit new_user_path
     end
@@ -40,5 +40,8 @@ RSpec.describe "ユーザー管理機能", type: :system do
       # エラーが表示されている
       expect(page).to have_css "#error_explanation"
     end
+  end
+  describe "ログイン機能" do
+
   end
 end

@@ -1,5 +1,6 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require "capybara/rspec"
+require "database_cleaner"
 
 RSpec.configure do |config|
   config.before(:each, type: :system) do
@@ -66,6 +67,18 @@ RSpec.configure do |config|
   #     # (e.g. via a command-line flag).
   #     config.default_formatter = "doc"
   #   end
+
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :truncation
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
   #
   #   # Print the 10 slowest examples and example groups at the
   #   # end of the spec run, to help surface which specs are running

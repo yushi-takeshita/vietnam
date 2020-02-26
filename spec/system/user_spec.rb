@@ -4,22 +4,20 @@ require "byebug"
 RSpec.describe "ユーザー管理機能", type: :system do
   describe "ユーザー登録機能" do
     before do
+      # visit root_path
+      # click_button "会員登録"
       visit new_user_path
     end
     it "正しい情報が入力された場合" do
       @user = FactoryBot.build(:user, name: "ユーザーA", email: "a@example.com")
       fill_in "ハンドルネーム", with: @user.name
-      fill_in "メールアドレス", with: @user.name
+      fill_in "メールアドレス", with: @user.email
       fill_in "パスワード", with: @user.password
       fill_in "パスワード(確認用)", with: @user.password_confirmation
-
-      # 登録ボタンをクリックするとユーザーが1件増える
-      expect do
-        click_button "登録する"
-      end.to change(User, :count).by(1)
+      click_button "登録する"
 
       # 個々のユーザー詳細画面へ遷移
-      expect(current_path).to eq user_url(@user)
+      expect(page).to have_content @user.name
 
       # 登録成功のフラッシュが表示されている
       expect(page).to have_css ".alert-success"

@@ -39,9 +39,20 @@ Documentation:
 ClassAndModuleChildren:
   Enabled: false
 
+# あとで意味を調べる
 # 文字リテラルのイミュータブル宣言を無視（freezeになるのはRuby3以降）
 Style/FrozenStringLiteralComment:
   Enabled: false
 
+# ブロック内の文字数宣言を無視
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+
+# ダブルクォート使用を強制させたい
 Style/StringLiterals:
   EnforcedStyle: double_quotes
+
+# デフォルトの80文字は少ないと判断
+Metrics/LineLength:
+  Max: 120

@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 class PostsController < ApplicationController
   def index
     @posts = Post.all.order(created_at: :desc)
@@ -13,8 +11,7 @@ class PostsController < ApplicationController
     @post = Post.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @post = Post.new(post_params)

@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-    def top
-        render html: "Hello World"
-    end
+  def top
+    render html: "Hello World"
+  end
 end

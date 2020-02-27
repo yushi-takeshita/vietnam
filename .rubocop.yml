@@ -28,15 +28,15 @@ AllCops:
     - '**/Gemfile'
 
 # 日本語でのコメントを許可
-AsciiComments:
+Style/AsciiComments:
   Enabled: false
 
 # クラスのコメント必須を無視
-Documentation:
+Style/Documentation:
   Enabled: false
 
 # モジュール名::クラス名の定義を許可
-ClassAndModuleChildren:
+Style/ClassAndModuleChildren:
   Enabled: false
 
 # あとで意味を調べる
@@ -54,5 +54,5 @@ Style/StringLiterals:
   EnforcedStyle: double_quotes
 
 # デフォルトの80文字は少ないと判断
-Metrics/LineLength:
+Layout/LineLength:
   Max: 120

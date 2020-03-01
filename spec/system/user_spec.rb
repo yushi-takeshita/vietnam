@@ -8,12 +8,8 @@ RSpec.describe "ユーザー管理機能", type: :system do
     visit root_path
   end
 
-  describe "ユーザー登録機能" do
-    before do
-      find(".navbar-toggler").click
-      click_link "会員登録"
-    end
-    it "正しい情報が入力された場合" do
+  shared_examples_for "正しい情報が入力された場合の処理" do
+    it {
       fill_in "ハンドルネーム", with: "テストユーザー"
       fill_in "メールアドレス", with: "test1@example.com"
       fill_in "パスワード", with: "password"
@@ -36,9 +32,11 @@ RSpec.describe "ユーザー管理機能", type: :system do
       # 未ログイン時のリンクが除外
       expect(page).not_to have_css ".login"
       expect(page).not_to have_css ".create-account"
-    end
+    }
+  end
 
-    it "誤った情報が入力された場合" do
+  shared_examples_for "誤った情報が入力された場合の処理" do
+    it {
       fill_in "ハンドルネーム", with: ""
       fill_in "メールアドレス", with: ""
       fill_in "パスワード", with: ""
@@ -49,11 +47,28 @@ RSpec.describe "ユーザー管理機能", type: :system do
         click_button "登録する"
       end.to_not change(User, :count)
 
-      # 再度、会員登録画面に戻る
+      # 会員登録画面に戻る
       expect(page).to have_content "会員情報の入力"
 
       # エラーが表示されている
       expect(page).to have_css "#error_explanation"
+    }
+  end
+
+  describe "ユーザー登録機能" do
+    context "会員登録ページから登録する場合" do
+      before do
+        find(".navbar-toggler").click
+        click_link "会員登録"
+      end
+
+      it_behaves_like "正しい情報が入力された場合の処理"
+      it_behaves_like "誤った情報が入力された場合の処理"
+    end
+
+    context "トップページから登録する場合" do
+      it_behaves_like "正しい情報が入力された場合の処理"
+      it_behaves_like "誤った情報が入力された場合の処理"
     end
   end
 

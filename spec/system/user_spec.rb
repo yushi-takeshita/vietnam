@@ -72,7 +72,7 @@ RSpec.describe "ユーザー管理機能", type: :system do
       # ユーザー詳細画面へリダイレクト
       expect(current_path).to eq user_path(@user)
 
-      # ヘッダーにマイページが追加
+      # ヘッダーにマイページが表示
       find(".navbar-toggler").click
       expect(page).to have_css ".mypage"
 
@@ -95,6 +95,21 @@ RSpec.describe "ユーザー管理機能", type: :system do
       # ページを更新するとFlashが消えている
       visit login_path
       expect(page).to_not have_css(".alert-danger")
+    end
+  end
+
+  describe "ログアウト機能" do
+    it do
+      valid_login
+      click_link "ログアウト"
+
+      # トップページへリダイレクト
+      expect(current_path).to eq root_path
+
+      # 未ログイン時のリンクが表示
+      find(".navbar-toggler").click
+      expect(page).to have_css ".login"
+      expect(page).to have_css ".create-account"
     end
   end
 end

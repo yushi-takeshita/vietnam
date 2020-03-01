@@ -1,6 +1,6 @@
 module UserUtilities
   def valid_login
-    @user = FactoryBot.create(:user, email: "a@example.com")
+    @user = FactoryBot.create(:user)
     find(".navbar-toggler").click
     click_link "ログイン"
     fill_in "メールアドレス", with: @user.email

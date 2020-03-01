@@ -132,5 +132,21 @@ RSpec.describe "ユーザー管理機能", type: :system do
       # エラーが表示されている
       expect(page).to have_css "#error_explanation"
     end
+
+    it "有効な情報が入力された場合" do
+      fill_in "ハンドルネーム", with: "valid_user"
+      fill_in "プロフィール", with: "Hello"
+      click_button "更新する"
+
+      # ユーザー詳細画面へリダイレクト
+      expect(current_path).to eq user_path(@user)
+
+      # 成功のフラッシュが表示されている
+      expect(page).to have_css ".alert-success"
+
+      # 編集した情報が反映されている
+      expect(page).to have_selector ".card-title", text: "valid_user"
+      expect(page).to have_selector ".card-text", text: "Hello"
+    end
   end
 end

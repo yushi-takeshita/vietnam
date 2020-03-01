@@ -27,6 +27,15 @@ RSpec.describe "ユーザー管理機能", type: :system do
 
       # 登録成功のフラッシュが表示されている
       expect(page).to have_css ".alert-success"
+
+      # ログインされている
+      # ヘッダーにマイページが追加
+      find(".navbar-toggler").click
+      expect(page).to have_css ".mypage"
+
+      # 未ログイン時のリンクが除外
+      expect(page).not_to have_css ".login"
+      expect(page).not_to have_css ".create-account"
     end
 
     it "誤った情報が入力された場合" do
@@ -49,19 +58,32 @@ RSpec.describe "ユーザー管理機能", type: :system do
   end
 
   describe "ログイン機能" do
-    @user = FactoryBot.create(:user, name: "テストユーザーA", email: "a@example.com")
     before do
+      @user = FactoryBot.create(:user, email: "a@example.com")
       find(".navbar-toggler").click
       click_link "ログイン"
     end
 
-    # it "正しい情報が入力された場合" do
-    #  fill_in "ハンドルネーム", with: @user.name
-    #  fill_in "メールアドレス", with: @user.email
-    #  fill_in "パスワード", with: @user.password
-    #  fill_in "パスワード(確認用)", with: @user.password_confirmation
-    #  click_button "ログイン"
-    # end
+    it "正しい情報が入力された場合" do
+      fill_in "メールアドレス", with: @user.email
+      fill_in "パスワード", with: @user.password
+      click_button "ログイン"
+
+      # ユーザー詳細画面へリダイレクト
+      expect(current_path).to eq user_path(@user)
+
+      # ヘッダーにマイページが追加
+      find(".navbar-toggler").click
+      expect(page).to have_css ".mypage"
+
+      # 未ログイン時のリンクが除外
+      expect(page).not_to have_css ".login"
+      expect(page).not_to have_css ".create-account"
+
+      # トップページの紹介文とログインフォームが除外
+      visit root_path
+      expect(page).not_to have_css ".introduction"
+    end
 
     it "誤った情報が入力された場合" do
       fill_in "メールアドレス", with: ""

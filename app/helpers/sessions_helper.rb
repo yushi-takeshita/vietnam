@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 module SessionsHelper
   # 渡されたユーザーでログインする
   def login(user)

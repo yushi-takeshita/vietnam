@@ -5,7 +5,7 @@
   <div class="card-body">
     <h1 class="card-title"><%= @user.name %></h1>
     <p class="card-text">
-      私は大学時代法学部で法律について勉強をしましたのでもし貴社で就職する事が出来た場合には、法律関係のトラブルが発生した時に適切なアドバイスをする事が出来ます。また在学中はアメフト部に居ましたので体力にも自信がありどの様な過酷な仕事でも弱音を吐くことなくガッツでどんな仕事に対しても取り組む事が出来ます。（150文字）
+      <%= @user.profile %>
     </p>
     <%= link_to "編集", edit_user_path(current_user), class: "card-link" %>
     <%= link_to "ログアウト", logout_path, method: :delete, class: "card-link" %>

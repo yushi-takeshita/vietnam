@@ -65,5 +65,10 @@ RSpec.describe "ユーザーモデル", type: :model do
       user_a.valid?
       expect(user_a.errors.added?(:password_confirmation, :confirmation, attribute: "パスワード")).to be_truthy
     end
+    it "プロフィールが301文字以上だと無効" do
+      user_a.profile = "a" * 301
+      user_a.valid?
+      expect(user_a.errors.added?(:profile, :too_long, count: 300)).to be_truthy
+    end
   end
 end

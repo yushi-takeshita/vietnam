@@ -2,12 +2,5 @@
 
 <h1 class="text-center my-4">会員情報の入力</h1>
 
-<% if @user.errors.any? %>
-<ul id="error_explanation">
-  <% @user.errors.full_messages.each do |msg| %>
-  <li><%= msg %></li>
-  <% end %>
-</ul>
-<% end %>
-
+<%= render "shared/error_messages" %>
 <%= render "shared/form" %>

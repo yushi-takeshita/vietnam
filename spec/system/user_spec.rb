@@ -112,4 +112,25 @@ RSpec.describe "ユーザー管理機能", type: :system do
       expect(page).to have_css ".create-account"
     end
   end
+
+  describe "プロフィール編集機能" do
+    before do
+      find(".navbar-toggler").click
+      click_link "ログイン"
+      valid_login
+      click_link "編集"
+    end
+
+    it "無効な情報が入力された場合" do
+      fill_in "ハンドルネーム", with: ""
+      fill_in "プロフィール", with: "a" * 301
+      click_button "更新する"
+
+      # 再度、プロフィール編集画面に戻る
+      expect(page).to have_content "プロフィールの編集"
+
+      # エラーが表示されている
+      expect(page).to have_css "#error_explanation"
+    end
+  end
 end

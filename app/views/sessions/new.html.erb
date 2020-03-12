@@ -2,7 +2,6 @@
 <h1 class="text-center my-4 login">ログイン</h1>
 
 <%= form_with scope: :session, url: login_path, local: true do |f| %>
-
 <div class="form-group">
   <%= f.label :email %>
   <%= f.email_field :email, class: "form-control" %>
@@ -11,7 +10,10 @@
   <%= f.label :password %>
   <%= f.password_field :password, class: "form-control" %>
 </div>
-
+<div class="form-group form-check">
+  <%= f.check_box :remember_me, class: "form-check-input" %>
+  <%= f.label :remember_me, "次回から自動的にログインする", class: "form-check-label" %>
+</div>
 <%= f.submit class: "btn btn-primary " %>
 <p><%= link_to "会員登録はこちらから", new_user_path %></p>
 <% end %>

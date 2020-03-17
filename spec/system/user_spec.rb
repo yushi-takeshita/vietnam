@@ -3,7 +3,7 @@
 # Railsチュートリアル9.1.4　複数ウィンドウを使ったログアウトテスト　難しいのでスルー
 
 require "rails_helper"
-require "byebug"
+require "pry-byebug"
 
 RSpec.describe "ユーザー管理機能", type: :system do
   let(:user) { FactoryBot.create(:user) }
@@ -106,6 +106,30 @@ RSpec.describe "ユーザー管理機能", type: :system do
         # トップページに表示されていたサイト紹介文とログインフォームが除外される
         visit root_path
         expect(page).not_to have_css ".introduction"
+      end
+      context "「次回から自動的にログインする」がチェックされた場合" do
+        it "ブラウザを開き直してもログイン状態であること" do
+          fill_in "session[email]", with: user.email
+          fill_in "session[password]", with: user.password
+          find(".form-check-input").check
+          find(".btn-primary").click
+          binding.pry
+          # https://github.com/nruth/show_me_the_cookies
+          # セッションのみ削除する
+          # expire_cookies
+
+          visit root_path
+          expect(page).not_to have_css ".introduction"
+        end
+      end
+      context "「次回から自動的にログインする」がチェックされなかった場合" do
+        it "ブラウザを開き直したらトップページにログインフォームが表示されている" do
+          fill_in "session[email]", with: user.email
+          fill_in "session[password]", with: user.password
+          find(".btn-primary").click
+
+          binding.pry
+        end
       end
     end
     context "誤った情報が入力された場合" do

@@ -46,6 +46,7 @@ group :development, :test do
   gem "rspec-rails", "~> 3.9"
   gem "factory_bot_rails", "~> 4.11"
   gem "database_cleaner"
+  gem "show_me_the_cookies"
 end
 
 group :development do

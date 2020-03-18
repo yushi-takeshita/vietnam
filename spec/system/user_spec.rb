@@ -13,43 +13,7 @@ RSpec.describe "ユーザー管理機能", type: :system do
   end
 
   describe "ユーザー登録機能" do
-    context "会員登録ページから登録する場合" do
-      before do
-        # ハンバーガーメニューから会員登録ページへ移動する
-        find(".navbar-toggler").click
-        find(".create-account").click
-      end
-      context "正しい情報が入力された場合" do
-        it "ユーザー登録が成功すること" do
-          fill_in "user[name]", with: "テストユーザー"
-          fill_in "user[email]", with: "test1@example.com"
-          fill_in "user[password]", with: "password"
-          fill_in "user[password_confirmation]", with: "password"
-
-          # DBのユーザー数が1増える
-          expect { find(".btn-primary").click }.to change { User.count }.by(1)
-
-          # マイページへリダイレクトされる
-          @user = User.find_by(email: "test1@example.com")
-          expect(current_path).to eq user_path(@user)
-
-          # 登録成功のフラッシュが表示される
-          expect(page).to have_css ".alert-success"
-
-          # ログインされていること
-          # ヘッダーにマイページが表示される
-          find(".navbar-toggler").click
-          expect(page).to have_css ".mypage"
-
-          # ログアウト時に見えるリンクが除外される
-          expect(page).not_to have_css ".login"
-          expect(page).not_to have_css ".create-account"
-
-          # トップページに表示されていたサイト紹介文とログインフォームが除外される
-          visit root_path
-          expect(page).not_to have_css ".introduction"
-        end
-      end
+    context "トップページから登録する場合" do
       context "誤った情報が入力された場合" do
         it "ユーザー登録が失敗すること" do
           # 登録フォームに何も入力せずに登録ボタンをクリックする
@@ -63,19 +27,55 @@ RSpec.describe "ユーザー管理機能", type: :system do
           expect(page).to have_css "#error_explanation"
         end
       end
-    end
-    # あとでリファクタリング
-=begin
-    context "トップページから登録する場合" do
       context "正しい情報が入力された場合" do
+        before do
+          fill_in "user[name]", with: "テストユーザー"
+          fill_in "user[email]", with: "test1@example.com"
+          fill_in "user[password]", with: "password"
+          fill_in "user[password_confirmation]", with: "password"
+          find(".btn-primary").click
+        end
+
+        it "ユーザー登録が成功すること" do
+          # マイページへリダイレクトされる
+          @user = User.find_by(email: "test1@example.com")
+          expect(current_path).to eq user_path(@user)
+
+          # 登録成功のフラッシュが表示される
+          expect(page).to have_css ".alert-success"
+        end
+        it "ログイン状態であること" do
+          # ヘッダーにマイページが表示される
+          find(".navbar-toggler").click
+          expect(page).to have_css ".mypage"
+
+          # ログアウト時に見えるリンクが除外される
+          expect(page).not_to have_css ".login"
+          expect(page).not_to have_css ".create-account"
+
+          # トップページに表示されていたサイト紹介文とログインフォームが除外される
+          visit root_path
+          expect(page).not_to have_css ".introduction"
+        end
+      end
+    end
+    context "会員登録ページから登録する場合" do
+      before do
+        # ハンバーガーメニューから会員登録ページへ移動する
+        find(".navbar-toggler").click
+        find(".create-account").click
+      end
+
+      context "正しい情報が入力された場合" do
+        include_context "正しい情報が入力された場合"
+
         it_behaves_like "ユーザー登録が成功すること"
-        it_behaves_like "ログインされていること"
+        it_behaves_like "ログイン状態であること"
       end
       context "誤った情報が入力された場合" do
         it_behaves_like "ユーザー登録が失敗すること"
       end
     end
-=end
   end
 
   describe "ログイン機能" do
@@ -85,28 +85,23 @@ RSpec.describe "ユーザー管理機能", type: :system do
       find(".login").click
     end
 
-    context "正しい情報が入力された場合" do
-      it "ログインに成功すること" do
-        fill_in "session[email]", with: user.email
-        fill_in "session[password]", with: user.password
+    context "誤った情報が入力された場合" do
+      it "ログインに失敗すること" do
+        # ログインフォームに何も入力せずにログインボタンをクリックする
         find(".btn-primary").click
 
-        # マイページへリダイレクトされる
-        expect(current_path).to eq user_path(user)
+        # ログインページに戻る
+        expect(page).to have_css "h1.login"
 
-        # ログインされていること
-        # ヘッダーにマイページが表示される
-        find(".navbar-toggler").click
-        expect(page).to have_css ".mypage"
+        # Flashのエラーが表示される
+        expect(page).to have_css(".alert-danger")
 
-        # ログアウト時に見えるリンクが除外される
-        expect(page).not_to have_css ".login"
-        expect(page).not_to have_css ".create-account"
-
-        # トップページに表示されていたサイト紹介文とログインフォームが除外される
-        visit root_path
-        expect(page).not_to have_css ".introduction"
+        # ページを更新するとFlashが消えている
+        visit login_path
+        expect(page).to_not have_css(".alert-danger")
       end
+    end
+    context "正しい情報が入力された場合" do
       context "「次回から自動的にログインする」がチェックされた場合" do
         it "ブラウザを開き直してもログイン状態であること" do
           fill_in "session[email]", with: user.email
@@ -117,42 +112,35 @@ RSpec.describe "ユーザー管理機能", type: :system do
           # https://github.com/nruth/show_me_the_cookies
           # セッションと期限切れのクッキーのみ削除する
           expire_cookies
-
           visit root_path
+
+          # ログインフォームが消えている
           expect(page).not_to have_css ".introduction"
         end
       end
       context "「次回から自動的にログインする」がチェックされなかった場合" do
-        it "ブラウザを開き直したらトップページにログインフォームが表示されている" do
+        before do
           fill_in "session[email]", with: user.email
           fill_in "session[password]", with: user.password
           find(".btn-primary").click
+        end
+        it "ログインに成功すること" do
+          # マイページへリダイレクトされる
+          expect(current_path).to eq user_path(user)
+        end
+        it_behaves_like "ログイン状態であること"
+        it "ブラウザを閉じたらログアウトされていること" do
           Capybara.current_session.quit
           visit root_path
+
+          # ログインフォームが表示されている
           expect(page).to have_css ".introduction"
         end
-      end
-    end
-    context "誤った情報が入力された場合" do
-      it "ログインに失敗すること" do
-        # ログインフォームに何も入力せずにログインボタンをクリックする
-        find(".btn-primary").click
-
-        # ログインページに戻る
-        expect(page).to have_css "h1.login"
-        # Flashのエラーが表示される
-        expect(page).to have_css(".alert-danger")
-
-        # ページを更新するとFlashが消えている
-        visit login_path
-        expect(page).to_not have_css(".alert-danger")
       end
     end
   end
 
   context "ログインしている時" do
-    let(:user) { FactoryBot.create(:user, email: "a@example.com") }
-
     before do
       valid_login
       expect(current_path).to eq user_path(user)
@@ -179,12 +167,10 @@ RSpec.describe "ユーザー管理機能", type: :system do
         # 編集をクリック
         all(".card-link")[0].click
       end
-
       it "編集フォームに編集前の情報が見えている" do
         expect(page).to have_field "user[name]", with: user.name
         expect(page).to have_field "user[profile]", with: user.profile
       end
-
       context "バリデーションに引っかかった場合" do
         it "編集に失敗すること" do
           fill_in "user[name]", with: "" # 名前が空白

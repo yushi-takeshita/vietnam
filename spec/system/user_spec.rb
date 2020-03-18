@@ -113,10 +113,10 @@ RSpec.describe "ユーザー管理機能", type: :system do
           fill_in "session[password]", with: user.password
           find(".form-check-input").check
           find(".btn-primary").click
-          binding.pry
+
           # https://github.com/nruth/show_me_the_cookies
-          # セッションのみ削除する
-          # expire_cookies
+          # セッションと期限切れのクッキーのみ削除する
+          expire_cookies
 
           visit root_path
           expect(page).not_to have_css ".introduction"
@@ -127,8 +127,9 @@ RSpec.describe "ユーザー管理機能", type: :system do
           fill_in "session[email]", with: user.email
           fill_in "session[password]", with: user.password
           find(".btn-primary").click
-
-          binding.pry
+          Capybara.current_session.quit
+          visit root_path
+          expect(page).to have_css ".introduction"
         end
       end
     end

@@ -12,7 +12,7 @@ module SessionsHelper
   end
 
   def current_user?(user)
-    user = current_user
+    user == current_user
   end
 
   # 現在ログイン中のユーザーを返す (いる場合)

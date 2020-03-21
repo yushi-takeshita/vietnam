@@ -45,6 +45,11 @@ RSpec.describe "ユーザー管理機能", type: :system do
           expect(page).to have_css ".alert-success"
         end
         it "ログイン状態であること" do
+          # (プロフィールの)編集とログアウトのリンクが表示される
+          within ".card-body" do
+            expect(find("a.card-link")).to all be_visible
+          end
+
           # ヘッダーにマイページが表示される
           find(".navbar-toggler").click
           expect(page).to have_css ".mypage"
@@ -114,7 +119,7 @@ RSpec.describe "ユーザー管理機能", type: :system do
           expire_cookies
           visit root_path
 
-          # ログインフォームが消えている
+          # トップページのログインフォームが消えている
           expect(page).not_to have_css ".introduction"
         end
       end
@@ -201,6 +206,23 @@ RSpec.describe "ユーザー管理機能", type: :system do
           expect(page).to have_selector ".card-text", text: "Hello"
         end
       end
+    end
+  end
+
+  describe "認可機能" do
+    it "ログイン前のユーザーはプロフィールを編集できないこと" do
+      visit user_path(user)
+
+      # 編集リンクが見えない
+      expect(all(".card-link")).not_to be_visible
+
+      # 編集ページへアクセスするとログインページに転送される
+      visit edit_user_path(user)
+      expect(current_path).to eq login_path
+      expect(page).to have_css ".alert-danger"
+    end
+
+    it "ログイン後であっても他人のプロフィールを編集できないこと" do
     end
   end
 end

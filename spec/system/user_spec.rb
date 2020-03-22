@@ -47,7 +47,7 @@ RSpec.describe "ユーザー管理機能", type: :system do
         it "ログイン状態であること" do
           # (プロフィールの)編集とログアウトのリンクが表示される
           within ".card-body" do
-            expect(find("a.card-link")).to all be_visible
+            expect(page).to have_css ".card-link"
           end
 
           # ヘッダーにマイページが表示される
@@ -214,7 +214,9 @@ RSpec.describe "ユーザー管理機能", type: :system do
       visit user_path(user)
 
       # 編集リンクが見えない
-      expect(all(".card-link")).not_to be_visible
+      within ".card-body" do
+        expect(page).not_to have_css ".card-link"
+      end
 
       # 編集ページへアクセスするとログインページに転送される
       visit edit_user_path(user)

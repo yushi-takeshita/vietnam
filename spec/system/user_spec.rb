@@ -6,8 +6,8 @@ require "rails_helper"
 require "pry-byebug"
 
 RSpec.describe "ユーザー管理機能", type: :system do
-  let(:user) { FactoryBot.create(:user) }
-  let(:other_user) { FactoryBot.create(:user) }
+  let(:user) { FactoryBot.create(:user) }   # name: "テストユーザー1", email: "test1@example.com"
+  let(:other_user) { FactoryBot.create(:user, name: "テストユーザー2", email: "test2@example.com") }
 
   before do
     visit root_path
@@ -187,6 +187,15 @@ RSpec.describe "ユーザー管理機能", type: :system do
 
     it "ログイン後であっても他人のプロフィールを編集できないこと" do
       valid_login
+      visit user_path(other_user)
+
+      within ".card-body" do
+        expect(page).not_to have_css ".card-link"
+      end
+
+      # 編集ページへアクセスするとトップページに転送される
+      visit edit_user_path(other_user)
+      expect(current_path).to eq root_path
     end
   end
 end

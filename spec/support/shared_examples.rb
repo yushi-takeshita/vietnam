@@ -12,6 +12,11 @@ shared_examples "ユーザー登録が成功すること" do
 end
 shared_examples "ログイン状態であること" do
   it {
+    # (プロフィールの)編集とログアウトのリンクが表示される
+    within ".card-body" do
+      expect(page).to have_css ".card-link"
+    end
+
     # ヘッダーにマイページが表示される
     find(".navbar-toggler").click
     expect(page).to have_css ".mypage"

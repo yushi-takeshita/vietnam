@@ -7,6 +7,7 @@ require "pry-byebug"
 
 RSpec.describe "ユーザー管理機能", type: :system do
   let(:user) { FactoryBot.create(:user) }
+  let(:other_user) { FactoryBot.create(:user) }
 
   before do
     visit root_path
@@ -14,54 +15,14 @@ RSpec.describe "ユーザー管理機能", type: :system do
 
   describe "ユーザー登録機能" do
     context "トップページから登録する場合" do
-      context "誤った情報が入力された場合" do
-        it "ユーザー登録が失敗すること" do
-          # 登録フォームに何も入力せずに登録ボタンをクリックする
-          # DBのユーザー数は増えない
-          expect { find(".btn-primary").click }.not_to change { User.count }
-
-          # 会員登録ページに戻る(「会員登録の入力」と表示されたまま)
-          expect(page).to have_css "h1.signup"
-
-          # エラーが表示される
-          expect(page).to have_css "#error_explanation"
-        end
-      end
       context "正しい情報が入力された場合" do
-        before do
-          fill_in "user[name]", with: "テストユーザー"
-          fill_in "user[email]", with: "test1@example.com"
-          fill_in "user[password]", with: "password"
-          fill_in "user[password_confirmation]", with: "password"
-          find(".btn-primary").click
-        end
+        include_context "正しい情報が入力された場合"
 
-        it "ユーザー登録が成功すること" do
-          # マイページへリダイレクトされる
-          @user = User.find_by(email: "test1@example.com")
-          expect(current_path).to eq user_path(@user)
-
-          # 登録成功のフラッシュが表示される
-          expect(page).to have_css ".alert-success"
-        end
-        it "ログイン状態であること" do
-          # (プロフィールの)編集とログアウトのリンクが表示される
-          within ".card-body" do
-            expect(page).to have_css ".card-link"
-          end
-
-          # ヘッダーにマイページが表示される
-          find(".navbar-toggler").click
-          expect(page).to have_css ".mypage"
-
-          # ログアウト時に見えるリンクが除外される
-          expect(page).not_to have_css ".login"
-          expect(page).not_to have_css ".create-account"
-
-          # トップページに表示されていたサイト紹介文とログインフォームが除外される
-          visit root_path
-          expect(page).not_to have_css ".introduction"
-        end
+        it_behaves_like "ユーザー登録が成功すること"
+        it_behaves_like "ログイン状態であること"
+      end
+      context "誤った情報が入力された場合" do
+        it_behaves_like "ユーザー登録が失敗すること"
       end
     end
     context "会員登録ページから登録する場合" do
@@ -225,6 +186,7 @@ RSpec.describe "ユーザー管理機能", type: :system do
     end
 
     it "ログイン後であっても他人のプロフィールを編集できないこと" do
+      valid_login
     end
   end
 end

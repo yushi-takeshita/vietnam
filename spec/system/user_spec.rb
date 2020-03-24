@@ -106,30 +106,55 @@ RSpec.describe "ユーザー管理機能", type: :system do
     end
   end
 
-  context "ログインしている時" do
-    before do
+  describe "ログアウト機能" do
+    it "ログアウトされていること" do
       valid_login
-      expect(current_path).to eq user_path(user)
+
+      # ログアウトをクリック
+      all(".card-link")[1].click
+      expect(current_path).to eq root_path
+
+      # ログアウト時のリンクが表示される
+      find(".navbar-toggler").click
+      expect(page).to have_css ".login"
+      expect(page).to have_css ".create-account"
+
+      # トップページのサイト紹介文とログインフォームが表示される
+      expect(page).to have_css ".introduction"
     end
+  end
 
-    describe "ログアウト機能" do
-      it "ログアウトされていること" do
-        # ログアウトをクリック
-        all(".card-link")[1].click
-        expect(current_path).to eq root_path
+  describe "プロフィール編集機能" do
+    it "ログイン前のユーザーはプロフィールを編集できないこと" do
+      visit user_path(user)
 
-        # ログアウト時のリンクが表示される
-        find(".navbar-toggler").click
-        expect(page).to have_css ".login"
-        expect(page).to have_css ".create-account"
-
-        # トップページのサイト紹介文とログインフォームが表示される
-        expect(page).to have_css ".introduction"
+      # 編集のリンクが見えない
+      within ".card-body" do
+        expect(page).not_to have_css ".card-link"
       end
+
+      # 編集ページへアクセスするとログインページに転送される
+      visit edit_user_path(user)
+      expect(current_path).to eq login_path
+      expect(page).to have_css ".alert-danger"
+    end
+    it "ログイン後であっても他人のプロフィールを編集できないこと" do
+      valid_login
+      visit user_path(other_user)
+
+      within ".card-body" do
+        expect(page).not_to have_css ".card-link"
+      end
+
+      # 編集ページへアクセスするとトップページに転送される
+      visit edit_user_path(other_user)
+      expect(current_path).to eq root_path
     end
 
-    describe "プロフィール編集機能" do
+    context "ユーザーが有効だった場合" do
       before do
+        valid_login
+
         # 編集をクリック
         all(".card-link")[0].click
       end
@@ -170,32 +195,19 @@ RSpec.describe "ユーザー管理機能", type: :system do
     end
   end
 
-  describe "認可機能" do
-    it "ログイン前のユーザーはプロフィールを編集できないこと" do
-      visit user_path(user)
-
-      # 編集リンクが見えない
-      within ".card-body" do
-        expect(page).not_to have_css ".card-link"
-      end
-
-      # 編集ページへアクセスするとログインページに転送される
-      visit edit_user_path(user)
-      expect(current_path).to eq login_path
-      expect(page).to have_css ".alert-danger"
-    end
-
-    it "ログイン後であっても他人のプロフィールを編集できないこと" do
+  describe "ユーザー削除機能" do
+    it "ユーザーがDBから削除されていること" do
       valid_login
-      visit user_path(other_user)
 
-      within ".card-body" do
-        expect(page).not_to have_css ".card-link"
-      end
+      # 「アカウントを削除」をクリック
+      all(".card-link")[2].click
 
-      # 編集ページへアクセスするとトップページに転送される
-      visit edit_user_path(other_user)
-      expect(current_path).to eq root_path
+      # OKを選択するとユーザーが1件減る
+      expect {
+        expect(page.driver.browser.switch_to.alert.text).to eq "このユーザーを完全に削除します。本当によろしいですか？"
+        page.driver.browser.switch_to.alert.accept
+        expect(page).to have_content "アカウントを削除しました"
+      }.to change { User.count }.by(-1)
     end
   end
 end

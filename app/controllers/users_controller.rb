@@ -1,8 +1,8 @@
 # encoding: UTF-8
 
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:edit, :update]
-  before_action :correct_user, only: [:edit, :update]
+  before_action :logged_in_user, only: [:edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update, :destroy]
 
   def index; end
 
@@ -31,6 +31,12 @@ class UsersController < ApplicationController
       redirect_to @user, flash: { success: "プロフィールを編集しました" }
     else
       render "users/edit"
+    end
+  end
+
+  def destroy
+    if @user.destroy
+      redirect_to root_url, flash: { success: "アカウントを削除しました" }
     end
   end
 

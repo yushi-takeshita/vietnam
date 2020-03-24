@@ -36,9 +36,8 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    if @user.destroy
-      redirect_to root_url, flash: { success: "アカウントを削除しました" }
-    end
+    @user.destroy
+    redirect_to root_url, flash: { success: "アカウントを削除しました" }
   end
 
   private

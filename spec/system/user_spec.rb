@@ -6,7 +6,7 @@ require "rails_helper"
 require "pry-byebug"
 
 RSpec.describe "ユーザー管理機能", type: :system do
-  let(:user) { FactoryBot.create(:user) }   # name: "テストユーザー1", email: "test1@example.com"
+  let(:user) { FactoryBot.create(:user, admin: true) } # name: "テストユーザー1", email: "test1@example.com"
   let(:other_user) { FactoryBot.create(:user, name: "テストユーザー2", email: "test2@example.com") }
 
   before do
@@ -108,7 +108,7 @@ RSpec.describe "ユーザー管理機能", type: :system do
 
   describe "ログアウト機能" do
     it "ログアウトされていること" do
-      valid_login
+      login_as(user)
 
       # ログアウトをクリック
       all(".card-link")[1].click
@@ -130,7 +130,7 @@ RSpec.describe "ユーザー管理機能", type: :system do
 
       # 編集のリンクが見えない
       within ".card-body" do
-        expect(page).not_to have_css ".card-link"
+        expect(page).not_to have_css ".card-link.edit-profile-link"
       end
 
       # 編集ページへアクセスするとログインページに転送される
@@ -139,21 +139,20 @@ RSpec.describe "ユーザー管理機能", type: :system do
       expect(page).to have_css ".alert-danger"
     end
     it "ログイン後であっても他人のプロフィールを編集できないこと" do
-      valid_login
+      login_as(user)
       visit user_path(other_user)
 
       within ".card-body" do
-        expect(page).not_to have_css ".card-link"
+        expect(page).not_to have_css ".card-link.edit-profile-link"
       end
 
       # 編集ページへアクセスするとトップページに転送される
       visit edit_user_path(other_user)
       expect(current_path).to eq root_path
     end
-
     context "ユーザーが有効だった場合" do
       before do
-        valid_login
+        login_as(user)
 
         # 編集をクリック
         all(".card-link")[0].click
@@ -196,18 +195,31 @@ RSpec.describe "ユーザー管理機能", type: :system do
   end
 
   describe "ユーザー削除機能" do
-    it "ユーザーがDBから削除されていること" do
-      valid_login
+    context "Admin権限を所有していない場合" do
+      it "「アカウントを削除」のリンクが表示されないこと" do
+        login_as(other_user)
+        expect(page).not_to have_css ".card-link.delete-user"
+      end
+    end
+    context "Admin権限を所有している場合" do
+      before { login_as(user) }
+      it "自分を削除できない" do
+        expect(page).not_to have_css ".card-link.delete-user"
+      end
 
-      # 「アカウントを削除」をクリック
-      all(".card-link")[2].click
+      it "他のユーザーを削除できること" do
+        visit user_path(other_user)
+        # 「アカウントを削除」をクリック
+        expect(page).to have_css ".card-link.delete-user"
+        find(".card-link.delete-user").click
 
-      # OKを選択するとユーザーが1件減る
-      expect {
-        expect(page.driver.browser.switch_to.alert.text).to eq "このユーザーを完全に削除します。本当によろしいですか？"
-        page.driver.browser.switch_to.alert.accept
-        expect(page).to have_content "アカウントを削除しました"
-      }.to change { User.count }.by(-1)
+        # OKを選択するとユーザーが1件減る
+        expect {
+          expect(page.driver.browser.switch_to.alert.text).to eq "このユーザーを完全に削除します。本当によろしいですか？"
+          page.driver.browser.switch_to.alert.accept
+          expect(page).to have_content "アカウントを削除しました"
+        }.to change { User.count }.by(-1)
+      end
     end
   end
 end

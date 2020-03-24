@@ -4,7 +4,7 @@ require "rails_helper"
 require "byebug"
 
 RSpec.describe "ユーザーモデル", type: :model do
-  let(:user_a) { FactoryBot.build(:user) }
+  let(:user_a) { FactoryBot.build(:user, admin: true) }
 
   describe "バリデーション" do
     it "名前、メールアドレス、パスワード、パスワード(再確認)が正しければtrue" do

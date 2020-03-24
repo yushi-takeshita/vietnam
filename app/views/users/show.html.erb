@@ -8,9 +8,11 @@
       <%= @user.profile %>
     </p>
     <% if current_user?(@user) %>
-    <%= link_to "編集", edit_user_path(current_user), class: "card-link" %>
-    <%= link_to "ログアウト", logout_path, method: :delete, class: "card-link" %>
-    <%= link_to "アカウントを削除", user_path(current_user), method: :delete, class: "card-link", data: { confirm: "このユーザーを完全に削除します。本当によろしいですか？"} %>
+    <%= link_to "編集", edit_user_path(current_user), class: "card-link edit-profile-link" %>
+    <%= link_to "ログアウト", logout_path, method: :delete, class: "card-link logout-link" %>
+    <% end %>
+    <% if current_user&.admin? && !current_user?(@user) %>
+    <%= link_to "アカウントを削除", user_path(current_user), method: :delete, class: "card-link delete-user", data: { confirm: "このユーザーを完全に削除します。本当によろしいですか？"} %>
     <% end %>
   </div>
 </div>

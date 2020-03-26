@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_24_023408) do
+ActiveRecord::Schema.define(version: 2020_03_26_150348) do
 
   create_table "posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "content"
@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(version: 2020_03_24_023408) do
     t.text "profile"
     t.string "remember_digest"
     t.boolean "admin", default: false
+    t.string "reset_digest"
+    t.datetime "reset_sent_at"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

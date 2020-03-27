@@ -168,6 +168,8 @@ ja:
         password: パスワード
       password_reset:
         email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード(確認用)
   number:
     currency:
       format:

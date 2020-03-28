@@ -6,5 +6,7 @@ FactoryBot.define do
     password_confirmation { "password" }
     profile { nil }
     admin { false }
+    reset_digest { nil }
+    reset_sent_at { nil }
   end
 end

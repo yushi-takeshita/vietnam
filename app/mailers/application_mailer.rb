@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "from@example.com"
+  default from: "PostOne Team <noreply_to_you@example.com>"
   layout "mailer"
 end

@@ -43,3 +43,15 @@ shared_examples "ユーザー登録が失敗すること" do
     expect(page).to have_css "#error_explanation"
   }
 end
+
+shared_examples "エラーが表示されること" do
+  it { expect(page).to have_css "#error_explanation" }
+end
+
+shared_examples "パスワード再設定ページが表示される" do
+  it {
+    expect(page).to have_field "user[password]"
+    expect(page).to have_field "user[password_confirmation]"
+    expect(find("#email", visible: false)).not_to be_visible
+  }
+end

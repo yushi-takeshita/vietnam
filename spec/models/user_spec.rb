@@ -117,12 +117,12 @@ RSpec.describe "ユーザーモデル", type: :model do
       context "remember_digestカラムがnilの場合" do
         it "falseを返す" do
           user_a.remember_digest = nil
-          expect(user_a.authenticated?(user_a.remember_digest)).to eq false
+          expect(user_a.authenticated?(:remember, user_a.remember_token)).to eq false
         end
       end
       context "remember_digestカラムに値が入っている場合" do
         it "渡されたトークンがダイジェストと一致したらtrueを返す" do
-          expect(user_a.authenticated?(user_a.remember_token)).to eq true
+          expect(user_a.authenticated?(:remember, user_a.remember_token)).to eq true
         end
       end
     end
@@ -131,6 +131,35 @@ RSpec.describe "ユーザーモデル", type: :model do
       it "remember_digestカラムをnilにする" do
         user_a.remember
         expect { user_a.forget }.to change { user_a.remember_digest }.from(String).to(nil)
+      end
+    end
+
+    describe "#downcase_email" do
+      it "メールアドレスが小文字に変換されること" do
+        user_a.email = "UPCASE.SAMPLE.COM"
+        expect(user_a.downcase_email).to eq "upcase.sample.com"
+      end
+    end
+
+    describe "#create_reset_digest" do
+      subject { Proc.new { user_a.create_reset_digest } }
+
+      it { is_expected.to change { user_a.reset_password_token }.from(nil).to(String) }
+      it { is_expected.to change { user_a.reset_digest }.from(nil).to(String) }
+      it { is_expected.to change { user_a.reset_sent_at }.from(nil).to(ActiveSupport::TimeWithZone) }
+    end
+
+    describe "#password_reset_expired?" do
+      let(:user_a) { FactoryBot.build(:user, reset_sent_at: minutes_ago) }
+      subject { user_a.password_reset_expired? }
+
+      context "パスワード再設定期限の120分を超えた場合" do
+        let(:minutes_ago) { 120.minutes.ago }
+        it { is_expected.to eq true }
+      end
+      context "120分未満の場合" do
+        let(:minutes_ago) { 119.minutes.ago }
+        it { is_expected.to eq false }
       end
     end
   end

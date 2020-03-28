@@ -222,4 +222,83 @@ RSpec.describe "ユーザー管理機能", type: :system do
       end
     end
   end
+
+  describe "パスワード再設定機能" do
+    describe "再設定の案内メール送付処理" do
+      before do
+        visit new_password_reset_path
+        fill_in "password_reset[email]", with: email
+        find(".btn-primary").click
+      end
+      context "メールアドレスが無効な場合" do
+        let(:email) { "its_wrong@example.com" }
+        it "メールアドレス入力画面に戻ること" do
+          expect(page).to have_css ".alert-danger"
+        end
+      end
+      context "メールアドレスが有効な場合" do
+        let(:email) { user.email }
+        it "トップメージに遷移されること" do
+          expect(current_path).to eq root_path
+          expect(page).to have_css ".alert-info"
+        end
+        it "再設定の案内メールが送信されること" do
+          expect(ActionMailer::Base.deliveries.size).to eq 1
+        end
+      end
+    end
+    describe "再設定ページへの遷移処理" do
+      shared_examples "トップメージに遷移されること" do
+        it { expect(current_path).to eq root_path }
+      end
+      before do
+        user.create_reset_digest
+        visit edit_password_reset_path(reset_password_token, email: email)
+      end
+      context "メールアドレスが無効な場合" do
+        let(:reset_password_token) { user.reset_password_token }
+        let(:email) { "its_wrong@example.com" }
+        it_behaves_like "トップメージに遷移されること"
+      end
+      context "メールアドレスが有効で、トークンが無効な場合" do
+        let(:reset_password_token) { "wrong_token" }
+        let(:email) { user.email }
+        it_behaves_like "トップメージに遷移されること"
+      end
+      context "メールアドレスもトークンも有効な場合" do
+        let(:reset_password_token) { user.reset_password_token }
+        let(:email) { user.email }
+        it_behaves_like "パスワード再設定ページが表示される"
+
+        describe "パスワードの再設定完了の処理" do
+          before do
+            fill_in "user[password]", with: password
+            fill_in "user[password_confirmation]", with: password_confirmation
+            find(".btn-primary").click
+          end
+          context "パスワードが空の場合" do
+            let(:password) { "" }
+            let(:password_confirmation) { "" }
+            it_behaves_like "エラーが表示されること"
+            it_behaves_like "パスワード再設定ページが表示される"
+          end
+          context "無効なパスワードとパスワード確認の場合" do
+            let(:password) { "hogehoge" }
+            let(:password_confirmation) { "fugafuga" }
+            it_behaves_like "エラーが表示されること"
+            it_behaves_like "パスワード再設定ページが表示される"
+          end
+          context "有効なパスワードとパスワード確認の場合" do
+            let(:password) { "new_password" }
+            let(:password_confirmation) { "new_password" }
+            it "マイページに遷移すること" do
+              expect(page).to have_css ".alert-success"
+              expect(current_path).to eq user_path(user)
+            end
+            it_behaves_like "ログイン状態であること"
+          end
+        end
+      end
+    end
+  end
 end

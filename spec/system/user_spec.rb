@@ -234,7 +234,6 @@ RSpec.describe "ユーザー管理機能", type: :system do
         let(:email) { "its_wrong@example.com" }
         it "メールアドレス入力画面に戻ること" do
           expect(page).to have_css ".alert-danger"
-          expect(current_path).to eq password_resets_path
         end
       end
       context "メールアドレスが有効な場合" do
@@ -269,22 +268,36 @@ RSpec.describe "ユーザー管理機能", type: :system do
       context "メールアドレスもトークンも有効な場合" do
         let(:reset_password_token) { user.reset_password_token }
         let(:email) { user.email }
-        it "パスワード再設定ページが表示される" do
-          expect(current_path).to eq edit_password_reset_path(user.reset_password_token)
-          expect(page).to have_field "user[password]"
-          expect(page).to have_field "user[password_confirmation]"
-          expect(find("#email", visible: false)).not_to be_visible
+        it_behaves_like "パスワード再設定ページが表示される"
+
+        describe "パスワードの再設定完了の処理" do
+          before do
+            fill_in "user[password]", with: password
+            fill_in "user[password_confirmation]", with: password_confirmation
+            find(".btn-primary").click
+          end
+          context "パスワードが空の場合" do
+            let(:password) { "" }
+            let(:password_confirmation) { "" }
+            it_behaves_like "エラーが表示されること"
+            it_behaves_like "パスワード再設定ページが表示される"
+          end
+          context "無効なパスワードとパスワード確認の場合" do
+            let(:password) { "hogehoge" }
+            let(:password_confirmation) { "fugafuga" }
+            it_behaves_like "エラーが表示されること"
+            it_behaves_like "パスワード再設定ページが表示される"
+          end
+          context "有効なパスワードとパスワード確認の場合" do
+            let(:password) { "new_password" }
+            let(:password_confirmation) { "new_password" }
+            it "マイページに遷移すること" do
+              expect(page).to have_css ".alert-success"
+              expect(current_path).to eq user_path(user)
+            end
+            it_behaves_like "ログイン状態であること"
+          end
         end
-      end
-    end
-    describe "パスワードの再設定完了の処理" do
-      it "無効なパスワードとパスワード確認" do
-      end
-      it "パスワードが空" do
-      end
-      it "有効なパスワードとパスワード確認" do
-      end
-      it "" do
       end
     end
   end

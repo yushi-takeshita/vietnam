@@ -1,4 +1,4 @@
-<div>
+<div data-scope-path="shared/form">
   <%= form_with(model: object, url: users_path, local: true) do |f| %>
   <div class="form-group">
     <%= f.label :name %>
@@ -16,6 +16,6 @@
     <%= f.label :password_confirmation %>
     <%= f.password_field :password_confirmation, class: "form-control" %>
   </div>
-  <%= f.submit class: "btn btn-primary " %>
+  <%= f.submit class: "btn btn-primary" %>
   <% end %>
 </div>

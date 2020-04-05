@@ -1,18 +1,20 @@
 <%= provide(:title, "マイページ") %>
 
-<div class="card mt-4 mx-auto" style="width: 30rem;">
-  <%= image_tag("unnamed.jpg", class: "rounded-circle") %>
-  <div class="card-body">
-    <h2 class="card-title"><%= @user.name %></h2>
-    <p class="card-text">
-      <%= @user.profile %>
-    </p>
-    <% if current_user?(@user) %>
-    <%= link_to "編集", edit_user_path(current_user), class: "card-link edit-profile-link" %>
-    <%= link_to "ログアウト", logout_path, method: :delete, class: "card-link logout-link" %>
-    <% end %>
-    <% if current_user&.admin? && !current_user?(@user) %>
-    <%= link_to "アカウントを削除", user_path(@user), method: :delete, class: "card-link delete-user", data: { confirm: "このユーザーを完全に削除します。本当によろしいですか？"} %>
-    <% end %>
+<div data-scope-path="users/show">
+  <div class="card">
+    <%= image_tag("unnamed.jpg", class: "rounded-circle") %>
+    <div class="card-body">
+      <h2 class="card-title"><%= @user.name %></h2>
+      <p class="card-text">
+        <%= @user.profile %>
+      </p>
+      <% if current_user?(@user) %>
+      <%= link_to "編集", edit_user_path(current_user), class: "card-link edit-profile-link" %>
+      <%= link_to "ログアウト", logout_path, method: :delete, class: "card-link logout-link" %>
+      <% end %>
+      <% if current_user&.admin? && !current_user?(@user) %>
+      <%= link_to "アカウントを削除", user_path(@user), method: :delete, class: "card-link delete-user", data: { confirm: "このユーザーを完全に削除します。本当によろしいですか？"} %>
+      <% end %>
+    </div>
   </div>
 </div>

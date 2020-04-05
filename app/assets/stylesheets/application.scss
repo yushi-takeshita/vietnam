@@ -1,6 +1,9 @@
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
 
+// shared
+@import "scopes/shared/error_messages.scss";
+
 // users
 @import "scopes/users/new";
 
@@ -60,9 +63,7 @@ footer {
   overflow:hidden;
 }
 
-#error_explanation {
-  color: red;
-}
+
 
 footer .container {
 

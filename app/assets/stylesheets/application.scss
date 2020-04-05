@@ -12,6 +12,9 @@
 // sessions
 @import "scopes/sessions/new";
 
+// password_resets
+@import "scopes/password_resets/new";
+
 /* mixins, variables, etc. */
 
 @mixin box_sizing {

@@ -57,7 +57,7 @@ RSpec.describe "ユーザー管理機能", type: :system do
         find(".btn-primary").click
 
         # ログインページに戻る
-        expect(page).to have_css "h1.login"
+        expect(page).to have_css "h1.title-login"
 
         # Flashのエラーが表示される
         expect(page).to have_css(".alert-danger")

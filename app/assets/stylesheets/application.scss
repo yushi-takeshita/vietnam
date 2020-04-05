@@ -9,6 +9,9 @@
 @import "scopes/users/show";
 @import "scopes/users/edit";
 
+// sessions
+@import "scopes/sessions/new";
+
 /* mixins, variables, etc. */
 
 @mixin box_sizing {
@@ -64,10 +67,3 @@ footer {
   margin:0 calc(50% - 50vw);
   overflow:hidden;
 }
-
-
-
-footer .container {
-
-}
-

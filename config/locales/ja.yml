@@ -138,23 +138,6 @@ ja:
       header:
         one: "%{model}にエラーが発生しました"
         other: "%{model}に%{count}個のエラーが発生しました"
-  helpers:
-    select:
-      prompt: 選択してください
-    submit:
-      create: 登録する
-      submit: ログイン
-      update: 更新する
-      password_reset:
-        submit: 送信する
-    label:
-      session:
-        email: メールアドレス
-        password: パスワード
-      password_reset:
-        email: メールアドレス
-        password: パスワード
-        password_confirmation: パスワード(確認用)
   number:
     currency:
       format:

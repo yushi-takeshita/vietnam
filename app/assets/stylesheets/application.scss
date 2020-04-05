@@ -1,4 +1,4 @@
-// Custom bootstrap variables must be set or imported *before* bootstrap.
+// Bootstrap
 @import "bootstrap";
 
 // layouts
@@ -12,6 +12,9 @@
 @import "scopes/users/new";
 @import "scopes/users/show";
 @import "scopes/users/edit";
+
+// post
+@import "scopes/posts/index";
 
 // sessions
 @import "scopes/sessions/new";
@@ -46,14 +49,4 @@ html {
 
 body {
   margin-bottom: 40px;
-}
-
-.introduction {
-  background-color: #e3f2fd;
-}
-
-.wide-wrap{
-  position:relative;
-  margin:0 calc(50% - 50vw);
-  overflow:hidden;
 }

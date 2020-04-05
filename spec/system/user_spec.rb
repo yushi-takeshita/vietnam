@@ -168,7 +168,7 @@ RSpec.describe "ユーザー管理機能", type: :system do
           find(".btn-primary").click
 
           # 再度、プロフィール編集画面に戻る
-          expect(page).to have_css "h1.profile-edit"
+          expect(page).to have_css "h1.title-profile-edit"
 
           # エラーが表示されている
           expect(page).to have_css "#error_explanation"

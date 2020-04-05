@@ -37,7 +37,7 @@ shared_examples "ユーザー登録が失敗すること" do
     expect { find(".btn-primary").click }.not_to change { User.count }
 
     # 会員登録ページに戻る(「会員登録の入力」と表示されたまま)
-    expect(page).to have_css "h1.signup"
+    expect(page).to have_css "h1.title-signup"
 
     # エラーが表示される
     expect(page).to have_css "#error_explanation"

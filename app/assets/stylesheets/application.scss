@@ -1,6 +1,9 @@
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
 
+// users
+@import "scopes/users/new";
+
 /* mixins, variables, etc. */
 
 @mixin box_sizing {

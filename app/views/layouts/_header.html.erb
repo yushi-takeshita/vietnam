@@ -1,5 +1,5 @@
-<header>
-  <div data-scope-path="layouts/header">
+<div data-scope-path="layouts/header">
+  <header>
     <% flash.each do |message_type, message| %>
     <div class="alert alert-<%= message_type %>"><%= message %></div>
     <% end %>
@@ -34,5 +34,5 @@
         </div>
       </nav>
     </div>
-  </div>
-</header>
+  </header>
+</div>

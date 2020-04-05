@@ -1,0 +1,14 @@
+vi:
+  activerecord:
+    models:
+      user: Người dùng
+    attributes:
+      user:
+        id: ID
+        name: Biệt hiệu
+        email: E-mail
+        password: Mật khẩu
+        password_confirmation: Mật khẩu(Tái khẳng định)
+        profile: Về tôi
+        created_at: Ngày và giờ đăng ký
+        updated_at: Ngày và giờ sửa đổi

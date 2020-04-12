@@ -25,13 +25,16 @@
             <li class="nav-item">
               <%= link_to "会員登録", new_user_path, class: "nav-link create-account" %>
             </li>
-            <% end %>
+            <% if I18n.locale.to_s == "ja" %>
             <li class="nav-item">
               <%= link_to "Việt", :locale => "vi", class: "nav-link" %>
             </li>
+            <% else %>
             <li class="nav-item">
               <%= link_to "日本語", :locale => "ja", class: "nav-link" %>
             </li>
+            <% end %>
+            <% end %>
           </ul>
           <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search">

@@ -27,11 +27,11 @@
             </li>
             <% if I18n.locale.to_s == "ja" %>
             <li class="nav-item">
-              <%= link_to "Việt", :locale => "vi", class: "nav-link" %>
+              <%= link_to "Việt", {:locale => "vi"}, {class: "nav-link"} %>
             </li>
             <% else %>
             <li class="nav-item">
-              <%= link_to "日本語", :locale => "ja", class: "nav-link" %>
+              <%= link_to "日本語", {:locale => "ja"}, {class: "nav-link"} %>
             </li>
             <% end %>
             <% end %>

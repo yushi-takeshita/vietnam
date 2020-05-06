@@ -16,29 +16,29 @@
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <% if logged_in? %>
             <li class="nav-item">
-              <%= link_to "マイページ", current_user, class: "nav-link mypage" %>
+              <%= link_to t(".mypage"), current_user, class: "nav-link mypage" %>
             </li>
             <% else %>
             <li class="nav-item">
-              <%= link_to "ログイン", login_path, class: "nav-link login" %>
+              <%= link_to t(".login"), login_path, class: "nav-link login" %>
             </li>
             <li class="nav-item">
-              <%= link_to "会員登録", new_user_path, class: "nav-link create-account" %>
-            </li>
-            <% if I18n.locale.to_s == "ja" %>
-            <li class="nav-item">
-              <%= link_to "Việt", {:locale => "vi"}, {class: "nav-link"} %>
-            </li>
-            <% else %>
-            <li class="nav-item">
-              <%= link_to "日本語", {:locale => "ja"}, {class: "nav-link"} %>
+              <%= link_to t(".signup"), new_user_path, class: "nav-link create-account" %>
             </li>
             <% end %>
+            <% if I18n.locale.to_s == "ja" %>
+            <li class="nav-item">
+              <%= link_to "ベトナム語へ切り替え", {:locale => "vi"}, {class: "nav-link"} %>
+            </li>
+            <% else %>
+            <li class="nav-item">
+              <%= link_to "Nhật", {:locale => "ja"}, {class: "nav-link"} %>
+            </li>
             <% end %>
           </ul>
           <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <input class="form-control mr-sm-2" type="search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><%= t(".search") %></button>
           </form>
         </div>
       </nav>

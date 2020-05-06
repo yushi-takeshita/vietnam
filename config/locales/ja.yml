@@ -1,5 +1,21 @@
----
 ja:
+  layouts:
+    header:
+      mypage: マイページ
+      login: ログイン
+      signup: 会員登録
+      search: 検索
+  users:
+    new:
+      title: "会員情報のご入力"
+  sessions:
+    new:
+      title: "ログイン"
+      reset_password: "※パスワードをお忘れですか？"
+      signup: 会員登録はこちらから
+  password_resets:
+    edit:
+      title: パスワードの再設定
   activerecord:
     errors:
       messages:
@@ -17,7 +33,7 @@ ja:
     - 金
     - 土
     abbr_month_names:
-    - 
+    -
     - 1月
     - 2月
     - 3月

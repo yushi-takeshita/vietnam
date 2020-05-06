@@ -10,6 +10,7 @@ ja:
       session:
         email: メールアドレス
         password: パスワード
+        remember_me: 次回から自動的にログインする
       password_reset:
         email: メールアドレス
         password: パスワード

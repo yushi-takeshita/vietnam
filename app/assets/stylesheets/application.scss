@@ -8,13 +8,15 @@
 // shared
 @import "scopes/shared/error_messages";
 
+// home
+@import "scopes/home/top";
+
 // users
 @import "scopes/users/new";
 @import "scopes/users/show";
 @import "scopes/users/edit";
 
 // post
-@import "scopes/posts/index";
 
 // sessions
 @import "scopes/sessions/new";

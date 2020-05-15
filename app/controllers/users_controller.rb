@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       login @user
-      redirect_to @user, flash: { success: "会員登録が完了しました" }
+      redirect_to @user, flash: { success: t("users.create.flash.会員登録が完了しました") }
     else
       render "users/new"
     end
@@ -29,7 +29,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update_attributes(user_params)
-      redirect_to @user, flash: { success: "プロフィールを編集しました" }
+      redirect_to @user, flash: { success: t("users.update.flash.プロフィールを編集しました") }
     else
       render "users/edit"
     end
@@ -49,7 +49,7 @@ class UsersController < ApplicationController
   # ログイン済みユーザーかどうか確認
   def logged_in_user
     unless logged_in?
-      flash[:danger] = "ログインしてください"
+      flash[:danger] = t("users.new.flash.ログインしてください")
       redirect_to login_url
     end
   end

@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   def top
-    render html: "Hello World"
+    @user = User.new
+    @posts = Post.all.order(created_at: :desc)
   end
 end

@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       params[:session][:remember_me] == "1" ? remember(user) : forget(user)
       redirect_to user
     else
-      flash.now[:danger] = "入力情報が正しくありません"
+      flash.now[:danger] = t("sessions.create.flash.入力情報が正しくありません")
       render "new"
     end
   end

@@ -1,0 +1,19 @@
+vi:
+  users:
+    new:
+      会員登録: Đăng ký làm thành viên
+      会員情報のご入力: Nhập thông tin thành viên của bạn
+      flash:
+        ログインしてください: Vui lòng đăng nhập.
+    create:
+      flash:
+        会員登録が完了しました: Đăng ký thành viên hoàn thành
+    show:
+      user_nameさんのプロフィール: "Hồ sơ của %{user_name}"
+      編集: Chỉnh sửa
+      ログアウト: Đăng nhập
+    edit:
+      プロフィールの編集: Chỉnh sửa tiểu sử của bạn
+    update:
+      flash:
+        プロフィールを編集しました: Hồ sơ đã sửa

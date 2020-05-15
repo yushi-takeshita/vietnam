@@ -1,9 +1,11 @@
-<% provide(:title, "パスワードをお忘れですか？") %>
+<% provide(:title, t(".パスワードをお忘れですか？")) %>
 
 <div data-scope-path="password_resets/new">
   <div class="text-wrapper">
-    <h1>パスワードをお忘れですか？</h1>
-    <p>以下のフォームにご登録頂いていたメールアドレスを入力してください。<br>すぐにパスワード再設定のご案内メールを送信いたします。</p>
+    <h1><%= t(".パスワードをお忘れですか？") %></h1>
+    <p><%= t(".以下のフォームにご登録頂いていたメールアドレスを入力してください。") %><br>
+      <%= t(".すぐにパスワード再設定のご案内メールを送信いたします。") %>
+    </p>
   </div>
 
   <%= form_with scope: :password_reset, url: password_resets_path, local: true do |f| %>

@@ -1,7 +1,7 @@
-<% provide(:title, t(".title"))%>
+<% provide(:title, t(".パスワードの再設定"))%>
 
 <div data-scope-path="password_resets/edit">
-  <h1><%= t(".title") %></h1>
+  <h1><%= t(".パスワードの再設定") %></h1>
 
   <%= form_with model: @user, url: password_reset_path(params[:id]), local: true do |f| %>
   <%= render "shared/error_messages" %>

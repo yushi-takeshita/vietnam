@@ -92,7 +92,7 @@ RSpec.describe "ユーザー管理機能", type: :system do
         end
         it "ログインに成功すること" do
           # マイページへリダイレクトされる
-          expect(current_path).to eq user_path(user)
+          expect(current_path).to eq user_path(I18n.locale, user)
         end
         it_behaves_like "ログイン状態であること"
         it "ブラウザを閉じたらログアウトされていること" do
@@ -112,7 +112,7 @@ RSpec.describe "ユーザー管理機能", type: :system do
 
       # ログアウトをクリック
       all(".card-link")[1].click
-      expect(current_path).to eq root_path
+      expect(current_path).to eq root_path(I18n.locale)
 
       # ログアウト時のリンクが表示される
       find(".navbar-toggler").click
@@ -126,7 +126,7 @@ RSpec.describe "ユーザー管理機能", type: :system do
 
   describe "プロフィール編集機能" do
     it "ログイン前のユーザーはプロフィールを編集できないこと" do
-      visit user_path(user)
+      visit user_path(I18n.locale, user)
 
       # 編集のリンクが見えない
       within ".card-body" do
@@ -134,21 +134,21 @@ RSpec.describe "ユーザー管理機能", type: :system do
       end
 
       # 編集ページへアクセスするとログインページに転送される
-      visit edit_user_path(user)
-      expect(current_path).to eq login_path
+      visit edit_user_path(I18n.locale, user)
+      expect(current_path).to eq login_path(I18n.locale)
       expect(page).to have_css ".alert-danger"
     end
     it "ログイン後であっても他人のプロフィールを編集できないこと" do
       login_as(user)
-      visit user_path(other_user)
+      visit user_path(I18n.locale, other_user)
 
       within ".card-body" do
         expect(page).not_to have_css ".card-link.edit-profile-link"
       end
 
       # 編集ページへアクセスするとトップページに転送される
-      visit edit_user_path(other_user)
-      expect(current_path).to eq root_path
+      visit edit_user_path(I18n.locale, other_user)
+      expect(current_path).to eq root_path(I18n.locale)
     end
     context "ユーザーが有効だった場合" do
       before do
@@ -181,7 +181,7 @@ RSpec.describe "ユーザー管理機能", type: :system do
           find(".btn-primary").click
 
           # ユーザー詳細画面へリダイレクト
-          expect(current_path).to eq user_path(user)
+          expect(current_path).to eq user_path(I18n.locale, user)
 
           # 成功のフラッシュが表示されている
           expect(page).to have_css ".alert-success"
@@ -208,7 +208,7 @@ RSpec.describe "ユーザー管理機能", type: :system do
       end
 
       it "他のユーザーを削除できること" do
-        visit user_path(other_user)
+        visit user_path(I18n.locale, other_user)
         # 「アカウントを削除」をクリック
         expect(page).to have_css ".card-link.delete-user"
         find(".card-link.delete-user").click
@@ -226,7 +226,7 @@ RSpec.describe "ユーザー管理機能", type: :system do
   describe "パスワード再設定機能" do
     describe "再設定の案内メール送付処理" do
       before do
-        visit new_password_reset_path
+        visit new_password_reset_path(I18n.locale)
         fill_in "password_reset[email]", with: email
         find(".btn-primary").click
       end
@@ -239,7 +239,7 @@ RSpec.describe "ユーザー管理機能", type: :system do
       context "メールアドレスが有効な場合" do
         let(:email) { user.email }
         it "トップメージに遷移されること" do
-          expect(current_path).to eq root_path
+          expect(current_path).to eq root_path(I18n.locale)
           expect(page).to have_css ".alert-info"
         end
         it "再設定の案内メールが送信されること" do
@@ -249,11 +249,11 @@ RSpec.describe "ユーザー管理機能", type: :system do
     end
     describe "再設定ページへの遷移処理" do
       shared_examples "トップメージに遷移されること" do
-        it { expect(current_path).to eq root_path }
+        it { expect(current_path).to eq root_path(I18n.locale) }
       end
       before do
         user.create_reset_digest
-        visit edit_password_reset_path(reset_password_token, email: email)
+        visit edit_password_reset_path(I18n.locale, reset_password_token, email: email)
       end
       context "メールアドレスが無効な場合" do
         let(:reset_password_token) { user.reset_password_token }
@@ -293,7 +293,7 @@ RSpec.describe "ユーザー管理機能", type: :system do
             let(:password_confirmation) { "new_password" }
             it "マイページに遷移すること" do
               expect(page).to have_css ".alert-success"
-              expect(current_path).to eq user_path(user)
+              expect(current_path).to eq user_path(I18n.locale, user)
             end
             it_behaves_like "ログイン状態であること"
           end

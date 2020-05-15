@@ -1,0 +1,17 @@
+vi:
+  helpers:
+    submit:
+      create: Tạo %{model}
+      submit: Đăng nhập
+      update: Cập nhật %{model}
+      password_reset:
+        submit: Gửi
+    label:
+      session:
+        email: E-mail
+        password: Mật khẩu
+        remember_me: Đăng nhập tự động vào lần tiếp theo #次回から自動的にログインする
+      password_reset:
+        email: E-mail
+        password: Mật khẩu
+        password_confirmation: Mật khẩu(Tái khẳng định)

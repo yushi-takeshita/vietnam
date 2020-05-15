@@ -1,7 +1,7 @@
-<%= provide(:title, "プロフィールの編集") %>
+<%= provide(:title, t(".プロフィールの編集")) %>
 
 <div data-scope-path="users/edit">
-  <h1 class="title-profile-edit">プロフィールの編集</h1>
+  <h1 class="title-profile-edit"><%= t(".プロフィールの編集") %></h1>
   <%= render "shared/error_messages" %>
   <div>
     <%= form_with model: @user, local: true do |f| %>

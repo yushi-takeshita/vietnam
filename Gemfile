@@ -29,6 +29,9 @@ gem "jbuilder", "~> 2.5"
 # Use ActiveModel has_secure_password
 gem "bcrypt", "~> 3.1.7"
 
+# For 5.0.x, 5.1.x and 5.2.x
+gem "rails-i18n", "~> 5.1"
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
@@ -43,6 +46,7 @@ group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   gem "pry-rails"
   gem "pry-byebug"
+  gem 'pry-doc'
   gem "rspec-rails", "~> 3.9"
   gem "factory_bot_rails", "~> 4.11"
   gem "database_cleaner"

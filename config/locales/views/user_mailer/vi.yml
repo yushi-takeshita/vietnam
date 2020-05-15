@@ -1,0 +1,10 @@
+vi:
+  user_mailer:
+    password_resets:
+      パスワード再設定のご案内: Hướng dẫn thiết lập mật khẩu của bạn
+      user_name様: "Kính gửi ngài Chủ tịch %{user_name}"
+      平素は本サービスをご利用頂きありがとうございます。: Cảm ơn bạn đã sử dụng dịch vụ này.
+      パスワード再設定を進めるためには、以下のリンクへアクセスしてください。: Để tiến hành đặt lại mật khẩu, vui lòng truy cập liên kết sau.
+      パスワード再設定ページ: Trang đặt lại mật khẩu
+      変更を取りやめたい場合、本メールを無視して下さい。: Nếu bạn muốn hủy bỏ thay đổi, vui lòng bỏ qua email này.
+      今後ともよろしくお願い致します。: Cảm ơn bạn trong tương lai.

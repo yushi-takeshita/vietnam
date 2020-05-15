@@ -1,0 +1,17 @@
+ja:
+  helpers:
+    submit:
+      create: 登録する
+      submit: ログイン
+      update: 更新する
+      password_reset:
+        submit: 送信する
+    label:
+      session:
+        email: メールアドレス
+        password: パスワード
+        remember_me: 次回から自動的にログインする
+      password_reset:
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード(確認用)

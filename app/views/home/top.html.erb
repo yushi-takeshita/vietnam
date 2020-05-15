@@ -1,0 +1,33 @@
+<% provide(:title) %>
+
+<div data-scope-path="home/top">
+  <% unless logged_in? %>
+  <div class="introduction wide-wrap">
+    <div class="row pt-3 pb-5 px-5">
+      <div class="col-md-6">
+        <h1><%= t(".日本での暮らしをもっと豊かに。") %></h1>
+        <p class="text-wrap">
+          <%= t(".PostOneは日本に住むベトナム人の交流サイトです。") %><br>
+          <%= t(".ベトナム語で記事を閲覧したり投稿することができます。") %><br>
+          <%= t(".生活の知恵を共有したり、気の合う仲間を見つけてみましょう。") %>
+        </p>
+        <%= image_tag("flags.png", :size =>"440x250") %>
+      </div>
+      <div class="d-none d-md-block col-md-6">
+        <%= render partial: "shared/form", locals: { object: @user } %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+
+  <% @posts.each do |post| %>
+  <div>
+    <%= post.created_at %>
+    <%= link_to post.content, post_path(post) %>
+  </div>
+  <% end %>
+  <div>
+    <%= link_to "Bài", new_post_path %>
+    <%= link_to "Đăng ký thành viên", "#"  %>
+  </div>
+</div>

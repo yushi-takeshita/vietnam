@@ -1,0 +1,17 @@
+vi:
+  password_resets:
+    new:
+      パスワードをお忘れですか？: Quên Mật khẩu?
+      以下のフォームにご登録頂いていたメールアドレスを入力してください。: Vui lòng nhập địa chỉ email mà bạn đã đăng ký trong mẫu dưới đây.
+      すぐにパスワード再設定のご案内メールを送信いたします。: Chúng tôi sẽ gửi email sớm để đặt lại mật khẩu của bạn.
+    create:
+      flash:
+        受信メールからパスワード再設定ページへアクセスして下さい: Chuyển đến trang đặt lại mật khẩu từ email đến
+        メールアドレスが見つかりません: Tôi không thể tìm thấy địa chỉ email của mình
+    edit:
+      パスワードの再設定: Đặt lại mật khẩu của bạn
+      flash:
+        パスワード再設定の有効期限が切れています。初めからやり直して下さい。: Đặt lại mật khẩu đã hết hạn. Bắt đầu lại.
+    update:
+      flash:
+        パスワードの再設定が完了しました: Hoàn tất đặt lại mật khẩu

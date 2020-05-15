@@ -4,7 +4,7 @@ shared_examples "ユーザー登録が成功すること" do
   it {
     # マイページへリダイレクトされる
     @user = User.find_by(email: "test1@example.com")
-    expect(current_path).to eq user_path(@user)
+    expect(current_path).to eq user_path(I18n.locale, @user)
 
     # 登録成功のフラッシュが表示される
     expect(page).to have_css ".alert-success"

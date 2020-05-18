@@ -28,11 +28,11 @@
             <% end %>
             <% if I18n.locale.to_s == "ja" %>
             <li class="nav-item">
-              <%= link_to "Việt / 日本語", {:locale => "vi"}, {class: "nav-link"} %>
+              <%= link_to "Việt / 日本語", root_path(:locale => "vi"), {class: "nav-link"} %>
             </li>
-            <% else %>
+            <% elsif I18n.locale.to_s == "vi" %>
             <li class="nav-item">
-              <%= link_to "Việt / 日本語", {:locale => "ja"}, {class: "nav-link"} %>
+              <%= link_to "Việt / 日本語", root_path(:locale => "ja"), {class: "nav-link"} %>
             </li>
             <% end %>
           </ul>

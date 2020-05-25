@@ -26,6 +26,9 @@
               <%= link_to t(".会員登録"), new_user_path, class: "nav-link create-account" %>
             </li>
             <% end %>
+            <li class="nav-item">
+              <%= link_to t(".暮らしに役立つサイト"), useful_pages_path, class: "nav-link create-account" %>
+            </li>
             <% if I18n.locale.to_s == "ja" %>
             <li class="nav-item">
               <%= link_to "Việt / 日本語", root_path(:locale => "vi"), {class: "nav-link"} %>

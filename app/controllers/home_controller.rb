@@ -3,4 +3,6 @@ class HomeController < ApplicationController
     @user = User.new
     @posts = Post.all.order(created_at: :desc)
   end
+
+  def useful_pages; end
 end

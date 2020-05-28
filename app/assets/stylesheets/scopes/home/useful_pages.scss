@@ -1,8 +1,12 @@
 [data-scope-path="home/useful_pages"] {
   .card {
     margin-top: 30px;
-    h4.card-title {
-    border-bottom: solid thick lightskyblue;
+    .round-cap:after {
+    background-color: #f48fb1; /* 線色 */
+    border-radius: 5px; /* 線幅の半分 */
+    content: "";
+    display: block;
+    height: 10px; /* 線幅 */  
     }
   }
 }

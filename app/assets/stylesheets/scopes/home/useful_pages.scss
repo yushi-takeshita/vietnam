@@ -2,11 +2,12 @@
   .card {
     margin-top: 30px;
     .round-cap:after {
-    background-color: #f48fb1; /* 線色 */
-    border-radius: 5px; /* 線幅の半分 */
+    background-color: lightgreen;
+    border-radius: 5px;
     content: "";
     display: block;
-    height: 10px; /* 線幅 */  
+    height: 7px;
+    margin-bottom: 20px;
     }
   }
 }

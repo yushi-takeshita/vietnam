@@ -1,8 +1,13 @@
 <% provide(:title, t(".暮らしに役立つサイト")) %>
 
 <div data-scope-path="home/useful_pages">
-  <div class="card mx-auto border border-0" style="width: 50rem;">
-    <h4 class="card-title"><%= t(".外国人技能実習機構") %></h4>
+  <ol>
+    <li><%= link_to(t(".外国人技能実習機構"), "#section1") %></li>
+    <li>リスト2</li>
+    <li>リスト3</li>
+  </ol>
+  <div class="card border border-0 mx-auto">
+    <h4 class="card-title" id="section1"><%= t(".外国人技能実習機構") %></h4>
     <div class="round-cap"></div>
     <%= image_tag("otit.png", class: "card-img") %>
     <div class="card-body">

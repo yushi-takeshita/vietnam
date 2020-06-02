@@ -4,12 +4,16 @@
   .card {
     margin-top: 30px;
     .round-cap:after {
-    background-color: lightgreen;
-    border-radius: 5px;
-    content: "";
-    display: block;
-    height: 7px;
-    margin-bottom: 20px;
+      background-color: lightgreen;
+      border-radius: 5px;
+      content: "";
+      display: block;
+      height: 7px;
+      margin-bottom: 20px;
+    }
+    .card-body {
+      border: solid 3px lightgreen;
+      margin-top: 10px;
     }
   }
   ol {
@@ -18,8 +22,14 @@
     background-color: #dadada;
     box-shadow: 5px 5px 10px silver;
     padding: 0.5em 0.5em 0.5em 2em;
+    h5 {
+      text-align: center;
+    }
     li {
       padding: 0.5em 0;
+      a {
+        color: black;
+      }
     }
   }
 }

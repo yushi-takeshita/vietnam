@@ -4,7 +4,7 @@
   <ol>
     <h5><%= t(".目次") %></h5>
     <li><%= link_to(t(".外国人技能実習機構"), "#section1") %></li>
-    <li>リスト2</li>
+    <li><%= link_to(t(".コミトモ"), "#section2") %></li>
     <li>リスト3</li>
   </ol>
   <div class="card border border-0 mx-auto">
@@ -13,9 +13,17 @@
     <%= image_tag("otit.png", class: "card-img") %>
     <div class="card-body">
       <a href="https://www.otit.go.jp/notebook_vi/" class="card-link">https://www.otit.go.jp/notebook_vi/</a>
-      <p class="card-text"><%= t(".技能実習生手帳や税金の免除について掲載されています。") %>
-      <p class="card-text"><%= t(".身近なトラブルも相談することができます。") %>
-      </p>
+      <p class="card-text"><%= t(".技能実習生手帳や税金の免除について掲載されています。") %></p>
+      <p class="card-text"><%= t(".身近なトラブルも相談することができます。") %></p>
+    </div>
+    <h4 class="card-title" id="section2"><%= t(".コミトモ") %></h4>
+    <div class="round-cap"></div>
+    <%= image_tag("comitomo.png", class: "card-img") %>
+    <div class="card-body">
+      <a href="https://comitomo.jp/vi/" class="card-link">https://comitomo.jp/vi/</a>
+      <p class="card-text"><%= t(".日本の文化や生活にフォーカスした情報サイトです。") %></p>
+      <p class="card-text"><%= t(".アルバイトや就職活動に関する記事も掲載されています。") %></p>
+      <p class="card-text"><%= t(".もちろん、ベトナム語でも読むことができます。") %></p>
     </div>
   </div>
 </div>

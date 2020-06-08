@@ -3,12 +3,11 @@
 <div data-scope-path="home/useful_pages">
   <ol>
     <h5><%= t(".目次") %></h5>
-    <li><%= link_to(t(".外国人技能実習機構"), "#section1") %></li>
-    <li><%= link_to(t(".コミトモ"), "#section2") %></li>
-    <li>リスト3</li>
+    <li><%= link_to(t(".外国人技能実習機構"), "#section0") %></li>
+    <li><%= link_to(t(".コミトモ"), "#section1") %></li>
   </ol>
   <div class="card border border-0 mx-auto">
-    <h4 class="card-title" id="section1"><%= t(".外国人技能実習機構") %></h4>
+    <h4 class="card-title" id="section0"><%= t(".外国人技能実習機構") %></h4>
     <div class="round-cap"></div>
     <%= image_tag("otit.png", class: "card-img") %>
     <div class="card-body">
@@ -16,7 +15,7 @@
       <p class="card-text"><%= t(".技能実習生手帳や税金の免除について掲載されています。") %></p>
       <p class="card-text"><%= t(".身近なトラブルも相談することができます。") %></p>
     </div>
-    <h4 class="card-title" id="section2"><%= t(".コミトモ") %></h4>
+    <h4 class="card-title" id="section1"><%= t(".コミトモ") %></h4>
     <div class="round-cap"></div>
     <%= image_tag("comitomo.png", class: "card-img") %>
     <div class="card-body">

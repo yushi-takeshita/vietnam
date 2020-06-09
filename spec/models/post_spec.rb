@@ -24,6 +24,11 @@ RSpec.describe "ポストモデル", type: :model do
         post_a.content = "a" * 601
         expect(post_a).not_to be_valid
       end
+      it "投稿日時の新しい順にソートされていること" do
+        post_b = user_a.posts.create(content: "Ruby is great", created_at: 10.minutes.ago)
+        post_a.update_attribute(:created_at, Time.zone.now)
+        expect(post_a).to eq Post.first
+      end
     end
   end
 end

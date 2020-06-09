@@ -11,6 +11,11 @@ RSpec.describe "ユーザーモデル", type: :model do
       valid_user = user_a
       expect(valid_user).to be_valid
     end
+    it "ユーザーを削除すると、投稿も削除されること" do
+      user_a.save
+      user_a.posts.create(content: "Hello")
+      expect { user_a.destroy }.to change { Post.count }.by(-1)
+    end
     it "メールアドレスが大文字から小文字へ変換されること" do
       upcase_email = "TEST1@EXAMPLE.COM"
       user_a.email = upcase_email

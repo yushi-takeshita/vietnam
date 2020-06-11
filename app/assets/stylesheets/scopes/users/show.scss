@@ -1,12 +1,24 @@
 [data-scope-path="users/show"] {
-  .card {
-    width: 40rem;
-    margin: 4rem auto;
-    text-align: center;
-    img.rounded-circle {
-    height: 140px;
-    width: 140px;
-    margin: 10px auto 0 auto;
+  .row {
+    margin-top: 2rem;
+    .card {
+      text-align: center;
+      img.rounded-circle {
+      height: 140px;
+      width: 140px;
+      margin: 10px auto 0 auto;
+      }
+    }
+    .posts {
+      li {
+        a {
+          color: black;
+        }
+        p {
+          color: gray;
+          text-align: right;
+        }
+      }
     }
   }
 }

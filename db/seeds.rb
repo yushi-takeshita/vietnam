@@ -8,7 +8,7 @@
 
 user = User.find(29)
 5.times do
-  title = Faker::Lorem.sentence
-  content = Faker::JapaneseMedia::OnePiece.character
+  title = Faker::Address.city
+  content = Faker::Company.name
   user.posts.create!(title: title, content: content)
 end

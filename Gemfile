@@ -51,6 +51,7 @@ group :development, :test do
   gem "factory_bot_rails", "~> 4.11"
   gem "database_cleaner"
   gem "show_me_the_cookies"
+  gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
 end
 
 group :development do

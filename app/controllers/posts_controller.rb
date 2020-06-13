@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   def index
-    @user = User.new
-    @posts = Post.all.order(created_at: :desc)
+    @q = Post.ransack(params[:q])
+    @posts = @q.result(distinct: true)
   end
 
   def show

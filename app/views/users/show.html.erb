@@ -19,7 +19,7 @@
       </div>
     </div>
     <ul class="posts col-5 list-group list-group-flush">
-      <h5><%= @user.name %>さんのPost</h5>
+      <h5><%= t(".user_nameさんの投稿", user_name: @user.name) %></h5>
       <%= render @posts %>
     </ul>
   </div>

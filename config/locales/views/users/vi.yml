@@ -12,6 +12,7 @@ vi:
       user_nameさんのプロフィール: "Hồ sơ của %{user_name}"
       編集: Chỉnh sửa
       ログアウト: Đăng nhập
+      user_nameさんの投稿: "bài đăng của %{user_name}"
     edit:
       プロフィールの編集: Chỉnh sửa tiểu sử của bạn
     update:

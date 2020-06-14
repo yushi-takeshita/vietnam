@@ -1,0 +1,12 @@
+ja:
+  activerecord:
+    models:
+      post: 掲示板
+    attributes:
+      post:
+        id: ID
+        title: タイトル
+        content: 投稿内容
+        user_id: 投稿ユーザーID
+        created_at: 登録日時
+        updated_at: 更新日時

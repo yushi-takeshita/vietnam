@@ -1,9 +1,20 @@
 [data-scope-path="posts/index"] {
   form {
     margin-top: 1.5rem;
-    background-color: grey;
     .btn.btn-secondary {
       margin-left: 0.5rem;
+    }
+  }
+  .card {
+    margin-bottom: 1rem;
+    width: 40rem;
+    height: 5rem;
+    .card-body {
+      background-color: dodgerblue;
+      height: 5rem;
+    }
+    .card-img {
+      height: 5rem;
     }
   }
 }

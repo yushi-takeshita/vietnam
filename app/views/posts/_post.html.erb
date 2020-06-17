@@ -1,4 +1,4 @@
 <li id="post-<%= post.id %>" class="list-group-item">
-  <%= link_to(post.title, root_path) %>
+  <%= link_to(post.title, post) %>
   <p><%= post.created_at.strftime("%Y/%m/%d") %></p>
 </li>

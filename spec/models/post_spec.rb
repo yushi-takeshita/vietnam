@@ -35,6 +35,9 @@ RSpec.describe "ポストモデル", type: :model do
         post_a.update_attribute(:created_at, Time.zone.now)
         expect(post_a).to eq Post.first
       end
+      it "検索できるのがcontentカラムのみであること" do
+        expect(Post.ransackable_attributes).to eq ["content"]
+      end
     end
   end
 end

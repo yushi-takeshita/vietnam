@@ -10,8 +10,14 @@
     width: 40rem;
     height: 5rem;
     box-shadow: 0px 1px 0px silver;
+    &:hover {
+      opacity: 0.7;
+    }
     .card-body {
       height: 5rem;
+      .card-link {
+        color: black;
+      }
       .card-text {
         color: gray;
         text-align: right;

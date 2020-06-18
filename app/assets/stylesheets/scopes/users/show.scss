@@ -1,23 +1,45 @@
 [data-scope-path="users/show"] {
-  .row {
-    margin-top: 2rem;
+  margin-top: 2rem;
+  .user {
+    text-align: center;
     .card {
-      text-align: center;
       img.rounded-circle {
       height: 140px;
       width: 140px;
       margin: 10px auto 0 auto;
       }
     }
-    .posts {
-      li {
-        a {
+  }
+  .posts {
+    .round-cap:after {
+      background-color: lightgreen;
+      border-radius: 5px;
+      content: "";
+      display: block;
+      height: 7px;
+      width: 40rem;
+      margin-bottom: 20px;
+    }
+    .card {
+      margin-bottom: 1rem;
+      width: 40rem;
+      height: 5rem;
+      box-shadow: 0px 1px 0px silver;
+      &:hover {
+        opacity: 0.7;
+      }
+      .card-body {
+        height: 5rem;
+        .card-link {
           color: black;
         }
-        p {
+        .card-text {
           color: gray;
           text-align: right;
         }
+      }
+      .card-img {
+        height: 5rem;
       }
     }
   }

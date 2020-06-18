@@ -1,4 +1,13 @@
-<li id="post-<%= post.id %>" class="list-group-item">
-  <%= link_to(post.title, post) %>
-  <p><%= post.created_at.strftime("%Y/%m/%d") %></p>
-</li>
+<div class="card">
+  <div class="row no-gutters">
+    <div class="col-2">
+      <%= image_tag "unnamed.jpg", class: "card-img" %>
+    </div>
+    <div class="col-10">
+      <div class="card-body">
+        <%= link_to post.title, post, id: "post-#{post.id}", class: "card-link stretched-link" %>
+        <p class="card-text"><%= post.created_at.strftime("%Y/%m/%d") %></p>
+      </div>
+    </div>
+  </div>
+</div>

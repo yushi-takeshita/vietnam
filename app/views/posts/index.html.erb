@@ -1,29 +1,17 @@
 <% provide(:title) %>
 
 <div data-scope-path="posts/index">
-	<% unless logged_in? %>
-	<div class="introduction wide-wrap">
-		<div class="row pt-3 pb-5 px-5">
-			<div class="col-md-6">
-				<h1>What is PostOne?</h1>
-				<p class="text-wrap">This is an Internet forum for Vietnamese living in Japan.This is an Internet forum for
-					Vietnamese living in Japan.</p>
-			</div>
-			<div class="d-none d-md-block col-md-6">
-				<%= render partial: "shared/form", locals: { object: @user } %>
-			</div>
-		</div>
+	<%= search_form_for @q, class: "form-inline" do |f| %>
+	<div class="form-group">
+		<%= f.search_field :content_cont, class: "form-control", placeholder: t(".検索") %>
+		<%= f.button type: "submit", class: "btn btn-secondary" do %>
+		<%= icon("fas", "search") %>
+		<% end %>
 	</div>
 	<% end %>
-
-	<% @posts.each do |post| %>
-	<div>
-		<%= post.created_at %>
-		<%= link_to post.content, post_path(post) %>
-	</div>
-	<% end %>
-	<div>
-		<%= link_to "Bài", new_post_path %>
-		<%= link_to "Đăng ký thành viên", "#"  %>
+	<div class="posts">
+		<%= render @posts %>
+		<%= paginate @posts %>
+		<%= page_entries_info @posts %>
 	</div>
 </div>

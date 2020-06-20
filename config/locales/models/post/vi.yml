@@ -1,0 +1,12 @@
+vi:
+  activerecord:
+    models:
+      post: Bảng tin
+    attributes:
+      post:
+        id: ID
+        title: Tiêu đề
+        content: Những gì bạn đã đăng
+        user_id: ID người dùnga
+        created_at: Ngày và giờ đăng ký
+        updated_at: Ngày và giờ sửa đổi

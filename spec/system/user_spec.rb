@@ -123,7 +123,25 @@ RSpec.describe "ユーザー管理機能", type: :system do
       expect(page).to have_css ".introduction"
     end
   end
-
+  describe "プロフィール表示機能" do
+    before do
+      for i in 1..15
+        FactoryBot.create(:post, created_at: i.day.ago, user: user)
+      end
+      visit user_path(I18n.locale, user)
+    end
+    it "10個区切りで投稿がページネーションされていること" do
+      within ".posts" do
+        expect(all(".card-link").count).to eq 10
+      end
+    end
+    it "上から下へ投稿日時の新しい順に並んでいること" do
+      latest_post = user.posts.first
+      within ".posts" do
+        expect(first(".card-text")).to have_content latest_post.created_at.strftime("%Y/%m/%d")
+      end
+    end
+  end
   describe "プロフィール編集機能" do
     it "ログイン前のユーザーはプロフィールを編集できないこと" do
       visit user_path(I18n.locale, user)

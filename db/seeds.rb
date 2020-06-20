@@ -5,3 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+user = User.find(29)
+5.times do
+  title = Faker::Address.city
+  content = Faker::Company.name
+  user.posts.create!(title: title, content: content)
+end

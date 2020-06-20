@@ -1,6 +1,10 @@
 // Bootstrap
 @import "bootstrap";
 
+// FantAwesome
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
 // layouts
 @import "scopes/layouts/header";
 @import "scopes/layouts/footer";
@@ -18,6 +22,7 @@
 @import "scopes/users/edit";
 
 // post
+@import "scopes/posts/index";
 
 // sessions
 @import "scopes/sessions/new";

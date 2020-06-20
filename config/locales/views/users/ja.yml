@@ -12,6 +12,7 @@ ja:
       user_nameさんのプロフィール: "%{user_name}さんのプロフィール"
       編集: 編集
       ログアウト: ログアウト
+      user_nameさんの投稿: "%{user_name}さんの投稿"
     edit:
       プロフィールの編集: プロフィールの編集
     update:

@@ -9,7 +9,9 @@
 		<% end %>
 	</div>
 	<% end %>
-	<%= render @posts %>
-	<%= paginate @posts %>
-	<%= page_entries_info @posts %>
+	<div class="posts">
+		<%= render @posts %>
+		<%= paginate @posts %>
+		<%= page_entries_info @posts %>
+	</div>
 </div>

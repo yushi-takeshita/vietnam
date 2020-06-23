@@ -15,7 +15,8 @@
 			<%= link_to "#{parent.name}", category_path(parent), class: "parent_category", id: "#{parent.id}" %>
 			<% end %>
 		</div>
-		<div class="children_list"></div>
+		<div class="children_list">
+		</div>
 	</div>
 	<div class="posts">
 		<%= render @posts %>

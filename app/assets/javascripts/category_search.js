@@ -4,16 +4,16 @@ $(function () {
     return html;
   }
 
-  $("parent_category").on("mouseover", function () {
-    var id = this.id
-    $(".now-selected-red").removeClass("now-selected-red")
-    $('#' + id).addClass("now-selected-red");
+  $(".parent_category").mouseover(function () {
+    var id = this.id;
+    $(".now-selected").removeClass("now-selected")
+    $('#' + id).addClass("now-selected")
     $(".child_category").remove();
     $.ajax({
       type: 'GET',
       url: '/category/new',
+      dataType: 'json',
       data: { parent_id: id },
-      dataType: 'json'
     }).done(function (children) {
       children.forEach(function (child) {
         var html = buildChildHTML(child);

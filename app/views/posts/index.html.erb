@@ -1,26 +1,32 @@
 <% provide(:title) %>
 
 <div data-scope-path="posts/index">
-	<%= search_form_for @q, class: "form-inline" do |f| %>
-	<div class="form-group">
-		<%= f.search_field :content_cont, class: "form-control", placeholder: t(".検索") %>
-		<%= f.button type: "submit", class: "btn btn-secondary" do %>
-		<%= icon("fas", "search") %>
-		<% end %>
-	</div>
-	<% end %>
-	<div class="category_list">
-		<div class="parents_list">
-			<% @parents.each do |parent| %>
-			<%= link_to "#{parent.name}", category_path(parent), class: "parent_category", id: "#{parent.id}" %>
-			<% end %>
+	<div class="row">
+		<div class="col-md-5">
+			<div class="search">
+				<%= search_form_for @q, class: "form-inline" do |f| %>
+				<div class="form-group">
+					<%= f.search_field :content_cont, class: "form-control", placeholder: t(".検索") %>
+					<%= f.button type: "submit", class: "btn btn-secondary" do %>
+					<%= icon("fas", "search") %>
+					<% end %>
+				</div>
+				<% end %>
+				<div class="category_list">
+					<div class="parents_list">
+						<% @parents.each do |parent| %>
+						<%= link_to "#{parent.name}", category_path(parent), class: "parent_category", id: "#{parent.id}" %>
+						<% end %>
+					</div>
+					<div class="children_list">
+					</div>
+				</div>
+			</div>
 		</div>
-		<div class="children_list">
+		<div class="posts col-md-5">
+			<%= render @posts %>
+			<%= paginate @posts %>
+			<%= page_entries_info @posts %>
 		</div>
-	</div>
-	<div class="posts">
-		<%= render @posts %>
-		<%= paginate @posts %>
-		<%= page_entries_info @posts %>
 	</div>
 </div>

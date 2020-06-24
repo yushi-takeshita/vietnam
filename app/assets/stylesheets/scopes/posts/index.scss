@@ -1,23 +1,25 @@
 [data-scope-path="posts/index"] {
-  .now-selected {
-    background-color: cadetblue;
+  margin-top: 1.5rem;
+  .category-list {
+    .parents_list {
+    }
   }
   form {
-    margin-top: 1.5rem;
     .btn.btn-secondary {
       margin-left: 0.5rem;
     }
   }
   .card {
     margin-bottom: 1rem;
-    width: 40rem;
-    height: 5rem;
     box-shadow: 0px 1px 0px silver;
     &:hover {
       opacity: 0.7;
     }
+    .card-img {
+      height: 100%;
+      width: 100%;
+    }
     .card-body {
-      height: 5rem;
       .card-link {
         color: black;
       }
@@ -26,8 +28,11 @@
         text-align: right;
       }
     }
-    .card-img {
-      height: 5rem;
-    }
+  }
+  .now-selected-green {
+    background-color: lightgreen;
+  }
+  .now-selected-gray {
+    background-color: lightgray;
   }
 }

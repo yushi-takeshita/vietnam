@@ -1,6 +1,6 @@
 $(function () {
   function buildChildHTML(child) {
-    var html = `<a class="child_category" id="${child.id}" href="/category/${child.id}">${child.name}</a>`;
+    var html = `<a class="child_category list-group-item" id="${child.id}" href="/category/${child.id}">${child.name}</a>`;
     return html;
   }
 

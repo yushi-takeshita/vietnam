@@ -1,6 +1,6 @@
 $(function () {
   function buildChildHTML(child) {
-    var html = `<a class="child_category list-group-item" id="${child.id}" href="/category/${child.id}">${child.name}</a>`;
+    var html = `<a class="child_category list-group-item" id="${child.id}" href="category/${child.id}">${child.name}</a>`;
     return html;
   }
 
@@ -13,7 +13,7 @@ $(function () {
       type: 'GET',
       url: '/category/new',
       dataType: 'json',
-      data: { parent_id: id }
+      data: { parent_id: id, locale: $('.current_locale').val() }
     }).done(function (children) {
       children.forEach(function (child) {
         var html = buildChildHTML(child);

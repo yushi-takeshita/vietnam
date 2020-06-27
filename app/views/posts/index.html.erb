@@ -1,4 +1,4 @@
-<% provide(:title) %>
+<% provide(:title, t(".掲示板検索")) %>
 
 <div data-scope-path="posts/index">
 	<div class="row">
@@ -13,7 +13,7 @@
 				</div>
 				<% end %>
 				<div class="category_list list-group list-group-flush">
-					<h3>カテゴリー</h3>
+					<h3><%= t(".カテゴリー") %></h3>
 					<div class="parents_list">
 						<% @parents.each do |parent| %>
 						<%= link_to "#{parent.name}", category_path(parent), class: "parent_category list-group-item", id: "#{parent.id}" %>

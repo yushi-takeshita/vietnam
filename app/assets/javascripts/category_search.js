@@ -24,7 +24,9 @@ $(function () {
 
   $(document).on("mouseover", ".child_category", function () {
     var id = this.id;
-    $(".now-selected-green").removeClass("now-selected-green");
-    $('#' + id).addClass("now-selected-green");
+    $(".now-selected-lavender").removeClass("now-selected-lavender");
+    $('#' + id).addClass("now-selected-lavender");
+  }).on("mouseleave", ".category_list", function () {
+    $(".child_category").remove();
   });
 });

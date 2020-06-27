@@ -3,8 +3,10 @@
   .category_list {
     a {
       color: black;
+      text-decoration: none;
       &:hover {
       font-weight: bold;
+      color: #FF8C00;
       }
     }
   }
@@ -30,8 +32,8 @@
       }
     }
   }
-  .now-selected-green {
-    background-color: lightgreen;
+  .now-selected-lavender {
+    background-color: #E6E6FA;
   }
   .now-selected-gray {
     background-color: #efeef3;

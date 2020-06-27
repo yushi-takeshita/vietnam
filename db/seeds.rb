@@ -1,8 +1,9 @@
-Category.create(name: "生活の知恵")
-Category.create(name: "仲間募集")
-Category.create(name: "売ります・あげます")
-Category.create(name: "雑談")
-question = Category.create(name: "質問・相談")
-question.children.create(
-  [{ name: "言葉/文化" }, { name: "技能実習" }, { name: "申請/手続き" }, { name: "お金" }, { name: "その他" }]
-)
+Category.find(2).update_attribute(:vi_name, "Tuyển dụng bạn bè")
+Category.find(3).update_attribute(:vi_name, "Bán và mua")
+Category.find(4).update_attribute(:vi_name, "Chat")
+Category.find(5).update_attribute(:vi_name, "Câu hỏi và tham vấn")
+Category.find(6).update_attribute(:vi_name, "Ngôn ngữ và văn hóa")
+Category.find(7).update_attribute(:vi_name, "Tập huấn kỹ thuật")
+Category.find(8).update_attribute(:vi_name, "Ứng dụng và thủ tục")
+Category.find(9).update_attribute(:vi_name, "Tiền")
+Category.find(10).update_attribute(:vi_name, "Khác")

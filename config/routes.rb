@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     resources :posts
     resources :users, except: [:index]
     resources :password_resets, only: [:new, :create, :edit, :update]
-    get "/category/:id", to: "categories#new", as: "category"
+    get "category/new", to: "categories#new"
+    get "category/:id", to: "categories#index", as: "category"
   end
 end

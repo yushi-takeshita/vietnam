@@ -1,7 +1,11 @@
 class PostsController < ApplicationController
   def index
     @q = Post.ransack(params[:q])
-    @posts = @q.result(distinct: true).page(params[:page])
+    if params[:category_id]
+      @posts = Category.find(params[:category_id]).posts.all.page(params[:page])
+    else
+      @posts = @q.result(distinct: true).page(params[:page])
+    end
   end
 
   def show
@@ -32,8 +36,4 @@ class PostsController < ApplicationController
   end
 
   private
-
-  def post_params
-    params.require(:post).permit(:content)
-  end
 end

@@ -1,6 +1,6 @@
 $(function () {
   function buildChildHTML(child) {
-    var html = `<a class="child_category list-group-item" id="${child.id}" href="category/${child.id}">${child.name}</a>`;
+    var html = `<a class="child_category list-group-item" id="${child.id}" href="/${$('.current_locale').val()}/categories/${child.id}/index">${child.name}</a>`;
     return html;
   }
 
@@ -11,7 +11,7 @@ $(function () {
     $(".child_category").remove();
     $.ajax({
       type: 'GET',
-      url: '/category/new',
+      url: '/categories/new',
       dataType: 'json',
       data: { parent_id: id, locale: $('.current_locale').val() }
     }).done(function (children) {

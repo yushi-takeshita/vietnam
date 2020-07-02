@@ -4,7 +4,7 @@
 	<div class="row">
 		<div class="col-md-6 col-xl-5">
 			<div class="search">
-				<%= search_form_for @q, class: "form-inline" do |f| %>
+				<%= search_form_for @q, url: category_path, class: "form-inline" do |f| %>
 				<div class="form-group row justify-content-center">
 					<%= f.search_field :content_cont, class: "form-control col-9", placeholder: t(".検索") %>
 					<%= f.button type: "submit", class: "btn btn-secondary col-2" do %>
@@ -17,9 +17,9 @@
 					<div class="parents_list">
 						<% @parents.each do |parent| %>
 						<% if I18n.locale.to_s == "ja" %>
-						<%= link_to "#{parent.ja_name}", category_path(parent), class: "parent_category list-group-item", id: "#{parent.id}" %>
+						<%= link_to "#{parent.ja_name}", category_path(parent.id), class: "parent_category list-group-item", id: "#{parent.id}" %>
 						<% elsif I18n.locale.to_s == "vi" %>
-						<%= link_to "#{parent.vi_name}", category_path(parent), class: "parent_category list-group-item", id: "#{parent.id}" %>
+						<%= link_to "#{parent.vi_name}", category_path(parent.id), class: "parent_category list-group-item", id: "#{parent.id}" %>
 						<% end %>
 						<% end %>
 					</div>

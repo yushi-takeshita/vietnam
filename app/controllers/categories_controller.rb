@@ -6,8 +6,4 @@ class CategoriesController < ApplicationController
       format.json
     end
   end
-
-  def index
-    @posts = Category.find(params[:id])
-  end
 end

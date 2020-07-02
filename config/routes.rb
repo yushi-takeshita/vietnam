@@ -5,10 +5,15 @@ Rails.application.routes.draw do
     get "login", to: "sessions#new"
     post "login", to: "sessions#create"
     delete "logout", to: "sessions#destroy"
-    resources :posts
     resources :users, except: [:index]
     resources :password_resets, only: [:new, :create, :edit, :update]
-    get "category/new", to: "categories#new"
-    get "category/:id", to: "categories#index", as: "category"
+
+    controller :posts do
+      resources :posts, except: [:index]
+      get "categories/(:category_id)/index", to: "posts#index", as: "category"
+    end
+    controller :categories do
+      get "categories/new", to: "categories#new", defaults: { format: "json" }
+    end
   end
 end

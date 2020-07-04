@@ -1,14 +1,9 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
-user = User.find(29)
-5.times do
-  title = Faker::Address.city
-  content = Faker::Company.name
-  user.posts.create!(title: title, content: content)
-end
+Category.find(2).update_attribute(:vi_name, "Tuyển dụng bạn bè")
+Category.find(3).update_attribute(:vi_name, "Bán và mua")
+Category.find(4).update_attribute(:vi_name, "Chat")
+Category.find(5).update_attribute(:vi_name, "Câu hỏi và tham vấn")
+Category.find(6).update_attribute(:vi_name, "Ngôn ngữ và văn hóa")
+Category.find(7).update_attribute(:vi_name, "Tập huấn kỹ thuật")
+Category.find(8).update_attribute(:vi_name, "Ứng dụng và thủ tục")
+Category.find(9).update_attribute(:vi_name, "Tiền")
+Category.find(10).update_attribute(:vi_name, "Khác")

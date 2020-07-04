@@ -35,6 +35,7 @@ gem "rails-i18n", "~> 5.1"
 gem "ransack"
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
+gem "ancestry", require: true
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

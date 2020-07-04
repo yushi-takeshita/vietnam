@@ -1,0 +1,11 @@
+vi:
+  activerecord:
+    models:
+      category: Mục
+    attributes:
+      category:
+        id: ID
+        name: Mục
+        ancestry: Mục ID
+        created_at: Ngày và giờ đăng ký
+        updated_at: Ngày và giờ sửa đổi

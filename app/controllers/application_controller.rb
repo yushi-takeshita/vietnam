@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   include SessionsHelper
 
-  before_action :set_locale
+  before_action :set_locale, :set_parents
 
   def set_locale
     I18n.locale = locale
@@ -13,5 +13,9 @@ class ApplicationController < ActionController::Base
 
   def default_url_options(options = {})
     options.merge(locale: locale)
+  end
+
+  def set_parents
+    @parents = Category.where(ancestry: nil)
   end
 end

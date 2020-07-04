@@ -9,7 +9,7 @@ RSpec.describe "掲示板管理機能", type: :system do
       for i in 1..30
         FactoryBot.create(:post, created_at: i.day.ago, user: user)
       end
-      visit posts_path(I18n.locale)
+      visit category_path(I18n.locale)
     end
     it "25個区切りで投稿がページネーションされていること" do
       within ".posts" do

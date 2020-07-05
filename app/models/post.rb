@@ -5,7 +5,7 @@ class Post < ApplicationRecord
   validates :content, presence: true, length: { maximum: 600 }
   validates :user_id, presence: true
   validates :category_id, presence: true
-  validates :title, presence: true
+  validates :title, presence: true, length: { maximum: 30 }
 
   def self.ransackable_attributes(auth_object = nil)
     %w[content]

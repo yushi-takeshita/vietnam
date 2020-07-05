@@ -6,8 +6,22 @@
 	<div class="form-group">
 		<%= f.label :title %>
 		<%= f.text_field :title, class: "form-control" %>
-		<%= f.label :category_id %>
-		<%= f.select :category_id, Category.where(ancestry: nil).map { |category| [category.ja_name, category.id] }, {}, {class: "custom-select custom-select-lg"} %>
+		<div class="category_pulldown">
+			<%= f.label :category_id %>
+			<div class="parents_pulldown">
+				<% if I18n.locale.to_s == "ja" %>
+				<%= f.select :category_id, [["---", 0]].concat(Category.where(ancestry: nil).map { |category| [category.ja_name, category.id] }), {}, {class: "custom-select custom-select-lg", id: "parent"} %>
+				<% elsif I18n.locale.to_s == "vi" %>
+				<%= f.select :category_id, [["---", 0]].concat(Category.where(ancestry: nil).map { |category| [category.vi_name, category.id] }), {}, {class: "custom-select custom-select-lg", id: "parent"} %>
+				<% end %>
+			</div>
+			<input type="hidden" class="current_locale" value="<%= I18n.locale %>">
+			<div class="children_pulldown">
+			</div>
+		</div>
+		<%= f.label :content %>
+		<%= f.text_area :content, class: "form-control" %>
+		<%= f.submit class: "btn btn-primary" %>
 	</div>
 	<% end %>
 </div>

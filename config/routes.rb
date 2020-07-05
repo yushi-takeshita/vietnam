@@ -26,6 +26,7 @@ Rails.application.routes.draw do
 
     controller :categories do
       get "categories/new", to: "categories#new", defaults: { format: "json" }
+      get "categories/pulldown", to: "categories#pulldown", defaults: { format: "json" }
     end
   end
 end

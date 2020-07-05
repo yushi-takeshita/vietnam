@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
 
   before_action :set_locale, :set_parents
 
+  private
+
   def set_locale
     I18n.locale = locale
   end

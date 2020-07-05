@@ -1,14 +1,11 @@
-<% provide(:title, "Bài") %>
+<% provide(:title, t(".掲示板作成")) %>
 
-<h1>Let's post your message !</h1>
-<div>
-    <%= link_to "← Back", root_path %>
+<div data-scope-path="posts/new">
+	<%= render "shared/error_messages", object: @post %>
+	<%= form_with model: @post do |f| %>
+	<div class="form-group">
+		<%= f.label :title %>
+		<%= f.text_field :title, class: "form-control" %>
+	</div>
+	<% end %>
 </div>
-
-<%= form_with model: @post, local: true do |f| %>
-<%= render 'shared/error_messages' %>
-    <%= f.label :content %>
-    <%= f.text_area :content, value: @post.content %>
-    <%= f.submit %>
-<% end %>
-

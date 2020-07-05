@@ -1,7 +1,7 @@
 <div data-scope-path="shared/error_messages">
-  <% if @user.errors.any? %>
+  <% if object.errors.any? %>
   <ul id="error_explanation">
-    <% @user.errors.full_messages.each do |msg| %>
+    <% object.errors.full_messages.each do |msg| %>
     <li><%= msg %></li>
     <% end %>
   </ul>

@@ -2,6 +2,6 @@
 
 <div data-scope-path="users/new">
   <h1 class="title-signup"><%= t(".会員情報のご入力") %></h1>
-  <%= render "shared/error_messages" %>
+  <%= render "shared/error_messages", object: @user %>
   <%= render partial: "shared/form", locals: { object: @user } %>
 </div>

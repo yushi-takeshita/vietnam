@@ -35,6 +35,7 @@
 			<h3><%= Category.find(params[:category_id]).vi_name %></h3>
 			<% end %>
 			<%= page_entries_info @posts %>
+			<div class="round-cap"></div>
 			<%= render @posts %>
 			<%= paginate @posts %>
 		</div>

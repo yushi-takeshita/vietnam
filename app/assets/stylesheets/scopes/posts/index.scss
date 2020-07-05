@@ -37,6 +37,14 @@
       }
     }
   }
+  .round-cap:after {
+    background-color: lightgreen;
+    border-radius: 5px;
+    content: "";
+    display: block;
+    height: 7px;
+    margin-bottom: 20px;
+  }
   .now-selected-lavender {
     background-color: #E6E6FA;
   }

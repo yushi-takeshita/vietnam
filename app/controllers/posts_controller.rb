@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  before_action :logged_in_user, only: [:new]
+
   def index
     @q = Post.ransack(params[:q])
     if params[:category_id]

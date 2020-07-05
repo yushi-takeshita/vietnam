@@ -18,4 +18,12 @@ class ApplicationController < ActionController::Base
   def set_parents
     @parents = Category.where(ancestry: nil)
   end
+
+  # ログイン済みユーザーかどうか確認
+  def logged_in_user
+    unless logged_in?
+      flash[:danger] = t("users.new.flash.ログインしてください")
+      redirect_to login_url
+    end
+  end
 end

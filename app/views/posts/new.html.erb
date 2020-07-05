@@ -6,6 +6,8 @@
 	<div class="form-group">
 		<%= f.label :title %>
 		<%= f.text_field :title, class: "form-control" %>
+		<%= f.label :category_id %>
+		<%= f.select :category_id, Category.where(ancestry: nil).map { |category| [category.ja_name, category.id] }, {}, {class: "custom-select custom-select-lg"} %>
 	</div>
 	<% end %>
 </div>

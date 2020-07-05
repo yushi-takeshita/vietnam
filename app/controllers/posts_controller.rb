@@ -36,6 +36,4 @@ class PostsController < ApplicationController
     flash[:notice] = "Loại bỏ thành công"
     redirect_to posts_url
   end
-
-  private
 end

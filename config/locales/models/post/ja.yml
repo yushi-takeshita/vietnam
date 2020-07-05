@@ -8,5 +8,6 @@ ja:
         title: タイトル
         content: 投稿内容
         user_id: 投稿ユーザーID
+        category_id: カテゴリー
         created_at: 登録日時
         updated_at: 更新日時

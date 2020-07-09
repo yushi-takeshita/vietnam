@@ -3,7 +3,8 @@ require "byebug"
 
 RSpec.describe "ポストモデル", type: :model do
   let(:user_a) { FactoryBot.create(:user, admin: true) }
-  let(:post_a) { user_a.posts.build(content: "Hello", title: "greetings") }
+  let(:post_a) { user_a.posts.build(content: "Hello", title: "greetings", category_id: 1) }
+  # let(:category_a) { Category.create() }
 
   describe "バリデーション" do
     it "正しい投稿であること" do

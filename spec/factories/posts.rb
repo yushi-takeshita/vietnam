@@ -3,5 +3,6 @@ FactoryBot.define do
     title { "greetings" }
     content { "hello" }
     user
+    category
   end
 end

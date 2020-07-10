@@ -8,7 +8,7 @@ class Post < ApplicationRecord
   validates :title, presence: true, length: { maximum: 30 }
 
   def self.ransackable_attributes(auth_object = nil)
-    %w[content]
+    %w[content title]
   end
 
   def self.ransackable_associations(auth_object = nil)

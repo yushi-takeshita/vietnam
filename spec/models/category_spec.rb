@@ -4,6 +4,7 @@ RSpec.describe "カテゴリー", type: :model do
   describe "バリデーション" do
     let(:category) { Category.new(params) }
     subject { category }
+
     context "日本語とベトナム語の名前が存在する場合" do
       let(:params) { { ja_name: "生活の知恵", vi_name: "Sự khôn ngoan của cuộc sống" } }
       it { is_expected.to be_valid }

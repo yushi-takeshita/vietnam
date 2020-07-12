@@ -3,10 +3,10 @@ require "rails_helper"
 RSpec.describe "掲示板管理機能", type: :system do
   describe "投稿一覧・検索ページ" do
     let(:user) { FactoryBot.create(:user) }
-    let(:category) { FactoryBot.create(:category) }
-    let(:child_category) { category.children.create(ja_name: "言葉/文化", vi_name: "Ngôn ngữ và văn hóa") }
+    let(:parent_category) { child_category.parent }
+    let(:child_category) { FactoryBot.create(:category, :with_child_category) }
     let!(:posts) {
-      FactoryBot.create_list(:post, 15, user: user, category: category)
+      FactoryBot.create_list(:post, 15, user: user, category: parent_category)
       FactoryBot.create_list(:post, 15, user: user, category: child_category)
     }
     before do
@@ -34,7 +34,7 @@ RSpec.describe "掲示板管理機能", type: :system do
     describe "投稿検索機能" do
       it "親子カテゴリ検索ができること", js: true do
         within ".parents_list" do
-          find_by_id("#{category.id}").hover
+          find_by_id("#{parent_category.id}").hover
         end
         within ".children_list" do
           find_by_id("#{child_category.id}").click

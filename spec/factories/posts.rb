@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :post do
-    title { "greetings" }
-    content { "hello" }
+    title { Faker::Lorem.word }
+    content { Faker::Lorem.word }
     user
     category
   end

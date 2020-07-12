@@ -34,7 +34,7 @@
 			<% elsif params[:category_id] && I18n.locale.to_s == "vi" %>
 			<h3><%= Category.find(params[:category_id]).vi_name %></h3>
 			<% end %>
-			<%= page_entries_info @posts %>
+			<div class="page_entries_info"><%= page_entries_info @posts %></div>
 			<div class="round-cap"></div>
 			<%= render @posts %>
 			<%= paginate @posts %>

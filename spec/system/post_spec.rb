@@ -1,25 +1,52 @@
 require "rails_helper"
-require "pry-byebug"
 
 RSpec.describe "掲示板管理機能", type: :system do
-  let(:user) { FactoryBot.create(:user, admin: true) }
-  let(:post) { FactoryBot.create(:post, user: user) }
-  describe "一覧表示機能" do
+  describe "投稿一覧・検索ページ" do
+    let(:user) { FactoryBot.create(:user) }
+    let(:category) { FactoryBot.create(:category) }
+    let(:child_category) { category.children.create(ja_name: "言葉/文化", vi_name: "Ngôn ngữ và văn hóa") }
+    let!(:posts) {
+      FactoryBot.create_list(:post, 15, user: user, category: category)
+      FactoryBot.create_list(:post, 15, user: user, category: child_category)
+    }
     before do
-      for i in 1..30
-        FactoryBot.create(:post, created_at: i.day.ago, user: user)
-      end
       visit category_path(I18n.locale)
     end
-    it "25個区切りで投稿がページネーションされていること" do
-      within ".posts" do
-        expect(all(".card-link").count).to eq 25
+    describe "投稿一覧表示機能" do
+      it "25個区切りで投稿がページネーションされていること" do
+        within ".posts" do
+          expect(all(".card").count).to eq 25
+        end
+        expect(page).to have_css ".pagination"
+      end
+      it "上から下へ投稿日時の新しい順に並んでいること" do
+        latest_post = Post.first
+        within ".posts" do
+          expect(first(".card-text")).to have_content latest_post.created_at.strftime("%Y/%m/%d")
+        end
+      end
+      it "検索結果の件数が正しいこと" do
+        within ".page_entries_info" do
+          expect(page).to have_content Post.count
+        end
       end
     end
-    it "上から下へ投稿日時の新しい順に並んでいること" do
-      latest_post = user.posts.first
-      within ".posts" do
-        expect(first(".card-text")).to have_content latest_post.created_at.strftime("%Y/%m/%d")
+    describe "投稿検索機能" do
+      it "親子カテゴリ検索ができること", js: true do
+        within ".parents_list" do
+          find_by_id("#{category.id}").hover
+        end
+        within ".children_list" do
+          find_by_id("#{child_category.id}").click
+        end
+        # 親カテゴリと子カテゴリで15投稿ずつ作成済み
+        expect(all(".card").count).to eq 15
+      end
+      it "キーワード検索ができること" do
+        key_word = Post.first.title
+        fill_in "q[title_or_content_cont]", with: key_word
+        find(".btn-secondary").click
+        expect(all(".card").count).to eq Post.where("title like '%#{key_word}%'").or(Post.where("content like '%#{key_word}%'")).count
       end
     end
   end

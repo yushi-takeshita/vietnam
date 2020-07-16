@@ -1,3 +1,17 @@
 [data-scope-path="posts/new"] {
-  margin-top: 1.5rem;
+  h1 {
+    text-align: center;
+    margin: 1rem 0;
+  }
+  form {
+    label {
+      margin-top: 2rem;
+    }
+    textarea {
+      height: 15rem;
+    }
+    .btn.btn-primary {
+      margin-top: 1rem;
+    }
+  }
 }

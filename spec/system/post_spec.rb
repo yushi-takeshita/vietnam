@@ -49,5 +49,9 @@ RSpec.describe "掲示板管理機能", type: :system do
         expect(all(".card").count).to eq Post.where("title like '%#{key_word}%'").or(Post.where("content like '%#{key_word}%'")).count
       end
     end
+    describe "記事投稿機能" do
+      it "記事が投稿できること"
+      it "選んだカテゴリが反映されていること"
+    end
   end
 end

@@ -1,10 +1,10 @@
 require "rails_helper"
 
 RSpec.describe "掲示板管理機能", type: :system do
+  let(:user) { FactoryBot.create(:user) }
+  let!(:parent_category) { child_category.parent }
+  let!(:child_category) { FactoryBot.create(:category, :with_child_category) }
   describe "投稿一覧・検索ページ" do
-    let(:user) { FactoryBot.create(:user) }
-    let(:parent_category) { child_category.parent }
-    let(:child_category) { FactoryBot.create(:category, :with_child_category) }
     let!(:posts) {
       FactoryBot.create_list(:post, 15, user: user, category: parent_category)
       FactoryBot.create_list(:post, 15, user: user, category: child_category)
@@ -49,9 +49,18 @@ RSpec.describe "掲示板管理機能", type: :system do
         expect(all(".card").count).to eq Post.where("title like '%#{key_word}%'").or(Post.where("content like '%#{key_word}%'")).count
       end
     end
-    describe "記事投稿機能" do
-      it "記事が投稿できること"
-      it "選んだカテゴリが反映されていること"
+  end
+  describe "記事投稿ページ" do
+    it "記事が投稿できること" do
+      login_as(user)
+      visit new_post_path
+      fill_in "post[title]", with: "VISAの申請について"
+      find("option[value='#{parent_category.id}']").select_option
+      find("option[value='#{child_category.id}']").select_option
+      fill_in "post[content]", with: "注意事項があれば教えて下さい"
+      expect { find(".btn-primary").click }.to change { Post.count }.by(1)
+      expect(current_path).to eq post_path(I18n.locale, Post.first.id)
+      expect(page).to have_css ".alert-success"
     end
   end
 end

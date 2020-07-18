@@ -1,7 +1,5 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require "spec_helper"
-require "support/shared_examples"
-require "support/shared_contexts"
 
 ENV["RAILS_ENV"] ||= "test"
 
@@ -64,6 +62,6 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 
-  config.include UserUtilities
   config.include ShowMeTheCookies, type: :system
+  config.include LoginMacros
 end

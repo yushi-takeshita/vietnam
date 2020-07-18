@@ -20,13 +20,5 @@
   </div>
   <% end %>
 
-  <% @posts.each do |post| %>
-  <div>
-    <%= post.created_at %>
-    <%= link_to post.content, post_path(post) %>
-  </div>
-  <% end %>
-  <div>
-    <%= link_to "Đăng ký thành viên", "#"  %>
-  </div>
+  <%= render partial: "shared/button_linked_create_post" %>
 </div>

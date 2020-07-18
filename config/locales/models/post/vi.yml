@@ -8,5 +8,13 @@ vi:
         title: Tiêu đề
         content: Những gì bạn đã đăng
         user_id: ID người dùnga
+        category: Mục
+        category_id: Mục
         created_at: Ngày và giờ đăng ký
         updated_at: Ngày và giờ sửa đổi
+    errors:
+      models:
+        post:
+          attributes:
+            category:
+              required: phải có

@@ -1,7 +1,6 @@
 [data-scope-path="posts/index"] {
+  margin-top: 2rem;
   form {
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
     .form-group {
       width: 100%;
       margin: 0 auto;
@@ -9,6 +8,9 @@
         margin-left: 0.5rem;
       }
     }
+  }
+  .w-100 {
+    margin-top: 2rem;
   }
   .category_list {
     margin-bottom: 1.5rem;
@@ -36,6 +38,14 @@
         text-align: right;
       }
     }
+  }
+  .round-cap:after {
+    background-color: lightgreen;
+    border-radius: 5px;
+    content: "";
+    display: block;
+    height: 7px;
+    margin-bottom: 20px;
   }
   .now-selected-lavender {
     background-color: #E6E6FA;

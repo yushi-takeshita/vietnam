@@ -12,6 +12,7 @@ vi:
         category_id: Mục
         created_at: Ngày và giờ đăng ký
         updated_at: Ngày và giờ sửa đổi
+        image: Hình ảnh
     errors:
       models:
         post:

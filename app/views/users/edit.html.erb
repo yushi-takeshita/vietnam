@@ -13,6 +13,15 @@
       <%= f.label :email %>
       <%= f.email_field :email, class: "form-control" %>
     </div>
+    <div class="form-group file-field row no-gutters">
+      <%= f.label :image, class: "image-icon col-md-1" do %>
+      <%= icon("fas", "image fa-2x") %>
+      <%= f.file_field :image, class: "selected-file" %>
+      <% end %>
+      <div class="col-md-7">
+        <input class="form-control" id="dummy_file" type="text" placeholder="<%= t(".ファイル未選択") %>">
+      </div>
+    </div>
     <div class="form-group">
       <%= f.label :profile %>
       <%= f.text_area :profile, class: "form-control" %>

@@ -5,9 +5,9 @@
     <div class="user col-5">
       <div class="card">
         <% if @user.image.attached? %>
-        <%= image_tag @user.image, class: "rounded-circle" %>
+        <%= image_tag @user.image, class: "rounded-circle border" %>
         <% else %>
-        <%= image_tag("unnamed.jpg", class: "rounded-circle") %>
+        <%= image_tag("unnamed.jpg", class: "rounded-circle border") %>
         <% end %>
         <div class="card-body">
           <h2 class="card-title"><%= @user.name %></h2>

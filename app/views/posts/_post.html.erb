@@ -1,7 +1,11 @@
 <div class="card">
   <div class="row no-gutters">
     <div class="col-3 my-auto">
-      <%= image_tag "unnamed.jpg", class: "card-img" %>
+      <% if post.image.attached? %>
+      <%= image_tag post.image, class: "card-img border" %>
+      <% else %>
+      <%= image_tag("unnamed.jpg", class: "card-img border") %>
+      <% end %>
     </div>
     <div class="col-9">
       <div class="card-body">

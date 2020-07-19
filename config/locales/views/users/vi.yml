@@ -15,7 +15,6 @@ vi:
       user_nameさんの投稿: "bài đăng của %{user_name}"
     edit:
       プロフィールの編集: Chỉnh sửa tiểu sử của bạn
-      ファイル未選択: Tệp không được chọn
     update:
       flash:
         プロフィールを編集しました: Hồ sơ đã sửa

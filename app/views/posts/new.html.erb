@@ -37,7 +37,7 @@
 				<%= f.file_field :image, class: "selected-file" %>
 				<% end %>
 				<div class="col-md-7">
-					<input class="form-control" id="dummy_file" type="text" placeholder="<%= t(".ファイル未選択") %>">
+					<%= render "shared/select_image_file" %>
 				</div>
 			</div>
 			<%= f.submit class: "btn btn-primary" %>

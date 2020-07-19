@@ -13,9 +13,6 @@
         label.image-icon {
           cursor: pointer;
           font-size: 1.2rem;
-          &:hover {
-            font-size: 1.5rem;
-          }
           input.selected-file {
             display: none;
           }

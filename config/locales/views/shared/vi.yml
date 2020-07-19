@@ -1,0 +1,4 @@
+vi:
+  shared:
+    select_image_file:
+      ファイル未選択: Tệp không được chọn

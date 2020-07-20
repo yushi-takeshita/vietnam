@@ -7,6 +7,9 @@
 <div>
     <%= @post.content %>
 </div>
+<% if @post.image.attached? %>
+<%= image_tag @post.image %>
+<% end %>
 <div>
     <%= link_to "Xóa", post_path(@post), method: :delete, data: {confirm: "Do you DELETE this post ?"} %>
 </div>

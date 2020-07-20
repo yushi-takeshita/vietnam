@@ -4,7 +4,11 @@
   <div class="row justify-content-around">
     <div class="user col-5">
       <div class="card">
-        <%= image_tag("unnamed.jpg", class: "rounded-circle") %>
+        <% if @user.image.attached? %>
+        <%= image_tag @user.image, class: "rounded-circle border" %>
+        <% else %>
+        <%= image_tag("ruby.png", class: "rounded-circle border") %>
+        <% end %>
         <div class="card-body">
           <h2 class="card-title"><%= @user.name %></h2>
           <p class="card-text">

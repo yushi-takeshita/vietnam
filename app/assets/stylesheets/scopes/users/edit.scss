@@ -1,6 +1,23 @@
 [data-scope-path="users/edit"] {
   h1 {
+    font-size: 2rem;
     text-align: center;
-    padding: 40px 0;
+    margin: 3rem 0;
+  }
+  form {
+    .form-group {
+      textarea {
+        height: 15rem;
+      }
+      &.file-field {
+        label.image-icon {
+          cursor: pointer;
+          font-size: 1.2rem;
+          input.selected-file {
+            display: none;
+          }
+        }
+      }
+    }
   }
 }

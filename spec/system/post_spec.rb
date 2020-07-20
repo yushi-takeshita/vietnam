@@ -4,6 +4,7 @@ RSpec.describe "掲示板管理機能", type: :system do
   let(:user) { FactoryBot.create(:user) }
   let!(:parent_category) { child_category.parent }
   let!(:child_category) { FactoryBot.create(:category, :with_child_category) }
+
   describe "投稿一覧・検索ページ" do
     let!(:posts) {
       FactoryBot.create_list(:post, 15, user: user, category: parent_category)
@@ -30,6 +31,14 @@ RSpec.describe "掲示板管理機能", type: :system do
           expect(page).to have_content Post.count
         end
       end
+      it "画像が投稿されてない掲示板のサムネにはデフォルト画像が表示されていること" do
+        within ".posts" do
+          posts = all(".card")
+          posts.each do |post|
+            expect(post).to have_css("img[src*='/assets/default_image']")
+          end
+        end
+      end
     end
     describe "投稿検索機能" do
       it "親子カテゴリ検索ができること", js: true do
@@ -53,14 +62,35 @@ RSpec.describe "掲示板管理機能", type: :system do
   describe "記事投稿ページ" do
     it "記事が投稿できること" do
       login_as(user)
+
       visit new_post_path
       fill_in "post[title]", with: "VISAの申請について"
       find("option[value='#{parent_category.id}']").select_option
       find("option[value='#{child_category.id}']").select_option
       fill_in "post[content]", with: "注意事項があれば教えて下さい"
+      attach_file "post[image]", "#{Rails.root}/spec/factories/default_image.jpg", { make_visible: true }
+
+      # 投稿数が1件増える
       expect { find(".btn-primary").click }.to change { Post.count }.by(1)
+
+      # 掲示板詳細ページへリダイレクトする
       expect(current_path).to eq post_path(I18n.locale, Post.first.id)
       expect(page).to have_css ".alert-success"
+
+      # 掲示板詳細ページに投稿画像が反映されている
+      expect(page).to have_css("img[src*='/rails/active_storage/blobs/']")
+
+      # 掲示板一覧ページに投稿画像が反映されている
+      visit category_path(I18n.locale)
+      within ".posts" do
+        expect(page).to have_content "VISAの申請について"
+        expect(page).to have_css("img[src*='/rails/active_storage/blobs/']")
+      end
+
+      # ユーザプロフィールの投稿一覧に投稿画像が反映されている
+      visit user_path(I18n.locale, user)
+      expect(page).to have_content "VISAの申請について"
+      expect(page).to have_css("img[src*='/rails/active_storage/blobs/']")
     end
   end
 end

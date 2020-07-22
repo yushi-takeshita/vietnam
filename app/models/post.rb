@@ -1,5 +1,6 @@
 class Post < ApplicationRecord
   has_one_attached :image
+  has_many :comments, dependent: :destroy
   belongs_to :category
   belongs_to :user
   default_scope -> { order(created_at: :desc) }

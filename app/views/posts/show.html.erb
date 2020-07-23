@@ -1,13 +1,21 @@
 <% provide(:title, @post.title ) %>
+
 <div data-scope-path="posts/show">
-	<%= render "shared/error_messages", object: @comment %>
 	<div>
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="#">Home</a></li>
+				<li class="breadcrumb-item"><a href="#">Library</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Data</li>
+			</ol>
+		</nav>
 		<%= @post.content %>
 		<% if @post.image.attached? %>
 		<%= image_tag @post.image %>
 		<% end %>
 	</div>
 
+	<%= render "shared/error_messages", object: @comment %>
 	<% if logged_in? %>
 	<%= form_with model: @comment, url: post_comments_path(@post), local: true do |f| %>
 	<div class="form-group">
@@ -18,7 +26,7 @@
 	<% end %>
 	<% end %>
 
-	<% @comments.each do |comment| %>
+	<% @comments&.each do |comment| %>
 	<%= comment.body %>
 	<% if current_user&.admin? %>
 	<%= link_to "削除", post_comment_path(@post, comment.id), method: :delete %>

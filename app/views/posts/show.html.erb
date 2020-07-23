@@ -8,6 +8,7 @@
 		<% end %>
 	</div>
 
+	<% if logged_in? %>
 	<%= form_with model: @comment, url: post_comments_path(@post), local: true do |f| %>
 	<div class="form-group">
 		<%= f.label :body %>
@@ -15,8 +16,12 @@
 	</div>
 	<%= f.submit class: "btn btn-primary" %>
 	<% end %>
+	<% end %>
 
-	<!-- <% @comments&.each do |comment| %> -->
-	<!-- <%= comment.body %> -->
-	<!-- <% end %> -->
+	<% @comments.each do |comment| %>
+	<%= comment.body %>
+	<% if current_user&.admin? %>
+	<%= link_to "削除", post_comment_path(@post, comment.id), method: :delete %>
+	<% end %>
+	<% end %>
 </div>

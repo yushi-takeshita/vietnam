@@ -1,0 +1,11 @@
+vi:
+  activerecord:
+    models:
+      comment: Ý kiến
+    attributes:
+      comment:
+        id: ID
+        body: Nội dung nhận xét
+        user_id: ID người dùnga
+        created_at: Ngày và giờ nhận xét
+        updated_at: Cập Nhật ngày và giờ

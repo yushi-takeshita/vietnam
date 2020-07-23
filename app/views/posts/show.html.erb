@@ -1,15 +1,22 @@
-<% provide(:title, "Chi tiết") %>
+<% provide(:title, @post.title ) %>
+<div data-scope-path="posts/show">
+	<%= render "shared/error_messages", object: @comment %>
+	<div>
+		<%= @post.content %>
+		<% if @post.image.attached? %>
+		<%= image_tag @post.image %>
+		<% end %>
+	</div>
 
-<h1>detail</h1>
-<div>
-    <%= link_to "← Back", posts_path %>
-</div>
-<div>
-    <%= @post.content %>
-</div>
-<% if @post.image.attached? %>
-<%= image_tag @post.image %>
-<% end %>
-<div>
-    <%= link_to "Xóa", post_path(@post), method: :delete, data: {confirm: "Do you DELETE this post ?"} %>
+	<%= form_with model: @comment, url: post_comments_path(@post), local: true do |f| %>
+	<div class="form-group">
+		<%= f.label :body %>
+		<%= f.text_area :body, class: "form-control" %>
+	</div>
+	<%= f.submit class: "btn btn-primary" %>
+	<% end %>
+
+	<!-- <% @comments&.each do |comment| %> -->
+	<!-- <%= comment.body %> -->
+	<!-- <% end %> -->
 </div>

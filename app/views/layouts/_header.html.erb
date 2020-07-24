@@ -34,15 +34,9 @@
             <li class="nav-item">
               <%= link_to t(".暮らしに役立つサイト"), useful_pages_path, class: "nav-link" %>
             </li>
-            <% if I18n.locale.to_s == "ja" %>
             <li class="nav-item">
-              <%= link_to "Việt / 日本語", root_path(:locale => "vi"), {class: "nav-link"} %>
+              <%= link_to "Việt / 日本語", root_path(:locale => another_locale), {class: "nav-link"} %>
             </li>
-            <% elsif I18n.locale.to_s == "vi" %>
-            <li class="nav-item">
-              <%= link_to "Việt / 日本語", root_path(:locale => "ja"), {class: "nav-link"} %>
-            </li>
-            <% end %>
           </ul>
         </div>
       </nav>

@@ -5,6 +5,10 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
+// utilities
+@import "color-list";
+
+// view
 // layouts
 @import "scopes/layouts/header";
 @import "scopes/layouts/footer";

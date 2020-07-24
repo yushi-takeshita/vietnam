@@ -53,11 +53,9 @@
   background-color: #eaeaea;
 }
 
-html {
+.wrapper {
+  min-height: 100vh;
   position: relative;
-  min-height: 100%;
-}
-
-body {
-  margin-bottom: 40px;
+  padding-bottom: 50px;
+  box-sizing: border-box;
 }

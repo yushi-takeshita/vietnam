@@ -7,4 +7,65 @@
     margin:0 calc(50% - 50vw);
     overflow:hidden;
   }
+  .main-contents {
+    margin-top: 3rem;
+    form {
+      .form-group {
+        width: 100%;
+        margin: 0 auto;
+        .btn.btn-secondary {
+          margin-left: 0.5rem;
+        }
+      }
+    }
+    .w-100 {
+      margin-top: 2rem;
+    }
+    .category_list {
+      margin-bottom: 1.5rem;
+      a {
+        color: black;
+        text-decoration: none;
+        &:hover {
+        font-weight: bold;
+        color: #FF8C00;
+        }
+      }
+    }
+    .card {
+      margin-bottom: 1rem;
+      box-shadow: 0px 1px 0px silver;
+      &:hover {
+        opacity: 0.7;
+      }
+      .card-body {
+        .card-link {
+          color: black;
+        }
+        .card-text {
+          color: gray;
+          text-align: right;
+        }
+      }
+    }
+    .round-cap:after {
+      background-color: lightgreen;
+      border-radius: 5px;
+      content: "";
+      display: block;
+      height: 7px;
+      margin-bottom: 20px;
+    }
+    ul.pagination {
+      li.page-item {
+        width: 4rem;
+      }
+    }
+    .now-selected-lavender {
+      background-color: #E6E6FA;
+    }
+    .now-selected-gray {
+      background-color: #efeef3;
+    }
+  }
 }

@@ -14,50 +14,49 @@
       margin-top: 2rem;
     }
     .category_list {
+      .now-selected-lavender {
+        background-color: $now-selected-lavender;
+      }
+      .now-selected-gray {
+        background-color: $now-selected-gray;
+      }
       margin-bottom: 1.5rem;
       a {
-        color: black;
+        color: $black;
         text-decoration: none;
         &:hover {
         font-weight: bold;
-        color: #FF8C00;
+        color: $now-selected-orange;
         }
       }
     }
-    .card {
-      margin-bottom: 1rem;
-      box-shadow: 0px 1px 0px silver;
-      &:hover {
-        opacity: 0.7;
+    .posts {
+      .round-cap:after {
+        @include under_bar;
       }
-      .card-body {
-        .card-link {
-          color: black;
+      .card {
+        height: 9rem;
+        margin-bottom: 1rem;
+        box-shadow: 0px 1px 0px silver;
+        &:hover {
+          opacity: 0.7;
         }
-        .card-text {
-          color: gray;
-          text-align: right;
+        .body {
+          height: 100%;
+          .card-img {
+            height: 100%;
+          }
+        }
+        .card-body {
+          .card-link {
+            color: $black;
+          }
+          .card-text {
+            color: gray;
+            text-align: right;
+          }
         }
       }
-    }
-    .round-cap:after {
-      background-color: lightgreen;
-      border-radius: 5px;
-      content: "";
-      display: block;
-      height: 7px;
-      margin-bottom: 20px;
-    }
-    ul.pagination {
-      li.page-item {
-        width: 4rem;
-      }
-    }
-    .now-selected-lavender {
-      background-color: #E6E6FA;
-    }
-    .now-selected-gray {
-      background-color: #efeef3;
     }
   }
 }

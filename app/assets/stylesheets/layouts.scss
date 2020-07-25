@@ -1,0 +1,8 @@
+@mixin under_bar {
+  background-color: $light-green;
+  border-radius: 5px;
+  content: "";
+  display: block;
+  height: 7px;
+  margin-bottom: 20px;
+}

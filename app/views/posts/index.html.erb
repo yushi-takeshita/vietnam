@@ -1,6 +1,13 @@
 <% provide(:title, t(".掲示板検索")) %>
 
 <div data-scope-path="posts/index">
+	<% if @category %>
+	<% breadcrumb :category, @category %>
+	<% else %>
+	<% breadcrumb :categories %>
+	<% end %>
+	<%= breadcrumbs pretext: "",separator: " &rsaquo; " %>
+
 	<div class="main-contents row">
 		<%= search_form_for @q, url: category_path, class: "form-inline col-md-6 col-xl-5" do |f| %>
 		<div class="form-group form-row">

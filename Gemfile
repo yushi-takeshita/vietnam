@@ -37,6 +37,7 @@ gem "ransack"
 # gem 'mini_magick', '~> 4.8'
 gem "ancestry", require: true
 
+gem "gretel"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

@@ -2,13 +2,13 @@
 
 <div data-scope-path="posts/show">
 	<div>
-		<nav aria-label="breadcrumb">
-			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="#">Home</a></li>
-				<li class="breadcrumb-item"><a href="#">Library</a></li>
-				<li class="breadcrumb-item active" aria-current="page">Data</li>
-			</ol>
-		</nav>
+		<% if @category %>
+		<% breadcrumb :category, @category %>
+		<% else %>
+		<% breadcrumb :categories %>
+		<% end %>
+		<%= breadcrumbs pretext: "",separator: " &rsaquo; " %>
+
 		<%= @post.content %>
 		<% if @post.image.attached? %>
 		<%= image_tag @post.image %>

@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   before_action :logged_in_user, only: [:new, :create]
 
   def index
+    @category = Category.find_by(id: params[:category_id])
     @q = Post.ransack(params[:q])
     if params[:category_id]
       @posts = Category.find(params[:category_id]).posts.all.page(params[:page])
@@ -12,6 +13,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @category = @post.category
     @comment = Comment.new
     @comments = @post.comments.all
   end

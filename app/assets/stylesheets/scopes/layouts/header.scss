@@ -1,14 +1,14 @@
 [data-scope-path="layouts/header"] {
   background-color: $main-color;
-  .navbar-brand {
-    font-size: 2rem;
+  nav {
+    width: 100%;
+    .navbar-brand {
+      font-size: 3rem;
+    }
   }
   .introduction {
     padding-bottom: 1.5rem;
     .title-col {
-      h1 {
-        font-size: 2em;
-      }
       img {
         height: 60%;
         width: 60%;

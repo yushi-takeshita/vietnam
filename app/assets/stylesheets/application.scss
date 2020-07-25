@@ -57,9 +57,15 @@
   background-color: #eaeaea;
 }
 
-.wrapper {
-  min-height: 100vh;
-  position: relative;
-  padding-bottom: 50px;
-  box-sizing: border-box;
+html {
+  font-size: 62.5%;
+  body {
+    font-size: 1.6rem;
+    .wrapper {
+      min-height: 100vh;
+      position: relative;
+      padding-bottom: 50px;
+      box-sizing: border-box;
+    }
+  }
 }

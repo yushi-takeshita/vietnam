@@ -3,41 +3,43 @@
   <div class="text-center alert alert-<%= message_type %>"><%= message %></div>
   <% end %>
   <div class="container-fluid">
-    <nav class="navbar navbar-expand-md navbar-light">
-      <%= link_to "PostOne", root_path, class: "navbar-brand" %>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
-        aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-        <ul class="navbar-nav">
-          <% if logged_in? %>
-          <li class="nav-item">
-            <%= link_to t(".マイページ"), current_user, class: "nav-link mypage" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to t(".ログアウト"), logout_path, method: :delete, class: "nav-link logout" %>
-          </li>
-          <% else %>
-          <li class="nav-item">
-            <%= link_to t(".ログイン"), login_path, class: "nav-link login" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to t(".会員登録"), new_user_path, class: "nav-link create-account" %>
-          </li>
-          <% end %>
-          <li class="nav-item">
-            <%= link_to t(".掲示板"), category_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to t(".暮らしに役立つサイト"), useful_pages_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Việt / 日本語", root_path(:locale => another_locale), {class: "nav-link"} %>
-          </li>
-        </ul>
-      </div>
-    </nav>
+    <div class="row">
+      <nav class="navbar navbar-expand-md navbar-light offset-md-1">
+        <%= link_to "PostOne", root_path, class: "navbar-brand" %>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+          aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul class="navbar-nav mr-auto">
+            <% if logged_in? %>
+            <li class="nav-item">
+              <%= link_to t(".マイページ"), current_user, class: "nav-link mypage" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to t(".ログアウト"), logout_path, method: :delete, class: "nav-link logout" %>
+            </li>
+            <% else %>
+            <li class="nav-item">
+              <%= link_to t(".ログイン"), login_path, class: "nav-link login" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to t(".会員登録"), new_user_path, class: "nav-link create-account" %>
+            </li>
+            <% end %>
+            <li class="nav-item">
+              <%= link_to t(".掲示板"), category_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to t(".暮らしに役立つサイト"), useful_pages_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Việt / 日本語", root_path(:locale => another_locale), {class: "nav-link"} %>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
 
     <div class="w-100"></div>
 

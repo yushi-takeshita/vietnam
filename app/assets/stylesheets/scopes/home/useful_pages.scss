@@ -1,36 +1,29 @@
 [data-scope-path="home/useful_pages"] {
-  width: 600px;
-  margin: 0 auto;
   .card {
     margin-top: 30px;
     .round-cap:after {
-      background-color: lightgreen;
-      border-radius: 5px;
-      content: "";
-      display: block;
-      height: 7px;
-      margin-bottom: 20px;
+      @include under_bar;
     }
     .card-body {
       margin-bottom: 30px;
     }
   }
-  ol {
+  .menu {
     margin-top: 30px;
     border-radius: 5px;
     background-color: #dadada;
     box-shadow: 5px 5px 10px silver;
-    padding: 0.5em 0.5em 0.5em 2em;
-    h5 {
+    padding: 1rem 0;
+    h2 {
       text-align: center;
     }
     li {
       padding: 0.5em 0;
       a {
         text-decoration: none;
-        color: black;
+        color: $black;
         &:hover {
-          color: #FF8C00;
+          color: $now-selected-orange;
         }
       }
     }

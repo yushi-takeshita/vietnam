@@ -1,8 +1,8 @@
 <%= provide(:title, t(".user_nameさんのプロフィール", user_name: @user.name)) %>
 
 <div data-scope-path="users/show">
-  <div class="row justify-content-around">
-    <div class="user col-5">
+  <div class="row">
+    <div class="user col-md-5 mb-5">
       <div class="card">
         <% if @user.image.attached? %>
         <%= image_tag @user.image, class: "rounded-circle border" %>
@@ -25,12 +25,12 @@
         </div>
       </div>
     </div>
-    <div class="posts col-6">
-      <h5><%= t(".user_nameさんの投稿", user_name: @user.name) %></h5>
+    <div class="posts col-md-7">
+      <h3><%= t(".user_nameさんの投稿", user_name: @user.name) %></h3>
       <div class="round-cap"></div>
       <%= render @posts %>
-      <%= paginate @posts %>
       <%= page_entries_info @posts %>
+      <%= paginate @posts %>
     </div>
   </div>
 </div>

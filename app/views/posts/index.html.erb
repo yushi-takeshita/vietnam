@@ -6,8 +6,7 @@
 	<% else %>
 	<% breadcrumb :categories %>
 	<% end %>
-	<%= breadcrumbs pretext: "",separator: " &rsaquo; " %>
-
+	<%= breadcrumbs pretext: "", separator: " &rsaquo; " %>
 	<div class="main-contents row">
 		<%= search_form_for @q, url: category_path, class: "form-inline col-md-6 col-xl-5" do |f| %>
 		<div class="form-group form-row">

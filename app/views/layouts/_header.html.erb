@@ -40,7 +40,7 @@
 
     <div class="w-100"></div>
 
-    <% if !logged_in? && current_page?(controller: "home", action: "top") %>
+    <% if !logged_in? && (current_page?(root_path(@locale)) || current_page?("/")) %>
     <div class="introduction">
       <div class="row justify-content-center">
         <div class="title-col col col-md-5 text-center text-md-left">

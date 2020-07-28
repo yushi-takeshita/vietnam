@@ -1,20 +1,41 @@
 <% provide(:title, @post.title ) %>
 
 <div data-scope-path="posts/show">
-	<div>
-		<% if @category %>
-		<% breadcrumb :category, @category %>
-		<% else %>
-		<% breadcrumb :categories %>
-		<% end %>
-		<%= breadcrumbs pretext: "",separator: " &rsaquo; " %>
-
-		<%= @post.content %>
-		<% if @post.image.attached? %>
-		<%= image_tag @post.image %>
-		<% end %>
+	<div class="row justify-content-center">
+		<div class="col-md-10 col-lg-12">
+			<div class="top-wrapper">
+				<% if @category %>
+				<% breadcrumb :category, @category %>
+				<% else %>
+				<% breadcrumb :categories %>
+				<% end %>
+				<%= breadcrumbs pretext: "", separator: " &rsaquo; " %>
+				<div class="round-cap"></div>
+				<p class="user">
+					<% if @user.image.attached? %>
+					<%= image_tag @user.image, class: "rounded-circle border" %>
+					<% else %>
+					<%= image_tag("ruby.png", class: "rounded-circle border") %>
+					<% end %>
+					<%= @user.name %>
+					| <span><%= @post.created_at.strftime("%Y/%m/%d %H:%M") %></span>
+				</p>
+			</div>
+			<div class="post-wrapper">
+				<h1><%= @post.title %></h1>
+				<div class="row no-gutters">
+					<div class="col-md-8">
+						<p><%= simple_format(@post.content) %></p>
+					</div>
+					<% if @post.image.attached? %>
+					<div class="post-img col-md-4">
+						<%= image_tag @post.image, class: "img-fluid" %>
+					</div>
+					<% end %>
+				</div>
+			</div>
+		</div>
 	</div>
-
 	<%= render "shared/error_messages", object: @comment %>
 	<% if logged_in? %>
 	<%= form_with model: @comment, url: post_comments_path(@post), local: true do |f| %>
@@ -27,9 +48,24 @@
 	<% end %>
 
 	<% @comments&.each do |comment| %>
-	<%= comment.body %>
-	<% if current_user&.admin? %>
-	<%= link_to "削除", post_comment_path(@post, comment.id), method: :delete %>
-	<% end %>
+	<div class="card">
+		<div class="card-header">
+			<% if comment.user.image.attached? %>
+			<%= image_tag comment.user.image, class: "rounded-circle border" %>
+			<% else %>
+			<%= image_tag("ruby.png", class: "rounded-circle border") %>
+			<% end %>
+			<%= comment.user.name %>
+			| <span><%= comment.created_at.strftime("%Y/%m/%d %H:%M") %></span>
+		</div>
+		<div class="card-body">
+			<p><%= simple_format(comment.body) %></p>
+			<% if current_user&.admin? %>
+			<footer class="blockquote-footer">
+				<%= link_to "削除", post_comment_path(@post, comment.id), method: :delete %>
+			</footer>
+			<% end %>
+		</div>
+	</div>
 	<% end %>
 </div>

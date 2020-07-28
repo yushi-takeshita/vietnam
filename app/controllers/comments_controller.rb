@@ -7,6 +7,9 @@ class CommentsController < ApplicationController
       redirect_to post_path(@comment.post), flash: { success: t(".flash.コメントしました") }
     else
       @post = Post.find(params[:post_id])
+      @category = @post.category
+      @user = @post.user
+      @comments = @post.comments.all
       render "posts/show"
     end
   end

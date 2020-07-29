@@ -3,7 +3,7 @@ vi:
     new:
       ログイン: Đăng nhập
       ※パスワードをお忘れですか？: ※Quên Mật khẩu?
-      会員登録はこちらから: Đăng ký ở đây
+      ※会員登録はこちらから: ※Đăng ký ở đây
     create:
       flash:
         入力情報が正しくありません: Thông tin đầu vào xấu

@@ -5,11 +5,20 @@
     margin: 3rem 0;
   }
   form {
+    input {
+      font-size: 1.5rem;
+      &.btn {
+        margin-bottom: 1rem;
+      }
+    }
     .form-group {
+      margin: 3rem 0;
       textarea {
         height: 15rem;
+        font-size: 1.5rem;
       }
       &.file-field {
+        margin-top: -2rem;
         label.image-icon {
           cursor: pointer;
           font-size: 1.2rem;

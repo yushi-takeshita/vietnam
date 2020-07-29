@@ -8,12 +8,10 @@
       margin: 2rem 0;
     }
     input {
-      &[value] {
-        font-size: 1.5rem;
-      }
-      &.btn {
-        margin-bottom: 2rem;
-      }
+      font-size: 1.5rem;
+    }
+    &.btn {
+      margin-bottom: 2rem;
     }
   }
 }

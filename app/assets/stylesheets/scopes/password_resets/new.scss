@@ -1,8 +1,12 @@
 [data-scope-path="password_resets/new"] {
-  .text-wrapper {
+  h1 {
     text-align: center;
-    h1 {
-      padding: 40px 0;
+    margin: 3rem 0;
+  }
+  form {
+    margin-top: 3rem;
+    input {
+      font-size: 1.5rem;
     }
   }
 }

@@ -48,23 +48,26 @@
 	<% end %>
 
 	<% @comments&.each do |comment| %>
-	<div class="card">
+	<div class="card" id="<%= comment.id %>">
 		<div class="card-header">
 			<% if comment.user.image.attached? %>
 			<%= image_tag comment.user.image, class: "rounded-circle border" %>
 			<% else %>
 			<%= image_tag("ruby.png", class: "rounded-circle border") %>
 			<% end %>
-			<%= comment.user.name %>
-			| <span><%= comment.created_at.strftime("%Y/%m/%d %H:%M") %></span>
+			<div class="CommentNum">No.<%= comment.id %></div>
+			<span class="CommentTime"><%= comment.created_at.strftime("%Y/%m/%d %H:%M") %></span>
+			<%= link_to comment.user.name, user_path(comment.user), class: "UserName" %>
 		</div>
 		<div class="card-body">
 			<p><%= simple_format(comment.body) %></p>
+			<% if logged_in? %>
+			<%= icon("fas", "reply fa-lg reply") %>
 			<% if current_user&.admin? %>
-			<footer class="blockquote-footer">
-				<%= link_to "削除", post_comment_path(@post, comment.id), method: :delete %>
-			</footer>
+			<%= link_to "削除", post_comment_path(@post, comment.id), method: :delete %>
 			<% end %>
+			<% end %>
+			</footer>
 		</div>
 	</div>
 	<% end %>

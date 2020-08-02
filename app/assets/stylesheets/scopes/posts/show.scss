@@ -34,14 +34,37 @@
       border-radius: 10px;
     }
   }
+  form {
+    input, textarea {
+      font-size: 1.5rem;
+    }
+  }
   .card {
     margin: 1rem 0;
-    font-size: 1.5rem;
     .card-header {
+      position: relative;
       img {
         height: 4rem;
         width: 4rem;
         margin-right: .7rem;
+        float: left;
+      }
+      .CommentNum {
+        font-size: 75%;
+      }
+      .CommentTime {
+        position: absolute;
+        font-size: 75%;
+        top: 8px;
+        right: 8px;
+      }
+      .UserName {
+        display: inline-block;
+      }
+    }
+    .card-body {
+      i {
+        cursor: pointer;
       }
     }
   }

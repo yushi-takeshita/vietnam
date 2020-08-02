@@ -51,4 +51,9 @@ RSpec.describe "ポストモデル", type: :model do
     post_a.save
     expect(Post.first).to eq post_a
   end
+
+  it "画像が添付できること" do
+    post = FactoryBot.create(:post, image: Rack::Test::UploadedFile.new(File.join(Rails.root, "spec/factories/default_image.jpg"), "image/jpg"))
+    expect(post.image.attached?).to eq true
+  end
 end

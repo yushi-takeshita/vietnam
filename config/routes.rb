@@ -20,8 +20,10 @@ Rails.application.routes.draw do
     end
 
     controller :posts do
-      resources :posts, except: [:index]
       get "categories/(:category_id)/index", to: "posts#index", as: "category"
+      resources :posts, except: [:index] do
+        resources :comments, only: [:create, :destroy], controller: "comments"
+      end
     end
 
     controller :categories do

@@ -2,7 +2,7 @@
 
 <div data-scope-path="posts/new">
 	<div class="row justify-content-center">
-		<div class="col-md-9">
+		<div class="col-md-8">
 			<h1><%= t(".投稿画面") %></h1>
 			<%= render "shared/error_messages", object: @post %>
 			<%= form_with model: @post, local: true do |f| %>
@@ -33,14 +33,14 @@
 			<div class="form-group file-field row no-gutters">
 				<label class="col-md-4" id="counter">0/600</label>
 				<%= f.label :image, class: "image-icon col-md-1" do %>
-				<%= icon("fas", "image fa-2x") %>
+				<%= icon("fas", "image fa-3x") %>
 				<%= f.file_field :image, class: "selected-file" %>
 				<% end %>
 				<div class="col-md-7">
 					<%= render "shared/select_image_file" %>
 				</div>
 			</div>
-			<%= f.submit class: "btn btn-primary" %>
+			<%= f.submit class: "btn btn-lg btn-block btn-primary" %>
 		</div>
 	</div>
 	<% end %>

@@ -1,5 +1,5 @@
 [data-scope-path="users/show"] {
-  margin-top: 2rem;
+  margin-top: 3rem;
   .user {
     text-align: center;
     .card {
@@ -12,35 +12,36 @@
   }
   .posts {
     .round-cap:after {
-      background-color: lightgreen;
-      border-radius: 5px;
-      content: "";
-      display: block;
-      height: 7px;
-      width: 40rem;
-      margin-bottom: 20px;
+      @include under_bar
     }
     .card {
-      margin-bottom: 1rem;
-      width: 40rem;
-      height: 5rem;
-      box-shadow: 0px 1px 0px silver;
-      &:hover {
-        opacity: 0.7;
-      }
-      .card-body {
-        height: 5rem;
-        .card-link {
-          color: black;
+        @media screen and (max-width: 480px) {
+            font-size: 1rem;
+          }
+        height: 10rem;
+        margin-bottom: 1rem;
+        box-shadow: 0px 1px 0px silver;
+        &:hover {
+          opacity: 0.7;
         }
-        .card-text {
-          color: gray;
-          text-align: right;
+        .card-img {
+            height: 100%;
+          }
+        .card-body {
+          height: 100%;
+          .card-link {
+            color: $black;
+          }
+          .card-text {
+            color: gray;
+            text-align: right;
+            img {
+              margin-right: .7rem;
+              height: 3rem;
+              width: 3rem;
+            }
+          }
         }
       }
-      .card-img {
-        height: 5rem;
-      }
-    }
   }
 }

@@ -10,3 +10,6 @@ vi:
     create:
       flash:
         掲示板を投稿しました: Tôi đăng một bảng tin
+    show:
+      カテゴリー: Mục
+

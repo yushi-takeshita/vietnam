@@ -5,6 +5,11 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
+// utilities
+@import "color-list";
+@import "layouts";
+
+// view
 // layouts
 @import "scopes/layouts/header";
 @import "scopes/layouts/footer";
@@ -13,6 +18,7 @@
 @import "scopes/shared/error_messages";
 @import "scopes/shared/button_linked_create_post";
 @import "scopes/shared/select_image_file";
+@import "scopes/shared/form.scss";
 
 // home
 @import "scopes/home/top";
@@ -26,6 +32,7 @@
 // post
 @import "scopes/posts/index";
 @import "scopes/posts/new";
+@import "scopes/posts/show";
 
 // sessions
 @import "scopes/sessions/new";
@@ -54,10 +61,14 @@
 }
 
 html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
-  margin-bottom: 40px;
+  font-size: 62.5%;
+  body {
+    font-size: 1.6em;
+    .wrapper {
+      min-height: 100vh;
+      position: relative;
+      padding-bottom: 50px;
+      box-sizing: border-box;
+    }
+  }
 }

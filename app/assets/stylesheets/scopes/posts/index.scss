@@ -1,56 +1,71 @@
 [data-scope-path="posts/index"] {
-  margin-top: 2rem;
-  form {
-    .form-group {
-      width: 100%;
-      margin: 0 auto;
-      .btn.btn-secondary {
-        margin-left: 0.5rem;
+  margin-top: 3rem;
+  .main-contents {
+    form {
+      .form-group {
+        width: 100%;
+        margin: 0 auto;
+        input {
+          font-size: 1.5rem;
+        }
+        .btn.btn-secondary {
+          margin-left: 0.5rem;
+        }
       }
     }
-  }
-  .w-100 {
-    margin-top: 2rem;
-  }
-  .category_list {
-    margin-bottom: 1.5rem;
-    a {
-      color: black;
-      text-decoration: none;
-      &:hover {
-      font-weight: bold;
-      color: #FF8C00;
+    .w-100 {
+      margin-top: 2rem;
+    }
+    .category_list {
+      .now-selected-lavender {
+        background-color: $now-selected-lavender;
+      }
+      .now-selected-gray {
+        background-color: $now-selected-gray;
+      }
+      margin-bottom: 1.5rem;
+      a {
+        color: $black;
+        text-decoration: none;
+        &:hover {
+        font-weight: bold;
+        color: $now-selected-orange;
+        }
       }
     }
-  }
-  .card {
-    margin-bottom: 1rem;
-    box-shadow: 0px 1px 0px silver;
-    &:hover {
-      opacity: 0.7;
-    }
-    .card-body {
-      .card-link {
-        color: black;
+    .posts {
+      .round-cap:after {
+        @include under_bar;
       }
-      .card-text {
-        color: gray;
-        text-align: right;
+      .card {
+        @media screen and (max-width: 480px) {
+            font-size: 1rem;
+          }
+        height: 10rem;
+        margin-bottom: 1rem;
+        box-shadow: 0px 1px 0px silver;
+        &:hover {
+          opacity: 0.7;
+        }
+        .card-img {
+            height: 100%;
+          }
+        .card-body {
+          height: 100%;
+          .card-link {
+            color: $black;
+          }
+          .card-text {
+            color: gray;
+            text-align: right;
+            img {
+              margin-right: .7rem;
+              height: 3rem;
+              width: 3rem;
+            }
+          }
+        }
       }
     }
-  }
-  .round-cap:after {
-    background-color: lightgreen;
-    border-radius: 5px;
-    content: "";
-    display: block;
-    height: 7px;
-    margin-bottom: 20px;
-  }
-  .now-selected-lavender {
-    background-color: #E6E6FA;
-  }
-  .now-selected-gray {
-    background-color: #efeef3;
   }
 }

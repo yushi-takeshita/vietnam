@@ -5,7 +5,4 @@ $(document).ready(function () {
       document.getElementById("dummy_file").value = file.name;
     }
   });
-  if (document.form1.filename.value == "") {
-    document.getElementById("dummy_file").value = "";
-  }
 });

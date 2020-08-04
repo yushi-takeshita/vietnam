@@ -1,0 +1,74 @@
+[data-scope-path="posts/show"] {
+  .top-wrapper {
+    width: 30rem;
+    .breadcrumbs {
+      margin-top: 3rem;
+    }
+    .round-cap:after {
+      @include under_bar;
+    }
+    p.user {
+      font-size: 1.5rem;
+      img {
+        height: 4rem;
+        width: 4rem;
+        margin-right: .7rem;
+      }
+      a {
+        color: $black
+      }
+    }
+  }
+  .post-wrapper {
+    padding: 0.2em 0.5em;
+    margin: 2em 0;
+    background: #d6ebff;
+    box-shadow: 0px 0px 0px 10px #d6ebff;
+    border: dashed 2px white;
+    h1 {
+      margin: 1.5rem 0;
+      margin-left: 1rem;
+    }
+    p {
+      margin: 0;
+      padding: 0;
+    }
+    .post-img img {
+      border-radius: 10px;
+    }
+  }
+  form {
+    input, textarea {
+      font-size: 1.5rem;
+    }
+  }
+  .card {
+    margin: 1rem 0;
+    .card-header {
+      position: relative;
+      img {
+        height: 4rem;
+        width: 4rem;
+        margin-right: .7rem;
+        float: left;
+      }
+      .CommentNum {
+        font-size: 75%;
+      }
+      .CommentTime {
+        position: absolute;
+        font-size: 75%;
+        top: 8px;
+        right: 8px;
+      }
+      .UserName {
+        display: inline-block;
+      }
+    }
+    .card-body {
+      i {
+        cursor: pointer;
+      }
+    }
+  }
+}

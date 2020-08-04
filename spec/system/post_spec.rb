@@ -14,9 +14,9 @@ RSpec.describe "掲示板管理機能", type: :system do
       visit category_path(I18n.locale)
     end
     describe "投稿一覧表示機能" do
-      it "25個区切りで投稿がページネーションされていること" do
+      it "15件区切りで投稿がページネーションされていること" do
         within ".posts" do
-          expect(all(".card").count).to eq 25
+          expect(all(".card").count).to eq 15
         end
         expect(page).to have_css ".pagination"
       end
@@ -91,6 +91,88 @@ RSpec.describe "掲示板管理機能", type: :system do
       visit user_path(I18n.locale, user)
       expect(page).to have_content "VISAの申請について"
       expect(page).to have_css("img[src*='/rails/active_storage/blobs/']")
+    end
+  end
+  describe "記事詳細ページ" do
+    let!(:post) { FactoryBot.create(:post, user: user, category: parent_category, image: Rack::Test::UploadedFile.new(File.join(Rails.root, "spec/factories/default_image.jpg"), "image/jpg")) }
+    let!(:comment) { FactoryBot.create(:comment, post: post, user: user) }
+
+    before do
+      visit post_path(I18n.locale, post)
+    end
+    describe "詳細表示機能" do
+      it "カテゴリーのパンくずリストが表示されていること" do
+        within ".breadcrumbs" do
+          expect(page).to have_content /#{parent_category.ja_name} | #{parent_category.vi_name}/
+        end
+      end
+      it "投稿者の情報が表示されていること" do
+        within ".user" do
+          expect(page).to have_selector ("a[href='/#{I18n.locale}/users/#{post.user.id}']"), text: post.user.name
+          expect(page).to have_content post.created_at.strftime("%Y/%m/%d %H:%M")
+        end
+      end
+      it "投稿内容や画像が表示されていること" do
+        within ".post-wrapper" do
+          expect(page).to have_content post.title
+          expect(page).to have_content post.content
+          expect(page).to have_css("img[src*='/rails/active_storage/blobs/']")
+        end
+      end
+    end
+    describe "コメント機能" do
+      it "コメント詳細が表示されていること" do
+        within "#comment-#{comment.id}" do
+          expect(page).to have_content "No.#{comment.id}"
+          expect(page).to have_content comment.body
+          expect(page).to have_content comment.user.name
+        end
+      end
+      context "ログインしている場合" do
+        before do
+          login_as(user)
+          visit post_path(I18n.locale, post)
+        end
+        it "コメントを投稿できること" do
+          fill_in "comment[body]", with: "good"
+          expect { find(".btn-primary").click }.to change { Comment.count }.by(1)
+          expect(page).to have_content "good"
+        end
+        it "コメントに返信できること" do
+          within "#comment-#{comment.id}" do
+            find(".reply").click
+            sleep 0.5
+          end
+          # コメント入力欄に返信先のコメントナンバーが表示されていること
+          expect(page).to have_field Comment.human_attribute_name(:body), with: ">>#{comment.id}\n"
+
+          # 投稿されたコメントナンバーがレスアンカーとしてリンク表示されていること
+          expect { find(".btn-primary").click }.to change { Comment.count }.by(1)
+          sleep 0.5
+          within "#comment-#{Comment.first.id}" do
+            expect(page).to have_selector ("a[href='#comment-#{comment.id}']"), text: ">>#{comment.id}"
+          end
+        end
+      end
+      context "Adminユーザーの場合" do
+        let(:admin_user) { FactoryBot.create(:user, admin: true) }
+        it "コメントを削除できること" do
+          act_as(user) do
+            # 一般ユーザーには削除ボタンが見えないこと
+            visit post_path(I18n.locale, post)
+            within "#comment-#{comment.id}" do
+              expect(page).not_to have_link "削除"
+            end
+          end
+
+          login_as(admin_user)
+          visit post_path(I18n.locale, post)
+          within "#comment-#{comment.id}" do
+            expect(page).to have_link "削除"
+          end
+          expect { click_link "削除" }.to change { Comment.count }.by(-1)
+        end
+      end
     end
   end
 end

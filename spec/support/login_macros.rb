@@ -8,7 +8,6 @@ module LoginMacros
   end
 
   def logout
-    find(".navbar-toggler").click
     find(".logout").click
     expect(current_path).to eq root_path(I18n.locale)
   end

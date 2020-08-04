@@ -17,7 +17,7 @@
 					<% else %>
 					<%= image_tag("ruby.png", class: "rounded-circle border") %>
 					<% end %>
-					<%= @user.name %>
+					<%= link_to @user.name, @user %>
 					| <span><%= @post.created_at.strftime("%Y/%m/%d %H:%M") %></span>
 				</p>
 			</div>
@@ -48,7 +48,7 @@
 	<% end %>
 
 	<% @comments&.each do |comment| %>
-	<div class="card" id="<%= comment.id %>">
+	<div class="card" id="comment-<%= comment.id %>">
 		<div class="card-header">
 			<% if comment.user.image.attached? %>
 			<%= image_tag comment.user.image, class: "rounded-circle border" %>

@@ -37,8 +37,7 @@ class PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-    flash[:notice] = "Loại bỏ thành công"
-    redirect_to posts_url
+    redirect_to category_path, flash: { success: t(".flash.掲示板を削除しました") }
   end
 
   private

@@ -15,4 +15,6 @@ vi:
       掲示板の: Trên bảng tin
       削除: Xóa
       編集: Chỉnh sửa
-
+    destroy:
+      flash:
+        掲示板を削除しました: Bảng tin đã xóa

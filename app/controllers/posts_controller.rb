@@ -23,7 +23,12 @@ class PostsController < ApplicationController
     @post = current_user.posts.build
   end
 
-  def edit; end
+  def edit
+    @post = Post.find(params[:id])
+    # unless @post.created_at >= 10.minutes.ago
+    #   render "show"
+    # end
+  end
 
   def create
     @post = current_user.posts.build(post_params)

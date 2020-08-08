@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
-  before_action :logged_in_user, only: [:new, :create]
+  before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy]
+  before_action :admin_or_correct_user, only: [:edit, :destroy, :update]
 
   def index
     @category = Category.find_by(id: params[:category_id])
@@ -25,9 +26,9 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
-    # unless @post.created_at >= 10.minutes.ago
-    #   render "show"
-    # end
+    unless @post.created_at >= 10.minutes.ago
+      render "show"
+    end
   end
 
   def create
@@ -49,5 +50,11 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:title, :content, :category_id, :image)
+  end
+
+  # 正しいユーザーもしくはAdminユーザーかどうか確認
+  def admin_or_correct_user
+    @post = Post.find(params[:id])
+    redirect_to root_url if !current_user.admin? && !current_user?(@post.user)
   end
 end

@@ -16,6 +16,10 @@ vi:
       掲示板の: Trên bảng tin
       削除: Xóa
       編集: Chỉnh sửa
+      確認: Kiểm tra
+      本当にこの掲示板を削除してよろしいですか？: Bạn có chắc bạn muốn xóa bảng tin này không?
+      いいえ: Không
+      はい: Có
     edit:
       post_titleの編集: "Chỉnh sửa %{post_title}"
       投稿を編集する: Chỉnh sửa bài đăng

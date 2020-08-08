@@ -23,6 +23,10 @@ vi:
     edit:
       post_titleの編集: "Chỉnh sửa %{post_title}"
       投稿を編集する: Chỉnh sửa bài đăng
+      投稿後10分以内であれば修正が可能です: Nó có thể được điều chỉnh trong vòng 10 phút sau khi đăng
+    update:
+      flash:
+        掲示板を編集しました: Bảng tin đã sửa
     destroy:
       flash:
         掲示板を削除しました: Bảng tin đã xóa

@@ -26,7 +26,7 @@ class PostsController < ApplicationController
 
   def edit
     if @post.created_at < 10.minutes.ago && !current_user.admin?
-      redirect_to category_path, flash: { danger: "投稿後10分以内であれば修正が可能です" }
+      redirect_to category_path, flash: { danger: t(".投稿後10分以内であれば修正が可能です") }
     end
   end
 
@@ -36,6 +36,15 @@ class PostsController < ApplicationController
       redirect_to @post, flash: { success: t(".flash.掲示板を投稿しました") }
     else
       render "new"
+    end
+  end
+
+  def update
+    @post = Post.find(params[:id])
+    if @post.update_attributes(post_params)
+      redirect_to @post, flash: { success: t(".flash.掲示板を編集しました") }
+    else
+      render "posts/edit"
     end
   end
 

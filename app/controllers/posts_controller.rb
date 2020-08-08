@@ -25,9 +25,8 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:id])
-    unless @post.created_at >= 10.minutes.ago
-      render "show"
+    if @post.created_at < 10.minutes.ago && !current_user.admin?
+      redirect_to category_path, flash: { danger: "投稿後10分以内であれば修正が可能です" }
     end
   end
 

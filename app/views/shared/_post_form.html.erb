@@ -1,0 +1,38 @@
+<%= render "shared/error_messages", object: @post %>
+<%= form_with model: @post, local: true do |f| %>
+<div class="form-group">
+  <%= f.label :title %>
+  <%= f.text_field :title, class: "form-control" %>
+</div>
+<div class="form-group">
+  <div class="category_pulldown">
+    <%= f.label :category_id %>
+    <div class="parents_pulldown">
+      <% if I18n.locale.to_s == "ja" %>
+      <%= f.select :category_id, [["---", 0]].concat(Category.where(ancestry: nil).map { |category| [category.ja_name, category.id] }), {}, {class: "custom-select custom-select-lg", id: "parent"} %>
+      <% elsif I18n.locale.to_s == "vi" %>
+      <%= f.select :category_id, [["---", 0]].concat(Category.where(ancestry: nil).map { |category| [category.vi_name, category.id] }), {}, {class: "custom-select custom-select-lg", id: "parent"} %>
+      <% end %>
+    </div>
+    <!-- 子カテゴリを今の言語で取得・翻訳するためにロケール情報を送付 -->
+    <input type="hidden" class="current_locale" value="<%= I18n.locale %>">
+    <div class="children_pulldown">
+    </div>
+  </div>
+</div>
+<div class="form-group">
+  <%= f.label :content %>
+  <%= f.text_area :content, class: "form-control" %>
+</div>
+<div class="form-group file-field row no-gutters">
+  <label class="col-md-4" id="counter">0/600</label>
+  <%= f.label :image, class: "image-icon col-md-1" do %>
+  <%= icon("fas", "image fa-3x") %>
+  <%= f.file_field :image, class: "selected-file" %>
+  <% end %>
+  <div class="col-md-7">
+    <%= render "shared/select_image_file" %>
+  </div>
+</div>
+<%= f.submit class: "btn btn-lg btn-block btn-primary" %>
+<% end %>

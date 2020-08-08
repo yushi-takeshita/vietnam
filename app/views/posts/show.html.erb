@@ -20,11 +20,13 @@
 		</p>
 		<% if current_user&.admin? || current_user?(@user) %>
 		<p class="menu">
-			<%= t(".掲示板の") %> <%= link_to t(".削除"), @post, method: :delete,
-		 title: t(".確認"), data: { confirm: t(".本当にこの掲示板を削除してよろしいですか？"),
+			<%= t(".掲示板の") %>
+			<%= link_to t(".削除"), @post, method: :delete,
+		 	title: t(".確認"), data: { confirm: t(".本当にこの掲示板を削除してよろしいですか？"),
 		                                commit: t(".はい"),
 		                                cancel: t(".いいえ") 
-		                              } %>
+																	} %>
+			/ <%= link_to t(".編集"), edit_post_path(@post) %>
 		</p>
 		<% end %>
 	</div>

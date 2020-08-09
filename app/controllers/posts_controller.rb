@@ -3,10 +3,9 @@ class PostsController < ApplicationController
   before_action :admin_or_correct_user, only: [:edit, :destroy, :update]
 
   def index
-    @category = Category.find_by(id: params[:category_id])
     @q = Post.ransack(params[:q])
-    if params[:category_id]
-      @posts = Category.find(params[:category_id]).posts.all.page(params[:page]).per(15)
+    if @category = Category.find_by(id: params[:category_id])
+      @posts = @category.posts.all.page(params[:page]).per(15)
     else
       @posts = @q.result(distinct: true).page(params[:page]).per(15)
     end

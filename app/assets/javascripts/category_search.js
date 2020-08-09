@@ -1,6 +1,6 @@
 $(function () {
   function buildChildHTML(child) {
-    var html = `<a class="child_category list-group-item" id="${child.id}" href="/${$('.current_locale').val()}/categories/${child.id}/index">${child.name}</a>`;
+    var html = `<a class="child_category list-group-item" id="${child.id}" href="/${$('.current_locale').val()}/categories/${child.id}/index">↳${child.name}</a>`;
     return html;
   }
 

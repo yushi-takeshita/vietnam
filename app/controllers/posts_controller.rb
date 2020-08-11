@@ -4,8 +4,11 @@ class PostsController < ApplicationController
 
   def index
     @q = Post.ransack(params[:q])
-    if @category = Category.find_by(id: params[:category_id])
-      @posts = @category.posts.all.page(params[:page]).per(15)
+    @category = Category.find_by(id: params[:category_id])
+    if @category
+      ids = [] << @category.id
+      ids.push(*@category.child_ids)
+      @posts = Post.where(category_id: ids).all.page(params[:page]).per(15)
     else
       @posts = @q.result(distinct: true).page(params[:page]).per(15)
     end

@@ -5,6 +5,16 @@ RSpec.describe "掲示板管理機能", type: :system do
   let!(:parent_category) { child_category.parent }
   let!(:child_category) { FactoryBot.create(:category, :with_child_category) }
 
+  shared_context "ログインしている場合" do
+    before do
+      login_as(user)
+      visit post_path(I18n.locale, post)
+    end
+  end
+  shared_context "Adminユーザーでログインしている場合" do
+    let(:admin_user) { FactoryBot.create(:user, admin: true) }
+  end
+
   describe "投稿一覧・検索ページ" do
     let!(:posts) {
       FactoryBot.create_list(:post, 15, user: user, category: parent_category)
@@ -59,8 +69,8 @@ RSpec.describe "掲示板管理機能", type: :system do
       end
     end
   end
-  describe "記事投稿ページ" do
-    it "記事が投稿できること" do
+  describe "掲示板投稿ページ" do
+    it "掲示板が投稿できること" do
       login_as(user)
 
       visit new_post_path
@@ -129,10 +139,8 @@ RSpec.describe "掲示板管理機能", type: :system do
         end
       end
       context "ログインしている場合" do
-        before do
-          login_as(user)
-          visit post_path(I18n.locale, post)
-        end
+        include_context "ログインしている場合"
+
         it "コメントを投稿できること" do
           fill_in "comment[body]", with: "good"
           expect { find(".btn-primary").click }.to change { Comment.count }.by(1)
@@ -154,8 +162,9 @@ RSpec.describe "掲示板管理機能", type: :system do
           end
         end
       end
-      context "Adminユーザーの場合" do
-        let(:admin_user) { FactoryBot.create(:user, admin: true) }
+      context "Adminユーザーでログインしている場合" do
+        include_context "Adminユーザーでログインしている場合"
+
         it "コメントを削除できること" do
           act_as(user) do
             # 一般ユーザーには削除ボタンが見えないこと
@@ -171,6 +180,49 @@ RSpec.describe "掲示板管理機能", type: :system do
             expect(page).to have_link "削除"
           end
           expect { click_link "削除" }.to change { Comment.count }.by(-1)
+        end
+      end
+    end
+    describe "掲示板削除機能" do
+      shared_examples "削除メニューが表示されていないこと" do
+        it { expect(page).not_to have_css "p.menu" }
+      end
+
+      context "未ログインユーザーの場合" do
+        it_behaves_like "削除メニューが表示されていないこと"
+      end
+      context "投稿主以外のログインユーザーの場合" do
+        let(:other_user) { FactoryBot.create(:user) }
+        before do
+          login_as(other_user)
+          visit post_path(I18n.locale, post)
+        end
+        it_behaves_like "削除メニューが表示されていないこと"
+      end
+      context "投稿主の場合" do
+        include_context "ログインしている場合"
+        it "掲示板が削除できること" do
+          within "p.menu" do
+            click_link I18n.t("posts.show.削除")
+          end
+          expect(page).to have_selector ".modal-body", text: I18n.t("posts.show.本当にこの掲示板を削除してよろしいですか？")
+          expect { click_button I18n.t("posts.show.はい") }.to change { Post.count }.by(-1)
+          expect(current_path).to eq category_path(I18n.locale) #投稿一覧・検索ページ
+        end
+      end
+      context "Adminユーザーでログインしている場合" do
+        include_context "Adminユーザーでログインしている場合"
+        before do
+          login_as(admin_user)
+          visit post_path(I18n.locale, post)
+        end
+        it "掲示板が削除できること" do
+          within "p.menu" do
+            click_link I18n.t("posts.show.削除")
+          end
+          expect(page).to have_selector ".modal-body", text: I18n.t("posts.show.本当にこの掲示板を削除してよろしいですか？")
+          expect { click_button I18n.t("posts.show.はい") }.to change { Post.count }.by(-1)
+          expect(current_path).to eq category_path(I18n.locale) #投稿一覧・検索ページ
         end
       end
     end

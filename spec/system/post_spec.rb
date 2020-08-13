@@ -187,6 +187,16 @@ RSpec.describe "掲示板管理機能", type: :system do
       shared_examples "削除メニューが表示されていないこと" do
         it { expect(page).not_to have_css "p.menu" }
       end
+      shared_examples "掲示板が削除できること" do
+        it {
+          within "p.menu" do
+            click_link I18n.t("posts.show.削除")
+          end
+          expect(page).to have_selector ".modal-body", text: I18n.t("posts.show.本当にこの掲示板を削除してよろしいですか？")
+          expect { click_button I18n.t("posts.show.はい") }.to change { Post.count }.by(-1)
+          expect(current_path).to eq category_path(I18n.locale) #投稿一覧・検索ページ
+        }
+      end
 
       context "未ログインユーザーの場合" do
         it_behaves_like "削除メニューが表示されていないこと"
@@ -201,14 +211,7 @@ RSpec.describe "掲示板管理機能", type: :system do
       end
       context "投稿主の場合" do
         include_context "ログインしている場合"
-        it "掲示板が削除できること" do
-          within "p.menu" do
-            click_link I18n.t("posts.show.削除")
-          end
-          expect(page).to have_selector ".modal-body", text: I18n.t("posts.show.本当にこの掲示板を削除してよろしいですか？")
-          expect { click_button I18n.t("posts.show.はい") }.to change { Post.count }.by(-1)
-          expect(current_path).to eq category_path(I18n.locale) #投稿一覧・検索ページ
-        end
+        it_behaves_like "掲示板が削除できること"
       end
       context "Adminユーザーでログインしている場合" do
         include_context "Adminユーザーでログインしている場合"
@@ -216,14 +219,7 @@ RSpec.describe "掲示板管理機能", type: :system do
           login_as(admin_user)
           visit post_path(I18n.locale, post)
         end
-        it "掲示板が削除できること" do
-          within "p.menu" do
-            click_link I18n.t("posts.show.削除")
-          end
-          expect(page).to have_selector ".modal-body", text: I18n.t("posts.show.本当にこの掲示板を削除してよろしいですか？")
-          expect { click_button I18n.t("posts.show.はい") }.to change { Post.count }.by(-1)
-          expect(current_path).to eq category_path(I18n.locale) #投稿一覧・検索ページ
-        end
+        it_behaves_like "掲示板が削除できること"
       end
     end
   end

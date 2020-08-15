@@ -64,4 +64,5 @@ RSpec.configure do |config|
 
   config.include ShowMeTheCookies, type: :system
   config.include LoginMacros
+  config.include ActiveSupport::Testing::TimeHelpers
 end

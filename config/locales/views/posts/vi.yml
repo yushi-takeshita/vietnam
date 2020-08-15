@@ -7,9 +7,26 @@ vi:
     new:
       掲示板作成: Tạo bảng tin
       投稿画面: Màn hình đăng
+      ※不正な編集防止のため、投稿後10分以内であれば修正が可能です: ※Để ngăn chặn việc chỉnh sửa trái phép, nó có thể được điều chỉnh trong vòng 10 phút sau khi đăng
     create:
       flash:
         掲示板を投稿しました: Tôi đăng một bảng tin
     show:
       カテゴリー: Mục
-
+      掲示板の: Trên bảng tin
+      削除: Xóa
+      編集: Chỉnh sửa
+      確認: Kiểm tra
+      本当にこの掲示板を削除してよろしいですか？: Bạn có chắc bạn muốn xóa bảng tin này không?
+      いいえ: Không
+      はい: Có
+    edit:
+      post_titleの編集: "Chỉnh sửa %{post_title}"
+      投稿を編集する: Chỉnh sửa bài đăng
+      投稿後10分以内であれば修正が可能です: Nó có thể được điều chỉnh trong vòng 10 phút sau khi đăng
+    update:
+      flash:
+        掲示板を編集しました: Bảng tin đã sửa
+    destroy:
+      flash:
+        掲示板を削除しました: Bảng tin đã xóa

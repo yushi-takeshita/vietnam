@@ -1,6 +1,5 @@
 [data-scope-path="posts/show"] {
   .top-wrapper {
-    width: 30rem;
     .breadcrumbs {
       margin-top: 3rem;
     }
@@ -16,6 +15,12 @@
       }
       a {
         color: $black
+      }
+    }
+    p.menu {
+      color: gray;
+      a {
+        color: gray;
       }
     }
   }

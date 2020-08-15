@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.describe "掲示板管理機能", type: :system do
   let(:user) { FactoryBot.create(:user) }
+  let(:admin_user) { FactoryBot.create(:user, admin: true) }
   let!(:parent_category) { child_category.parent }
   let!(:child_category) { FactoryBot.create(:category, :with_child_category) }
 
@@ -12,7 +13,10 @@ RSpec.describe "掲示板管理機能", type: :system do
     end
   end
   shared_context "Adminユーザーでログインしている場合" do
-    let(:admin_user) { FactoryBot.create(:user, admin: true) }
+    before do
+      login_as(admin_user)
+      visit post_path(I18n.locale, post)
+    end
   end
 
   describe "投稿一覧・検索ページ" do
@@ -163,8 +167,6 @@ RSpec.describe "掲示板管理機能", type: :system do
         end
       end
       context "Adminユーザーでログインしている場合" do
-        include_context "Adminユーザーでログインしている場合"
-
         it "コメントを削除できること" do
           act_as(user) do
             # 一般ユーザーには削除ボタンが見えないこと
@@ -220,6 +222,64 @@ RSpec.describe "掲示板管理機能", type: :system do
           visit post_path(I18n.locale, post)
         end
         it_behaves_like "掲示板が削除できること"
+      end
+    end
+    describe "掲示板編集機能" do
+      context "未ログインユーザーの場合" do
+        it "ログイン画面へ誘導されること" do
+          visit edit_post_path(I18n.locale, post)
+          expect(current_path).to eq login_path(I18n.locale)
+          expect(page).to have_content I18n.t("users.new.flash.ログインしてください")
+        end
+      end
+      context "投稿主以外のログインユーザーの場合" do
+        let(:other_user) { FactoryBot.create(:user) }
+        before do
+          login_as(other_user)
+          visit post_path(I18n.locale, post)
+        end
+        it "トップページへ誘導されること" do
+          visit edit_post_path(I18n.locale, post)
+          expect(current_path).to eq root_path(I18n.locale)
+        end
+      end
+      context "投稿主の場合" do
+        include_context "ログインしている場合"
+        context "投稿後10分を超えている場合" do
+          it "編集ページへアクセスできないこと" do
+            travel_to(post.created_at + 601) do
+              visit edit_post_path(I18n.locale, post)
+              expect(current_path).to eq category_path(I18n.locale)
+              expect(page).to have_content I18n.t("posts.edit.投稿後10分以内であれば修正が可能です")
+            end
+          end
+        end
+        context "投稿後10分以内の場合" do
+          it "掲示板が編集できること" do
+            travel_to(post.created_at + 600) do
+              visit edit_post_path(I18n.locale, post)
+              expect(page).not_to have_field Post.human_attribute_name(:title), with: "編集しました"
+              fill_in "post[title]", with: "編集しました"
+              find(".btn-primary").click
+              expect(current_path).to eq post_path(I18n.locale, post)
+              expect(page).to have_content "編集しました"
+            end
+          end
+        end
+      end
+      context "Adminユーザーでログインしている場合" do
+        include_context "Adminユーザーでログインしている場合"
+
+        it "投稿時間に関わらず掲示板の編集ができること" do
+          travel_to(post.created_at + 601) do
+            visit edit_post_path(I18n.locale, post)
+            expect(page).not_to have_field Post.human_attribute_name(:title), with: "編集しました"
+            fill_in "post[title]", with: "編集しました"
+            find(".btn-primary").click
+            expect(current_path).to eq post_path(I18n.locale, post)
+            expect(page).to have_content "編集しました"
+          end
+        end
       end
     end
   end

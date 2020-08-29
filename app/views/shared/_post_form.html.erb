@@ -9,9 +9,9 @@
     <%= f.label :category_id %>
     <div class="parents_pulldown">
       <% if I18n.locale.to_s == "ja" %>
-      <%= f.select :category_id, [["---", 0]].concat(Category.where(ancestry: nil).map { |category| [category.ja_name, category.id] }), {}, {class: "custom-select custom-select-lg", id: "parent"} %>
+      <%= f.select :category_id, [["---", 0]].concat(Category.where(ancestry: nil).map { |category| [category.ja_name, category.id] }), {}, { class: "custom-select custom-select-lg", id: "parent" } %>
       <% elsif I18n.locale.to_s == "vi" %>
-      <%= f.select :category_id, [["---", 0]].concat(Category.where(ancestry: nil).map { |category| [category.vi_name, category.id] }), {}, {class: "custom-select custom-select-lg", id: "parent"} %>
+      <%= f.select :category_id, [["---", 0]].concat(Category.where(ancestry: nil).map { |category| [category.vi_name, category.id] }), {}, { class: "custom-select custom-select-lg", id: "parent" } %>
       <% end %>
     </div>
     <!-- 子カテゴリを今の言語で取得・翻訳するためにロケール情報を送付 -->

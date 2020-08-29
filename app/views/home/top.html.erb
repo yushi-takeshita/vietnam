@@ -23,7 +23,7 @@
           <% @parents.each do |parent| %>
           <% if I18n.locale.to_s == "ja" %>
           <%= link_to "#{parent.ja_name}", category_path(parent.id), class: "parent_category list-group-item", id: "#{parent.id}" %>
-          <% else%>
+          <% else %>
           <%= link_to "#{parent.vi_name}", category_path(parent.id), class: "parent_category list-group-item", id: "#{parent.id}" %>
           <% end %>
           <% end %>
@@ -34,7 +34,7 @@
       </div>
     </div>
     <div class="posts col-md-6">
-      <% if params[:category_id] && I18n.locale.to_s == "ja"  %>
+      <% if params[:category_id] && I18n.locale.to_s == "ja" %>
       <h2><%= Category.find(params[:category_id]).ja_name %></h2>
       <% elsif params[:category_id] && I18n.locale.to_s == "vi" %>
       <h2><%= Category.find(params[:category_id]).vi_name %></h2>

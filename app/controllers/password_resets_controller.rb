@@ -1,7 +1,7 @@
 class PasswordResetsController < ApplicationController
-  before_action :get_user, only: [:edit, :update]
-  before_action :valid_user, only: [:edit, :update]
-  before_action :check_expiration, only: [:edit, :update]
+  before_action :get_user, only: %i[edit update]
+  before_action :valid_user, only: %i[edit update]
+  before_action :check_expiration, only: %i[edit update]
 
   def new; end
 
@@ -23,7 +23,7 @@ class PasswordResetsController < ApplicationController
     if params[:user][:password].empty?
       @user.errors.add(:password, :blank)
       render "edit"
-    elsif @user.update_attributes(user_params)
+    elsif @user.update(user_params)
       login @user
       redirect_to @user, flash: { success: t("password_resets.update.flash.パスワードの再設定が完了しました") }
     else
@@ -45,9 +45,7 @@ class PasswordResetsController < ApplicationController
 
   # 有効なユーザーか確認する
   def valid_user
-    unless @user && @user.authenticated?(:reset, params[:id])
-      redirect_to root_url
-    end
+    redirect_to root_url unless @user&.authenticated?(:reset, params[:id])
   end
 
   # トークンが有効切れかどうか確認する

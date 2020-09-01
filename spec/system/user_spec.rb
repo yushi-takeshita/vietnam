@@ -125,7 +125,7 @@ RSpec.describe "ユーザー管理機能", type: :system do
   end
   describe "プロフィール表示機能" do
     before do
-      for i in 1..15
+      (1..15).each do |i|
         FactoryBot.create(:post, created_at: i.day.ago, user: user)
       end
       visit user_path(I18n.locale, user)
@@ -232,11 +232,11 @@ RSpec.describe "ユーザー管理機能", type: :system do
         find(".card-link.delete-user").click
 
         # OKを選択するとユーザーが1件減る
-        expect {
+        expect do
           expect(page.driver.browser.switch_to.alert.text).to eq "このユーザーを完全に削除します。本当によろしいですか？"
           page.driver.browser.switch_to.alert.accept
           expect(page).to have_content "アカウントを削除しました"
-        }.to change { User.count }.by(-1)
+        end.to change { User.count }.by(-1)
       end
     end
   end

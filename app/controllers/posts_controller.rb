@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
-  before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy]
-  before_action :admin_or_correct_user, only: [:edit, :destroy, :update]
+  before_action :logged_in_user, only: %i[new create edit update destroy]
+  before_action :admin_or_correct_user, only: %i[edit destroy update]
 
   def index
     @q = Post.ransack(params[:q])
@@ -43,7 +43,7 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    if @post.update_attributes(post_params)
+    if @post.update(post_params)
       redirect_to @post, flash: { success: t(".flash.掲示板を編集しました") }
     else
       render "posts/edit"

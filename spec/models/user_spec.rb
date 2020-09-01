@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 require "rails_helper"
 require "byebug"
 
@@ -147,7 +145,7 @@ RSpec.describe "ユーザーモデル", type: :model do
     end
 
     describe "#create_reset_digest" do
-      subject { Proc.new { user_a.create_reset_digest } }
+      subject { proc { user_a.create_reset_digest } }
 
       it { is_expected.to change { user_a.reset_password_token }.from(nil).to(String) }
       it { is_expected.to change { user_a.reset_digest }.from(nil).to(String) }

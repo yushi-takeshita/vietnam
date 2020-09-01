@@ -9,7 +9,7 @@ RSpec.describe "I18n", type: :request do
   end
   context "ロケール指定が有る場合" do
     it "正しいロケールは反映されること" do
-      get "/", :params => { locale: "ja" }
+      get "/", params: { locale: "ja" }
       expect(I18n.locale).to eq :ja
     end
   end

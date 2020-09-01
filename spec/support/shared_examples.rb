@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 shared_examples "ユーザー登録が成功すること" do
   it {
     # マイページへリダイレクトされる

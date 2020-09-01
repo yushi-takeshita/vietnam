@@ -9,11 +9,11 @@ class Post < ApplicationRecord
   validates :category_id, presence: true
   validates :title, presence: true, length: { maximum: 30 }
 
-  def self.ransackable_attributes(auth_object = nil)
+  def self.ransackable_attributes(_auth_object = nil)
     %w[content title]
   end
 
-  def self.ransackable_associations(auth_object = nil)
+  def self.ransackable_associations(_auth_object = nil)
     []
   end
 end

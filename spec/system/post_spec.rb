@@ -69,7 +69,8 @@ RSpec.describe "掲示板管理機能", type: :system do
         key_word = Post.first.title
         fill_in "q[title_or_content_cont]", with: key_word
         find(".btn-secondary").click
-        expect(all(".card").count).to eq Post.where("title like '%#{key_word}%'").or(Post.where("content like '%#{key_word}%'")).count
+        expect(all(".card").count).to eq Post.where("title like '%#{key_word}%'")
+                                             .or(Post.where("content like '%#{key_word}%'")).count
       end
     end
   end
@@ -82,7 +83,7 @@ RSpec.describe "掲示板管理機能", type: :system do
       find("option[value='#{parent_category.id}']").select_option
       find("option[value='#{child_category.id}']").select_option
       fill_in "post[content]", with: "注意事項があれば教えて下さい"
-      attach_file "post[image]", "#{Rails.root}/spec/factories/default_image.jpg", make_visible: true
+      attach_file "post[image]", Rails.root.join("spec/factories/default_image.jpg"), make_visible: true
 
       # 投稿数が1件増える
       expect { find(".btn-primary").click }.to change { Post.count }.by(1)
@@ -108,7 +109,11 @@ RSpec.describe "掲示板管理機能", type: :system do
     end
   end
   describe "記事詳細ページ" do
-    let!(:post) { FactoryBot.create(:post, user: user, category: parent_category, image: Rack::Test::UploadedFile.new(File.join(Rails.root, "spec/factories/default_image.jpg"), "image/jpg")) }
+    let!(:post) {
+      FactoryBot.create(:post, user: user, category: parent_category,
+                               image: Rack::Test::UploadedFile
+                                 .new(Rails.root.join("spec/factories/default_image.jpg"), "image/jpg"))
+    }
     let!(:comment) { FactoryBot.create(:comment, post: post, user: user) }
 
     before do
@@ -117,7 +122,7 @@ RSpec.describe "掲示板管理機能", type: :system do
     describe "詳細表示機能" do
       it "カテゴリーのパンくずリストが表示されていること" do
         within ".breadcrumbs" do
-          expect(page).to have_content /#{parent_category.ja_name} | #{parent_category.vi_name}/
+          expect(page).to have_content(/#{parent_category.ja_name} | #{parent_category.vi_name}/)
         end
       end
       it "投稿者の情報が表示されていること" do

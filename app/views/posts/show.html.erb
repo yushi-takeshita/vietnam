@@ -1,23 +1,23 @@
 <% provide(:title, @post.title) %>
 <div data-scope-path="posts/show">
 	<div class="top-wrapper">
-		<% if @category %>
-			<% breadcrumb :category, @category %>
+		<% if @post.category %>
+			<% breadcrumb :category, @post.category %>
 		<% else %>
 			<% breadcrumb :categories %>
 		<% end %>
 		<%= breadcrumbs pretext: "", separator: " &rsaquo; " %>
 		<div class="round-cap"></div>
 		<p class="user">
-			<% if @user.image.attached? %>
-				<%= image_tag @user.image, class: "rounded-circle border" %>
+			<% if @post.user.image.attached? %>
+				<%= image_tag @post.user.image, class: "rounded-circle border" %>
 			<% else %>
 				<%= image_tag("ruby.png", class: "rounded-circle border") %>
 			<% end %>
-			<%= link_to @user.name, @user %>
+			<%= link_to @post.user.name, @post.user %>
 			| <span><%= @post.created_at.strftime("%Y/%m/%d %H:%M") %></span>
 		</p>
-		<% if current_user&.admin? || current_user?(@user) %>
+		<% if current_user&.admin? || current_user?(@post.user) %>
 			<p class="menu">
 				<%= t(".掲示板の") %>
 				<%= link_to t(".削除"), @post, method: :delete,
@@ -54,7 +54,7 @@
 						<%= f.submit class: "btn btn-lg btn-primary" %>
 					<% end %>
 				<% end %>
-				<% @comments&.each do |comment| %>
+				<% @post.comments&.each do |comment| %>
 					<div class="card" id="comment-<%= comment.id %>">
 						<div class="card-header">
 							<% if comment.user.image.attached? %>

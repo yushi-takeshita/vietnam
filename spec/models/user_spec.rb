@@ -91,7 +91,8 @@ RSpec.describe "ユーザーモデル", type: :model do
         it "エラーメッセージが発生する" do
           user_a.password_confirmation = "Password"
           user_a.valid?
-          expect(user_a.errors.added?(:password_confirmation, :confirmation, attribute: (I18n.t "activerecord.attributes.user.password"))).to be_truthy
+          expect(user_a.errors.added?(:password_confirmation, :confirmation,
+                                      attribute: (I18n.t "activerecord.attributes.user.password"))).to be_truthy
         end
       end
     end

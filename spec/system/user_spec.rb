@@ -1,7 +1,3 @@
-# encoding: UTF-8
-
-# Railsチュートリアル9.1.4　複数ウィンドウを使ったログアウトテスト　難しいのでスルー
-
 require "rails_helper"
 require "pry-byebug"
 

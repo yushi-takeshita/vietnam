@@ -3,6 +3,7 @@ require "byebug"
 
 RSpec.describe "ユーザーモデル", type: :model do
   let(:user_a) { FactoryBot.build(:user, admin: true) }
+  let(:post) { FactoryBot.create(:post) }
 
   describe "バリデーション" do
     it "名前、メールアドレス、パスワード、パスワード(再確認)が正しければtrue" do
@@ -10,9 +11,8 @@ RSpec.describe "ユーザーモデル", type: :model do
       expect(valid_user).to be_valid
     end
     it "ユーザーを削除すると、投稿も削除されること" do
-      user_a.save
-      user_a.posts.create(content: "Hello")
-      expect { user_a.destroy }.to change { Post.count }.by(-1)
+      user = post.user
+      expect { user.destroy }.to change { Post.count }.by(-1)
     end
     it "メールアドレスが大文字から小文字へ変換されること" do
       upcase_email = "TEST1@EXAMPLE.COM"

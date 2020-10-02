@@ -10,8 +10,8 @@ RSpec.describe "コメント", type: :model do
 
     it "投稿日時が新しい順にソートされていること" do
       comment_a.save
-      sleep 0.5
       FactoryBot.create(:comment)
+      sleep 1.0
       expect(Comment.first).to eq comment_a
     end
     context "user_id,post_id,300字以内のコメント内容がそれぞれ存在する場合" do

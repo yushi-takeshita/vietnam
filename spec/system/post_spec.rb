@@ -57,10 +57,10 @@ RSpec.describe "掲示板管理機能", type: :system do
     describe "投稿検索機能" do
       it "親子カテゴリ検索ができること", js: true do
         within ".parents_list" do
-          find_by(id: parent_category.id.to_s).hover
+          find_by_id(parent_category.id).hover
         end
         within ".children_list" do
-          find_by(id: child_category.id.to_s).click
+          find_by_id(child_category.id).click
         end
         # 親カテゴリと子カテゴリで15投稿ずつ作成済み
         expect(all(".card").count).to eq 15

@@ -48,8 +48,8 @@ RSpec.describe "ポストモデル", type: :model do
 
   it "投稿日時の新しい順にソートされていること" do
     post_a.save
-    sleep 0.5
     FactoryBot.create(:comment)
+    sleep 1.0
     expect(Post.first).to eq post_a
   end
 

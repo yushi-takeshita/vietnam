@@ -19,7 +19,8 @@
 						<%= link_to t(".ログアウト"), logout_path, method: :delete, class: "card-link logout-link" %>
 					<% end %>
 					<% if current_user&.admin? && !current_user?(@user) %>
-						<%= link_to "アカウントを削除", user_path(@user), method: :delete, class: "card-link delete-user", data: { confirm: "このユーザーを完全に削除します。本当によろしいですか？" } %>
+						<%= link_to "アカウントを削除", user_path(@user), method: :delete, class: "card-link delete-user",
+                                                data: { confirm: t(".このユーザーを完全に削除します。本当によろしいですか？") }, title: t(".削除確認") %>
 					<% end %>
 				</div>
 			</div>

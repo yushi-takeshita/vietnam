@@ -68,14 +68,15 @@ group :development do
   gem "spring-watcher-listen", "~> 2.0.0"
   gem "better_errors"
   gem "binding_of_caller"
-  gem 'rubocop', require: false
-  gem 'rubocop-performance', require: false
-  gem 'rubocop-rails', require: false
+  gem "rubocop", require: false
+  gem "rubocop-performance", require: false
+  gem "rubocop-rails", require: false
 end
 
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem "capybara", ">= 2.15"
+  gem "capybara-webkit"
   gem "selenium-webdriver"
   gem "webdrivers"
 end

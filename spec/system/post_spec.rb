@@ -57,10 +57,10 @@ RSpec.describe "掲示板管理機能", type: :system do
     describe "投稿検索機能" do
       it "親子カテゴリ検索ができること", js: true do
         within ".parents_list" do
-          find_by_id(parent_category.id).hover
+          find(id: parent_category.id.to_s).hover
         end
         within ".children_list" do
-          find_by_id(child_category.id).click
+          find(id: child_category.id.to_s).click
         end
         # 親カテゴリと子カテゴリで15投稿ずつ作成済み
         expect(all(".card").count).to eq 15
@@ -165,7 +165,7 @@ RSpec.describe "掲示板管理機能", type: :system do
 
           # 投稿されたコメントナンバーがレスアンカーとしてリンク表示されていること
           expect { find(".btn-primary").click }.to change { Comment.count }.by(1)
-          sleep 0.5
+          sleep 1.0
           within "#comment-#{Comment.first.id}" do
             expect(page).to have_selector "a[href='#comment-#{comment.id}']", text: ">>#{comment.id}"
           end

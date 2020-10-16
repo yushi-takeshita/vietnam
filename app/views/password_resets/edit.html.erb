@@ -1,25 +1,21 @@
-<% provide(:title, t(".パスワードの再設定"))%>
-
+<% provide(:title, t(".パスワードの再設定")) %>
 <div data-scope-path="password_resets/edit">
-  <div class="row justify-content-around">
-    <div class="col-md-8">
-      <h1><%= t(".パスワードの再設定") %></h1>
-
-      <%= form_with model: @user, url: password_reset_path(params[:id]), local: true do |f| %>
-      <%= render "shared/error_messages", object: @user %>
-
-      <%= hidden_field_tag :email, @user.email %>
-
-      <div class="form-group">
-        <%= f.label :password %>
-        <%= f.password_field :password, class: "form-control" %>
-      </div>
-      <div class="form-group">
-        <%= f.label :password_confirmation %>
-        <%= f.password_field :password_confirmation, class: "form-control" %>
-      </div>
-      <%= f.submit class: "btn btn-lg btn-block btn-primary " %>
-      <% end %>
-    </div>
-  </div>
+	<div class="row justify-content-around">
+		<div class="col-md-8">
+			<h1><%= t(".パスワードの再設定") %></h1>
+			<%= form_with model: @user, url: password_reset_path(params[:id]), local: true do |f| %>
+				<%= render "shared/error_messages", object: @user %>
+				<%= hidden_field_tag :email, @user.email %>
+				<div class="form-group">
+					<%= f.label :password %>
+					<%= f.password_field :password, class: "form-control" %>
+				</div>
+				<div class="form-group">
+					<%= f.label :password_confirmation %>
+					<%= f.password_field :password_confirmation, class: "form-control" %>
+				</div>
+				<%= f.submit class: "btn btn-lg btn-block btn-primary " %>
+			<% end %>
+		</div>
+	</div>
 </div>

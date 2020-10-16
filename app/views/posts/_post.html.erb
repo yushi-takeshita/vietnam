@@ -1,25 +1,25 @@
 <div class="card">
-  <div class="row no-gutters h-100">
-    <div class="col-3">
-      <% if post.image.attached? %>
-      <%= image_tag(post.image, class: "card-img border") %>
-      <% else %>
-      <%= image_tag("default_image.jpg", class: "card-img border") %>
-      <% end %>
-    </div>
-    <div class="col-9">
-      <div class="card-body">
-        <%= link_to post.title, post, id: "post-#{post.id}", class: "card-link stretched-link" %>
-        <p class="card-text">
-          <% if post.user.image.attached? %>
-          <%= image_tag post.user.image, class: "card-img rounded-circle border" %>
-          <% else %>
-          <%= image_tag("ruby.png", class: "card-img rounded-circle border") %>
-          <% end %>
-          <%= post.user.name %>
-          | <span><%= post.created_at.strftime("%Y/%m/%d %H:%M") %></span>
-        </p>
-      </div>
-    </div>
-  </div>
+	<div class="row no-gutters h-100">
+		<div class="col-3">
+			<% if post.image.attached? %>
+				<%= image_tag(post.image, class: "card-img border") %>
+			<% else %>
+				<%= image_tag("default_image.jpg", class: "card-img border") %>
+			<% end %>
+		</div>
+		<div class="col-9">
+			<div class="card-body">
+				<%= link_to post.title, post, id: "post-#{post.id}", class: "card-link stretched-link" %>
+				<p class="card-text">
+					<% if post.user.image.attached? %>
+						<%= image_tag post.user.image, class: "card-img rounded-circle border" %>
+					<% else %>
+						<%= image_tag("ruby.png", class: "card-img rounded-circle border") %>
+					<% end %>
+					<%= post.user.name %>
+					| <span><%= post.created_at.strftime("%Y/%m/%d %H:%M") %></span>
+				</p>
+			</div>
+		</div>
+	</div>
 </div>

@@ -1,8 +1,6 @@
-# encoding: UTF-8
-
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:edit, :update, :destroy]
-  before_action :correct_user, only: [:edit, :update]
+  before_action :logged_in_user, only: %i[edit update destroy]
+  before_action :correct_user, only: %i[edit update]
   before_action :admin_user, only: :destroy
 
   def index; end
@@ -29,7 +27,7 @@ class UsersController < ApplicationController
   def edit; end
 
   def update
-    if @user.update_attributes(user_params)
+    if @user.update(user_params)
       redirect_to @user, flash: { success: t("users.update.flash.プロフィールを編集しました") }
     else
       render "users/edit"

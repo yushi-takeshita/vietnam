@@ -1,33 +1,31 @@
-<% provide(:title, @post.title ) %>
-
+<% provide(:title, @post.title) %>
 <div data-scope-path="posts/show">
 	<div class="top-wrapper">
-		<% if @category %>
-		<% breadcrumb :category, @category %>
+		<% if @post.category %>
+			<% breadcrumb :category, @post.category %>
 		<% else %>
-		<% breadcrumb :categories %>
+			<% breadcrumb :categories %>
 		<% end %>
 		<%= breadcrumbs pretext: "", separator: " &rsaquo; " %>
 		<div class="round-cap"></div>
 		<p class="user">
-			<% if @user.image.attached? %>
-			<%= image_tag @user.image, class: "rounded-circle border" %>
+			<% if @post.user.image.attached? %>
+				<%= image_tag @post.user.image, class: "rounded-circle border" %>
 			<% else %>
-			<%= image_tag("ruby.png", class: "rounded-circle border") %>
+				<%= image_tag("ruby.png", class: "rounded-circle border") %>
 			<% end %>
-			<%= link_to @user.name, @user %>
+			<%= link_to @post.user.name, @post.user %>
 			| <span><%= @post.created_at.strftime("%Y/%m/%d %H:%M") %></span>
 		</p>
-		<% if current_user&.admin? || current_user?(@user) %>
-		<p class="menu">
-			<%= t(".掲示板の") %>
-			<%= link_to t(".削除"), @post, method: :delete,
-		 	title: t(".確認"), data: { confirm: t(".本当にこの掲示板を削除してよろしいですか？"),
-		                                commit: t(".はい"),
-		                                cancel: t(".いいえ") 
-																	} %>
-			/ <%= link_to t(".編集"), edit_post_path(@post) %>
-		</p>
+		<% if current_user&.admin? || current_user?(@post.user) %>
+			<p class="menu">
+				<%= t(".掲示板の") %>
+				<%= link_to t(".削除"), @post, method: :delete,
+                                 title: t(".確認"), data: { confirm: t(".本当にこの掲示板を削除してよろしいですか？"),
+                                                          commit: t(".はい"),
+                                                          cancel: t(".いいえ") } %>
+				/ <%= link_to t(".編集"), edit_post_path(@post) %>
+			</p>
 		<% end %>
 	</div>
 	<div class="row justify-content-center">
@@ -39,49 +37,48 @@
 						<p><%= simple_format(@post.content) %></p>
 					</div>
 					<% if @post.image.attached? %>
-					<div class="post-img col-md-4">
-						<%= image_tag @post.image, class: "img-fluid" %>
-					</div>
+						<div class="post-img col-md-4">
+							<%= image_tag @post.image, class: "img-fluid" %>
+						</div>
 					<% end %>
 				</div>
 			</div>
 			<div class="comment-wrapper">
 				<%= render "shared/error_messages", object: @comment %>
 				<% if logged_in? %>
-				<%= form_with model: @comment, url: post_comments_path(@post), local: true do |f| %>
-				<div class="form-group">
-					<%= f.label :body %>
-					<%= f.text_area :body, class: "form-control" %>
-				</div>
-				<%= f.submit class: "btn btn-lg btn-primary" %>
+					<%= form_with model: @comment, url: post_comments_path(@post), local: true do |f| %>
+						<div class="form-group">
+							<%= f.label :body %>
+							<%= f.text_area :body, class: "form-control" %>
+						</div>
+						<%= f.submit class: "btn btn-lg btn-primary" %>
+					<% end %>
 				<% end %>
-				<% end %>
-
-				<% @comments&.each do |comment| %>
-				<div class="card" id="comment-<%= comment.id %>">
-					<div class="card-header">
-						<% if comment.user.image.attached? %>
-						<%= image_tag comment.user.image, class: "rounded-circle border" %>
-						<% else %>
-						<%= image_tag("ruby.png", class: "rounded-circle border") %>
-						<% end %>
-						<div class="CommentNum">No.<%= comment.id %></div>
-						<span class="CommentTime"><%= comment.created_at.strftime("%Y/%m/%d %H:%M") %></span>
-						<%= link_to comment.user.name, user_path(comment.user), class: "UserName" %>
-					</div>
-					<div class="card-body">
-						<p><%= simple_format(comment.body) %></p>
-						<% if logged_in? %>
-						<%= icon("fas", "reply fa-lg reply") %>
-						<% if current_user&.admin? %>
-						<%= link_to "削除", post_comment_path(@post, comment.id), method: :delete %>
-						<% end %>
-						<% end %>
+				<% @post.comments&.each do |comment| %>
+					<div class="card" id="comment-<%= comment.id %>">
+						<div class="card-header">
+							<% if comment.user.image.attached? %>
+								<%= image_tag comment.user.image, class: "rounded-circle border" %>
+							<% else %>
+								<%= image_tag("ruby.png", class: "rounded-circle border") %>
+							<% end %>
+							<div class="CommentNum">No.<%= comment.id %></div>
+							<span class="CommentTime"><%= comment.created_at.strftime("%Y/%m/%d %H:%M") %></span>
+							<%= link_to comment.user.name, user_path(comment.user), class: "UserName" %>
+						</div>
+						<div class="card-body">
+							<p><%= simple_format(comment.body) %></p>
+							<% if logged_in? %>
+								<%= icon("fas", "reply fa-lg reply") %>
+								<% if current_user&.admin? %>
+									<%= link_to "削除", post_comment_path(@post, comment.id), method: :delete %>
+								<% end %>
+							<% end %>
 						</footer>
 					</div>
 				</div>
-				<% end %>
-			</div>
+			<% end %>
 		</div>
 	</div>
+</div>
 </div>

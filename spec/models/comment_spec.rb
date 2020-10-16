@@ -8,6 +8,12 @@ RSpec.describe "コメント", type: :model do
       it { is_expected.to be_invalid }
     end
 
+    it "投稿日時が新しい順にソートされていること" do
+      comment_a.save
+      FactoryBot.create(:comment)
+      sleep 1.0
+      expect(Comment.first).to eq comment_a
+    end
     context "user_id,post_id,300字以内のコメント内容がそれぞれ存在する場合" do
       it { is_expected.to be_valid }
     end
@@ -27,11 +33,6 @@ RSpec.describe "コメント", type: :model do
       context "300字を超える場合" do
         before { comment_a.body = "a" * 301 }
         it_behaves_like "コメントは無効であること"
-      end
-      it "投稿日時が新しい順にソートされていること" do
-        comment_b = comment_a.update_attribute(:created_at, 10.minutes.ago)
-        comment_a.save
-        expect(Comment.first).to eq comment_a
       end
     end
   end

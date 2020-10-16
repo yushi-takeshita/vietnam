@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 shared_context "正しい情報が入力された場合" do
   before "正しい情報を入力する" do
     fill_in "user[name]", with: "テストユーザー"

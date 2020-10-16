@@ -20,10 +20,10 @@ RSpec.describe "掲示板管理機能", type: :system do
   end
 
   describe "投稿一覧・検索ページ" do
-    let!(:posts) {
+    let!(:posts) do
       FactoryBot.create_list(:post, 15, user: user, category: parent_category)
       FactoryBot.create_list(:post, 15, user: user, category: child_category)
-    }
+    end
     before do
       visit category_path(I18n.locale)
     end
@@ -57,10 +57,10 @@ RSpec.describe "掲示板管理機能", type: :system do
     describe "投稿検索機能" do
       it "親子カテゴリ検索ができること", js: true do
         within ".parents_list" do
-          find_by_id("#{parent_category.id}").hover
+          find(id: parent_category.id.to_s).hover
         end
         within ".children_list" do
-          find_by_id("#{child_category.id}").click
+          find(id: child_category.id.to_s).click
         end
         # 親カテゴリと子カテゴリで15投稿ずつ作成済み
         expect(all(".card").count).to eq 15
@@ -69,7 +69,8 @@ RSpec.describe "掲示板管理機能", type: :system do
         key_word = Post.first.title
         fill_in "q[title_or_content_cont]", with: key_word
         find(".btn-secondary").click
-        expect(all(".card").count).to eq Post.where("title like '%#{key_word}%'").or(Post.where("content like '%#{key_word}%'")).count
+        expect(all(".card").count).to eq Post.where("title like '%#{key_word}%'")
+                                             .or(Post.where("content like '%#{key_word}%'")).count
       end
     end
   end
@@ -82,7 +83,7 @@ RSpec.describe "掲示板管理機能", type: :system do
       find("option[value='#{parent_category.id}']").select_option
       find("option[value='#{child_category.id}']").select_option
       fill_in "post[content]", with: "注意事項があれば教えて下さい"
-      attach_file "post[image]", "#{Rails.root}/spec/factories/default_image.jpg", { make_visible: true }
+      attach_file "post[image]", Rails.root.join("spec/factories/default_image.jpg"), make_visible: true
 
       # 投稿数が1件増える
       expect { find(".btn-primary").click }.to change { Post.count }.by(1)
@@ -108,7 +109,11 @@ RSpec.describe "掲示板管理機能", type: :system do
     end
   end
   describe "記事詳細ページ" do
-    let!(:post) { FactoryBot.create(:post, user: user, category: parent_category, image: Rack::Test::UploadedFile.new(File.join(Rails.root, "spec/factories/default_image.jpg"), "image/jpg")) }
+    let!(:post) {
+      FactoryBot.create(:post, user: user, category: parent_category,
+                               image: Rack::Test::UploadedFile
+                                 .new(Rails.root.join("spec/factories/default_image.jpg"), "image/jpg"))
+    }
     let!(:comment) { FactoryBot.create(:comment, post: post, user: user) }
 
     before do
@@ -117,12 +122,12 @@ RSpec.describe "掲示板管理機能", type: :system do
     describe "詳細表示機能" do
       it "カテゴリーのパンくずリストが表示されていること" do
         within ".breadcrumbs" do
-          expect(page).to have_content /#{parent_category.ja_name} | #{parent_category.vi_name}/
+          expect(page).to have_content(/#{parent_category.ja_name} | #{parent_category.vi_name}/)
         end
       end
       it "投稿者の情報が表示されていること" do
         within ".user" do
-          expect(page).to have_selector ("a[href='/#{I18n.locale}/users/#{post.user.id}']"), text: post.user.name
+          expect(page).to have_selector "a[href='/#{I18n.locale}/users/#{post.user.id}']", text: post.user.name
           expect(page).to have_content post.created_at.strftime("%Y/%m/%d %H:%M")
         end
       end
@@ -160,9 +165,9 @@ RSpec.describe "掲示板管理機能", type: :system do
 
           # 投稿されたコメントナンバーがレスアンカーとしてリンク表示されていること
           expect { find(".btn-primary").click }.to change { Comment.count }.by(1)
-          sleep 0.5
+          sleep 1.0
           within "#comment-#{Comment.first.id}" do
-            expect(page).to have_selector ("a[href='#comment-#{comment.id}']"), text: ">>#{comment.id}"
+            expect(page).to have_selector "a[href='#comment-#{comment.id}']", text: ">>#{comment.id}"
           end
         end
       end
@@ -196,7 +201,7 @@ RSpec.describe "掲示板管理機能", type: :system do
           end
           expect(page).to have_selector ".modal-body", text: I18n.t("posts.show.本当にこの掲示板を削除してよろしいですか？")
           expect { click_button I18n.t("posts.show.はい") }.to change { Post.count }.by(-1)
-          expect(current_path).to eq category_path(I18n.locale) #投稿一覧・検索ページ
+          expect(current_path).to eq category_path(I18n.locale) # 投稿一覧・検索ページ
         }
       end
 

@@ -1,34 +1,33 @@
 <% provide(:title, t(".暮らしに役立つサイト")) %>
-
 <div data-scope-path="home/useful_pages">
-  <div class="row justify-content-center">
-    <div class="col-md-10">
-      <div class="menu">
-        <h2><%= t(".目次") %></h2>
-        <ol>
-          <li><%= link_to(t(".外国人技能実習機構"), "#section0") %></li>
-          <li><%= link_to(t(".コミトモ"), "#section1") %></li>
-        </ol>
-      </div>
-      <div class="card border border-0">
-        <h1 class="card-title" id="section0"><%= t(".外国人技能実習機構") %></h1>
-        <div class="round-cap"></div>
-        <%= image_tag("otit.png", class: "card-img") %>
-        <div class="card-body">
-          <a href="https://www.otit.go.jp/notebook_vi/" class="card-link">https://www.otit.go.jp/notebook_vi/</a>
-          <p class="card-text"><%= t(".技能実習生手帳や税金の免除について掲載されています。") %></p>
-          <p class="card-text"><%= t(".身近なトラブルも相談することができます。") %></p>
-        </div>
-        <h1 class="card-title" id="section1"><%= t(".コミトモ") %></h1>
-        <div class="round-cap"></div>
-        <%= image_tag("comitomo.png", class: "card-img") %>
-        <div class="card-body">
-          <a href="https://comitomo.jp/vi/" class="card-link">https://comitomo.jp/vi/</a>
-          <p class="card-text"><%= t(".日本の文化や生活にフォーカスした情報サイトです。") %></p>
-          <p class="card-text"><%= t(".アルバイトや就職活動に関する記事も掲載されています。") %></p>
-          <p class="card-text"><%= t(".もちろん、ベトナム語でも読むことができます。") %></p>
-        </div>
-      </div>
-    </div>
-  </div>
+	<div class="row justify-content-center">
+		<div class="col-md-10">
+			<div class="menu">
+				<h2><%= t(".目次") %></h2>
+				<ol>
+					<li><%= link_to(t(".外国人技能実習機構"), "#section0") %></li>
+					<li><%= link_to(t(".コミトモ"), "#section1") %></li>
+				</ol>
+			</div>
+			<div class="card border border-0">
+				<h1 class="card-title" id="section0"><%= t(".外国人技能実習機構") %></h1>
+				<div class="round-cap"></div>
+				<%= image_tag("otit.png", class: "card-img") %>
+				<div class="card-body">
+					<a href="https://www.otit.go.jp/notebook_vi/" class="card-link">https://www.otit.go.jp/notebook_vi/</a>
+					<p class="card-text"><%= t(".技能実習生手帳や税金の免除について掲載されています。") %></p>
+					<p class="card-text"><%= t(".身近なトラブルも相談することができます。") %></p>
+				</div>
+				<h1 class="card-title" id="section1"><%= t(".コミトモ") %></h1>
+				<div class="round-cap"></div>
+				<%= image_tag("comitomo.png", class: "card-img") %>
+				<div class="card-body">
+					<a href="https://comitomo.jp/vi/" class="card-link">https://comitomo.jp/vi/</a>
+					<p class="card-text"><%= t(".日本の文化や生活にフォーカスした情報サイトです。") %></p>
+					<p class="card-text"><%= t(".アルバイトや就職活動に関する記事も掲載されています。") %></p>
+					<p class="card-text"><%= t(".もちろん、ベトナム語でも読むことができます。") %></p>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

@@ -47,13 +47,15 @@ RSpec.describe "ポストモデル", type: :model do
   end
 
   it "投稿日時の新しい順にソートされていること" do
-    post_b = post_a.update_attribute(:created_at, 10.minutes.ago)
     post_a.save
+    FactoryBot.create(:comment)
+    sleep 1.0
     expect(Post.first).to eq post_a
   end
 
   it "画像が添付できること" do
-    post = FactoryBot.create(:post, image: Rack::Test::UploadedFile.new(File.join(Rails.root, "spec/factories/default_image.jpg"), "image/jpg"))
+    post = FactoryBot.create(:post, image: Rack::Test::UploadedFile
+                                      .new(Rails.root.join("spec/factories/default_image.jpg"), "image/jpg"))
     expect(post.image.attached?).to eq true
   end
 end

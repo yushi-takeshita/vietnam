@@ -1,20 +1,12 @@
-# 参考サイト https://kitsune.blog/rails-rubocop
-
-# 将来的には対応する規約の読込
 inherit_from: .rubocop_todo.yml
 
-# 追加した規約ファイル読込
 require:
   - rubocop-rails
-
-# Railsモード
-Rails:
-  Enabled: true
+  - rubocop-performance
 
 AllCops:
-  # Rubyバージョン指定
   TargetRubyVersion: 2.6
-  # 除外
+  NewCops: enable
   Exclude:
     - 'config.ru'
     - 'bin/**'
@@ -26,6 +18,7 @@ AllCops:
     - 'script/**/*'
     - !ruby/regexp /old_and_unused\.rb$/
     - '**/Gemfile'
+    - '.pryrc'
 
 # 日本語でのコメントを許可
 Style/AsciiComments:
@@ -39,7 +32,6 @@ Style/Documentation:
 Style/ClassAndModuleChildren:
   Enabled: false
 
-# あとで意味を調べる
 # 文字リテラルのイミュータブル宣言を無視（freezeになるのはRuby3以降）
 Style/FrozenStringLiteralComment:
   Enabled: false
@@ -56,3 +48,31 @@ Style/StringLiterals:
 # デフォルトの80文字は少ないと判断
 Layout/LineLength:
   Max: 120
+
+# rufoでフォーマットすると、今度はLayout/EndAlignmentに引っかかるのでOFF
+Style/MultilineTernaryOperator:
+  Enabled: false
+
+# 調べてもよくわからないのでOFF
+Lint/AmbiguousBlockAssociation:
+  Enabled: false
+
+# ４行までは許してほしい
+Style/GuardClause:
+  MinBodyLength: 4
+
+# do .. end から更にメソッドチェーンすると見づらいので
+# auto-correct せず、自分で修正する
+# spec 内は見た目が綺麗になるので許可
+Style/BlockDelimiters:
+  AutoCorrect: false
+  Exclude:
+    - "spec/**/*"
+
+# 修正するのに時間がかかりそうなので・・
+Rails/HelperInstanceVariable:
+  Enabled: false
+
+# デフォルト15だときつい
+Metrics/AbcSize:
+  Max: 22

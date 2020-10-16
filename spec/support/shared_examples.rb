@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 shared_examples "ユーザー登録が成功すること" do
   it {
     # マイページへリダイレクトされる
@@ -12,20 +10,15 @@ shared_examples "ユーザー登録が成功すること" do
 end
 shared_examples "ログイン状態であること" do
   it {
-    # (プロフィールの)編集とログアウトのリンクが表示される
-    within ".card-body" do
-      expect(page).to have_css ".card-link"
-    end
-
-    # ヘッダーにマイページが表示される
-    find(".navbar-toggler").click
+    # ヘッダーにリンクが追加されている
     expect(page).to have_css ".mypage"
+    expect(page).to have_css ".logout"
 
-    # ヘッダーからログアウト時に見えるリンクが除外される
+    # ヘッダーからリンクが除外されている
     expect(page).not_to have_css ".login"
     expect(page).not_to have_css ".create-account"
 
-    # トップページに表示されていたサイト紹介文とログインフォームが除外される
+    # トップページに表示されていたサイト紹介文とログインフォームが除外されている
     visit root_path
     expect(page).not_to have_css ".introduction"
   }

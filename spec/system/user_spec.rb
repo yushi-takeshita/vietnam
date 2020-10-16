@@ -1,7 +1,3 @@
-# encoding: UTF-8
-
-# Railsチュートリアル9.1.4　複数ウィンドウを使ったログアウトテスト　難しいのでスルー
-
 require "rails_helper"
 require "pry-byebug"
 
@@ -27,8 +23,6 @@ RSpec.describe "ユーザー管理機能", type: :system do
     end
     context "会員登録ページから登録する場合" do
       before do
-        # ハンバーガーメニューから会員登録ページへ移動する
-        find(".navbar-toggler").click
         find(".create-account").click
       end
 
@@ -46,8 +40,6 @@ RSpec.describe "ユーザー管理機能", type: :system do
 
   describe "ログイン機能" do
     before do
-      # ハンバーガーメニューからログインページへ移動する
-      find(".navbar-toggler").click
       find(".login").click
     end
 
@@ -115,7 +107,6 @@ RSpec.describe "ユーザー管理機能", type: :system do
       expect(current_path).to eq root_path(I18n.locale)
 
       # ログアウト時のリンクが表示される
-      find(".navbar-toggler").click
       expect(page).to have_css ".login"
       expect(page).to have_css ".create-account"
 
@@ -125,7 +116,7 @@ RSpec.describe "ユーザー管理機能", type: :system do
   end
   describe "プロフィール表示機能" do
     before do
-      for i in 1..15
+      (1..15).each do |i|
         FactoryBot.create(:post, created_at: i.day.ago, user: user)
       end
       visit user_path(I18n.locale, user)
@@ -226,17 +217,14 @@ RSpec.describe "ユーザー管理機能", type: :system do
       end
 
       it "他のユーザーを削除できること" do
+        I18n.locale = "ja"
         visit user_path(I18n.locale, other_user)
-        # 「アカウントを削除」をクリック
-        expect(page).to have_css ".card-link.delete-user"
-        find(".card-link.delete-user").click
-
-        # OKを選択するとユーザーが1件減る
-        expect {
-          expect(page.driver.browser.switch_to.alert.text).to eq "このユーザーを完全に削除します。本当によろしいですか？"
-          page.driver.browser.switch_to.alert.accept
-          expect(page).to have_content "アカウントを削除しました"
-        }.to change { User.count }.by(-1)
+        find(".card-link.delete-user").click # 「アカウントを削除」をクリック
+        within ".modal-content" do
+          expect(page).to have_content I18n.t("users.show.削除確認")
+          expect(page).to have_content I18n.t("users.show.このユーザーを完全に削除します。本当によろしいですか？")
+          expect { click_button "Confirm" }.to change { User.count }.by(-1)
+        end
       end
     end
   end

@@ -12,6 +12,7 @@ vi:
       user_nameさんのプロフィール: "Hồ sơ của %{user_name}"
       編集: Chỉnh sửa
       ログアウト: Đăng nhập
+      パスワードの変更: Thay đổi mật khẩu của bạn
       user_nameさんの投稿: "bài đăng của %{user_name}"
       削除確認: Xóa xác nhận
       このユーザーを完全に削除します。本当によろしいですか？: Xóa bỏ người dùng này. Bạn có chắc bạn muốn làm điều này?

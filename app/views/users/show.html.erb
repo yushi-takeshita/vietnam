@@ -17,6 +17,8 @@
 						<%= render partial: "shared/button_linked_create_post" %>
 						<%= link_to t(".編集"), edit_user_path(current_user), class: "card-link edit-profile-link" %>
 						<%= link_to t(".ログアウト"), logout_path, method: :delete, class: "card-link logout-link" %>
+						<br>
+						<%= link_to t(".パスワードの変更"), new_password_reset_path, class: "card-link" %>
 					<% end %>
 					<% if current_user&.admin? && !current_user?(@user) %>
 						<%= link_to "アカウントを削除", user_path(@user), method: :delete, class: "card-link delete-user",

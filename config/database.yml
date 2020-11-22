@@ -50,5 +50,4 @@ test:
 production:
   <<: *default
   database: vietnam_production
-  username: vietnam
-  password: <%= ENV['VIETNAM_DATABASE_PASSWORD'] %>
+

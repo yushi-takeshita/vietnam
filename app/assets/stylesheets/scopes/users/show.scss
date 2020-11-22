@@ -1,47 +1,58 @@
 [data-scope-path="users/show"] {
   margin-top: 3rem;
+
   .user {
     text-align: center;
+
     .card {
       img.rounded-circle {
-      height: 140px;
-      width: 140px;
-      margin: 10px auto 0 auto;
+        height: 140px;
+        width: 140px;
+        margin: 10px auto 0 auto;
       }
     }
   }
+
   .posts {
     .round-cap:after {
       @include under_bar
     }
+
     .card {
-        @media screen and (max-width: 480px) {
-            font-size: 1rem;
-          }
+      @media screen and (max-width: 480px) {
+        font-size: 1rem;
+      }
+
+      height: 10rem;
+      margin-bottom: 1rem;
+      box-shadow: 0px 1px 0px silver;
+
+      &:hover {
+        opacity: 0.7;
+      }
+
+      .card-img {
         height: 10rem;
-        margin-bottom: 1rem;
-        box-shadow: 0px 1px 0px silver;
-        &:hover {
-          opacity: 0.7;
+      }
+
+      .card-body {
+        height: 10rem;
+
+        .card-link {
+          color: $black;
         }
-        .card-img {
-            height: 100%;
-          }
-        .card-body {
-          height: 100%;
-          .card-link {
-            color: $black;
-          }
-          .card-text {
-            color: gray;
-            text-align: right;
-            img {
-              margin-right: .7rem;
-              height: 3rem;
-              width: 3rem;
-            }
+
+        .card-text {
+          color: gray;
+          text-align: right;
+
+          img {
+            margin-right: .7rem;
+            height: 3rem;
+            width: 3rem;
           }
         }
       }
+    }
   }
 }
